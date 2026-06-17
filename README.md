@@ -1,42 +1,73 @@
-# Festival de Fin de Cursos — Mondomío Kínder
+# Mondomío Kínder
 
-Landing page de una sola página para el Festival de Fin de Cursos (tema Zootopia, Grupo Babies).
+Sitio principal de [Mondomío Kínder](https://mondomio.mx) — educación constructivista para niños de 1-4 años en San Pedro Garza García.
 
-## Estructura
+## 🌍 Características
+
+- **Educación Constructivista**: Rotación de 8 áreas de aprendizaje
+- **Actividades Especializadas**: Huerto, yoga y música especializada
+- **Diseño Responsivo**: Funciona en todos los dispositivos
+- **Sin Dependencias**: HTML estático, sin necesidad de build tools
+
+## 📂 Estructura
 
 ```
-mondomio-festival/
-├── index.html            ← la página
+inicio/
+├── index.html              ← Sitio único (SPA)
 └── assets/
-    ├── img/              ← logo e ilustraciones (PNG)
-    └── fonts/            ← fuentes Uniform (woff2)
+    ├── fonts/              ← Tipografía Uniform (woff2)
+    └── img/                ← Imágenes y logos
 ```
 
-Todo usa rutas relativas, así que funciona tal cual en cualquier hosting estático.
+## 🚀 Despliegue
 
-## Publicar en GitHub Pages
+El sitio está desplegado en **Vercel** con dominio personalizado.
 
-1. Crea un repositorio nuevo en GitHub (por ejemplo `festival-mondomio`).
-2. Sube **el contenido de esta carpeta** (que `index.html` quede en la raíz del repo, no dentro de otra carpeta).
-3. En el repo ve a **Settings → Pages**.
-4. En **Source** elige la rama `main` y la carpeta `/ (root)`. Guarda.
-5. En 1–2 minutos tu sitio queda en `https://TU-USUARIO.github.io/festival-mondomio/`.
-
-### Por terminal (opcional)
+### Desplegar cambios localmente
 
 ```bash
-cd mondomio-festival
-git init
-git add .
-git commit -m "Landing Festival de Fin de Cursos"
-git branch -M main
-git remote add origin https://github.com/TU-USUARIO/festival-mondomio.git
-git push -u origin main
+cd inicio
+python -m http.server 8000
+# Abre http://localhost:8000
 ```
 
-Luego activa GitHub Pages en Settings → Pages como arriba.
+### Desplegar a producción
 
-## Notas
+```bash
+git add .
+git commit -m "tu mensaje"
+git push origin main
+# Vercel despliega automáticamente
+```
 
-- Toda la información se ve aunque el navegador tenga JavaScript desactivado; las animaciones de aparición son solo un extra.
-- Falta la **fecha** del festival (no venía en los materiales). Para agregarla, busca en `index.html` los "chips" del hero y la sección "Detalles".
+## 🎨 Personalización
+
+### Colores
+
+Edita las variables CSS en `inicio/index.html`:
+
+```css
+:root {
+  --sky: #6CC9EC;         /* Azul cielo */
+  --lime: #8CC63E;        /* Verde lima */
+  --pink: #C0539F;        /* Rosa */
+  --navy: #322B7A;        /* Azul marino */
+  /* ... más colores */
+}
+```
+
+### Contenido
+
+Todo el contenido está en `inicio/index.html`. Los cambios de HTML se reflejan inmediatamente.
+
+## 📝 Notas
+
+- ✅ Funciona sin JavaScript habilitado (HTML/CSS puro)
+- ✅ Optimizado para móvil y escritorio
+- ✅ Fuentes preload para máxima velocidad
+- ✅ Sin dependencias externas
+
+## 📞 Contacto
+
+- **Teléfono**: 81 8259 0721
+- **Ubicación**: San Pedro Garza García, Nuevo León
