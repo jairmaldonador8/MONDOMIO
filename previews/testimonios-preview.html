@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mondomío · Variantes "Papás nos cuentan"</title>
+<style>
+@font-face{font-family:'UniformBlack';src:url(../inicio/assets/fonts/uniform-black.woff2) format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'UniformMed';src:url(../inicio/assets/fonts/uniform-medium.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'UniformLight';src:url(../inicio/assets/fonts/uniform-light.woff2) format('woff2');font-weight:300;font-display:swap}
+
+:root{
+  --sky:#6CC9EC; --sky-deep:#46B2DD; --sky-top:#8BD6F1;
+  --cloud:#EAF8FD; --cloud2:#C9EDF8;
+  --lime:#8CC63E; --lime-d:#79B62F; --lime-l:#B7DF57;
+  --pink:#C0539F; --pink-d:#A6408A;
+  --yellow:#FAC81C; --yellow-d:#EBB200;
+  --navy:#322B7A; --navy-d:#231E5C;
+  --ink:#262223; --paper:#ffffff;
+  --r:30px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'UniformMed',system-ui,sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+h1,h2,h3,.disp{font-family:'UniformBlack',system-ui,sans-serif;font-weight:900;line-height:.92;text-transform:uppercase;letter-spacing:.01em}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1140px,90vw);margin-inline:auto}
+
+.preview-bar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.preview-bar strong{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin-right:8px}
+.preview-bar a{font-size:13px;padding:7px 16px;border-radius:999px;background:rgba(255,255,255,.12);transition:background .2s}
+.preview-bar a:hover{background:var(--pink)}
+.variant-label{background:var(--cloud);padding:60px 0 0;text-align:center}
+.variant-label .tag{display:inline-block;background:var(--navy);color:#fff;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.14em;font-size:13px;padding:9px 22px;border-radius:999px;transform:rotate(-1.5deg);box-shadow:0 5px 0 rgba(35,30,92,.35)}
+.variant-label p{max-width:64ch;margin:16px auto 0;padding:0 20px;font-size:15px;color:#4a5568}
+.band{padding:clamp(60px,9vw,110px) 0;position:relative;overflow:hidden}
+.sec-head{text-align:center;margin-bottom:48px;position:relative;z-index:3}
+.sec-head .kicker{display:inline-block;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.16em;font-size:14px;color:var(--pink);margin-bottom:14px}
+.sec-head h2{font-size:clamp(32px,6.5vw,64px);color:var(--navy)}
+.divider{height:14px;background:repeating-linear-gradient(-45deg,var(--sky) 0 22px,var(--yellow) 22px 44px,var(--pink) 44px 66px,var(--lime) 66px 88px)}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.215,.61,.355,1),transform .7s cubic-bezier(.215,.61,.355,1)}
+.reveal.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* ══════════════════════════════════════════════
+   VARIANTE A · GLOBOS QUE RESPIRAN
+   ══════════════════════════════════════════════ */
+.vaa{background:var(--paper)}
+.blob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:34px;margin-top:10px}
+.blob{position:relative;padding:34px 30px 30px;color:#fff;
+  animation:blobmorph 9s ease-in-out infinite;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.blob:hover{transform:translateY(-8px) rotate(-1deg)}
+.blob.b1{background:var(--sky-deep);animation-delay:0s}
+.blob.b2{background:var(--pink);animation-delay:-3s}
+.blob.b3{background:var(--lime);animation-delay:-6s}
+@keyframes blobmorph{
+  0%,100%{border-radius:36px 50px 34px 52px/46px 34px 50px 36px}
+  50%{border-radius:52px 34px 50px 36px/36px 50px 34px 46px}
+}
+.blob::after{content:"";position:absolute;bottom:-16px;left:52px;width:34px;height:34px;background:inherit;
+  clip-path:polygon(0 0,100% 0,22% 100%);border-radius:4px}
+.blob .qmark{position:absolute;top:-24px;left:24px;font-family:'UniformBlack';font-size:78px;line-height:1;color:var(--yellow);
+  text-shadow:0 4px 0 rgba(0,0,0,.12);transform:rotate(-6deg)}
+.blob .quote{font-size:15.5px;line-height:1.65;font-family:'UniformLight';position:relative;z-index:2}
+.blob .author{display:flex;align-items:center;gap:12px;margin-top:20px}
+.blob .avatar{width:48px;height:48px;border-radius:50%;background:#fff;display:grid;place-items:center;
+  font-family:'UniformBlack';font-size:18px;flex:0 0 auto;box-shadow:0 4px 0 rgba(0,0,0,.14)}
+.blob.b1 .avatar{color:var(--sky-deep)}.blob.b2 .avatar{color:var(--pink)}.blob.b3 .avatar{color:var(--lime-d)}
+.blob .name{font-family:'UniformBlack';font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.blob .role{font-size:12px;opacity:.85;font-family:'UniformLight'}
+.blob.reveal{transform:scale(.6);opacity:0}
+.blob.reveal.on{transform:none;opacity:1;transition:opacity .5s ease,transform .7s cubic-bezier(.34,1.56,.64,1)}
+.blob.reveal.on:hover{transform:translateY(-8px) rotate(-1deg)}
+
+/* ══════════════════════════════════════════════
+   VARIANTE B · EL CHAT DE LOS PAPÁS
+   ══════════════════════════════════════════════ */
+.vbb{background:linear-gradient(180deg,var(--cloud) 0%,#fff 100%)}
+.phone{max-width:560px;margin:0 auto;background:#fff;border-radius:34px;box-shadow:0 20px 0 rgba(50,43,122,.1);overflow:hidden;border:3px solid var(--cloud2)}
+.phone-top{background:var(--navy);color:#fff;padding:16px 22px;display:flex;align-items:center;gap:13px}
+.phone-top .pfp{width:44px;height:44px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-size:22px}
+.phone-top .who{line-height:1.2}
+.phone-top .who b{font-family:'UniformBlack';text-transform:uppercase;font-size:14px;letter-spacing:.05em}
+.phone-top .who span{font-size:12px;color:var(--cloud2);font-family:'UniformLight';display:block}
+.chat{padding:26px 20px 30px;display:flex;flex-direction:column;gap:14px;min-height:430px;
+  background-image:radial-gradient(var(--cloud) 1.5px,transparent 1.5px);background-size:22px 22px}
+.msg{display:flex;gap:10px;align-items:flex-end;opacity:0;transform:translateY(14px) scale(.92);transform-origin:bottom left;
+  transition:opacity .35s ease,transform .45s cubic-bezier(.34,1.56,.64,1)}
+.msg.show{opacity:1;transform:none}
+.msg .mavatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:'UniformBlack';font-size:14px;flex:0 0 auto;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+.msg .bub{position:relative;background:#fff;border-radius:20px 20px 20px 6px;padding:14px 18px;max-width:78%;
+  box-shadow:0 6px 0 rgba(50,43,122,.08)}
+.msg .bub p{font-size:14.5px;line-height:1.55}
+.msg .bub .meta{font-family:'UniformBlack';font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-top:8px}
+.msg .bub .meta span{display:block;font-family:'UniformLight';font-size:11px;color:#98a1ad;text-transform:none;letter-spacing:0}
+.msg .heart{position:absolute;right:-8px;bottom:-14px;background:#fff;border-radius:999px;padding:3px 8px;font-size:13px;
+  box-shadow:0 3px 0 rgba(50,43,122,.12);opacity:0;transform:scale(0);transition:opacity .25s,transform .4s cubic-bezier(.34,1.7,.5,1)}
+.msg .heart.pop{opacity:1;transform:scale(1)}
+.typing{display:flex;gap:10px;align-items:flex-end;opacity:0;transition:opacity .25s}
+.typing.show{opacity:1}
+.typing .bub{background:#fff;border-radius:20px 20px 20px 6px;padding:16px 18px;box-shadow:0 6px 0 rgba(50,43,122,.08);display:flex;gap:5px}
+.typing .d{width:9px;height:9px;border-radius:50%;background:var(--cloud2);animation:tdot 1s ease-in-out infinite}
+.typing .d:nth-child(2){animation-delay:.15s}
+.typing .d:nth-child(3){animation-delay:.3s}
+@keyframes tdot{0%,100%{transform:translateY(0);background:var(--cloud2)}50%{transform:translateY(-6px);background:var(--sky-deep)}}
+.replay{display:block;margin:22px auto 0;background:var(--yellow);border:none;cursor:pointer;color:var(--ink);
+  font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.06em;font-size:13px;padding:12px 26px;border-radius:999px;
+  box-shadow:0 5px 0 var(--yellow-d);transition:transform .15s}
+.replay:hover{transform:translateY(-3px)}
+
+/* ══════════════════════════════════════════════
+   VARIANTE C · RÍO DE CARIÑITOS
+   ══════════════════════════════════════════════ */
+.vcc{background:var(--navy)}
+.vcc .sec-head h2{color:#fff}
+.vcc .sec-head .kicker{color:var(--yellow)}
+.mrow{display:flex;overflow:hidden;margin:0 -6vw;padding:14px 0;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mtrack{display:flex;gap:24px;flex:0 0 auto;animation:mq 42s linear infinite;padding-right:24px}
+.mrow.rev .mtrack{animation-direction:reverse;animation-duration:48s}
+.mrow:hover .mtrack{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-100%)}}
+.mcard{flex:0 0 360px;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.14);border-radius:24px;padding:24px 26px;transition:background .3s,border-color .3s}
+.mcard:hover{background:rgba(255,255,255,.14);border-color:var(--yellow)}
+.mcard .quote{font-size:14.5px;line-height:1.6;color:var(--cloud2);font-family:'UniformLight'}
+.mcard .author{display:flex;align-items:center;gap:11px;margin-top:16px}
+.mcard .avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:'UniformBlack';font-size:15px}
+.mcard .name{font-family:'UniformBlack';font-size:12.5px;color:#fff;text-transform:uppercase;letter-spacing:.04em}
+.mcard .role{font-size:11.5px;color:#9aa3d0;font-family:'UniformLight'}
+.mcard.sticker{flex:0 0 auto;display:grid;place-items:center;font-size:40px;background:transparent;border:none;padding:0 6px}
+.mcard.sticker span{display:inline-block;animation:stickerbob 3.2s ease-in-out infinite}
+@keyframes stickerbob{0%,100%{transform:rotate(-8deg) translateY(0)}50%{transform:rotate(8deg) translateY(-8px)}}
+
+/* ══════════════════════════════════════════════
+   VARIANTE D · LA CITA GIGANTE
+   ══════════════════════════════════════════════ */
+.vdd{background:linear-gradient(180deg,#fff 0%,var(--cloud) 100%)}
+.bigquote{max-width:860px;margin:0 auto;text-align:center;position:relative;min-height:340px}
+.bigquote .qq{position:absolute;font-family:'UniformBlack';font-size:clamp(110px,16vw,190px);line-height:1;color:var(--cloud2);z-index:0;user-select:none}
+.bigquote .qq.l{top:-30px;left:-10px;transform:rotate(-8deg)}
+.bigquote .qq.r{bottom:30px;right:-10px;transform:rotate(172deg)}
+.bq-slide{position:relative;z-index:2}
+.bq-text{font-size:clamp(20px,3.2vw,30px);line-height:1.5;color:var(--navy);font-family:'UniformLight';min-height:5.6em}
+.bq-text .w{display:inline-block;opacity:0;transform:translateY(14px) rotate(3deg);transition:opacity .4s ease,transform .5s cubic-bezier(.34,1.56,.64,1)}
+.bq-text .w.in{opacity:1;transform:none}
+.bq-author{margin-top:26px;display:flex;align-items:center;justify-content:center;gap:14px;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s}
+.bq-author.in{opacity:1;transform:none}
+.bq-author .avatar{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:'UniformBlack';font-size:20px;box-shadow:0 5px 0 rgba(50,43,122,.15)}
+.bq-author .name{font-family:'UniformBlack';font-size:14px;color:var(--navy);text-transform:uppercase;text-align:left}
+.bq-author .role{font-size:12.5px;color:#7c86a0;font-family:'UniformLight';text-align:left}
+.bq-dots{display:flex;justify-content:center;gap:10px;margin-top:34px}
+.bq-dots button{width:38px;height:9px;border-radius:999px;border:none;background:var(--cloud2);cursor:pointer;transition:background .3s,width .3s;padding:0}
+.bq-dots button.on{background:var(--pink);width:58px}
+
+.pfoot{background:var(--ink);color:#9aa3b2;text-align:center;padding:34px 20px;font-size:14px}
+.pfoot strong{color:#fff}
+</style>
+</head>
+<body>
+
+<div class="preview-bar">
+  <strong>Preview · Papás nos cuentan</strong>
+  <a href="#va">A · Globos</a>
+  <a href="#vb">B · Chat</a>
+  <a href="#vc">C · Río</a>
+  <a href="#vd">D · Cita gigante</a>
+</div>
+
+<!-- ════════════ VARIANTE A ════════════ -->
+<div class="variant-label" id="va">
+  <span class="tag">Variante A · Globos que respiran</span>
+  <p>Los testimonios como globos de diálogo de colores (con colita y todo) cuyos bordes <strong>se deforman lentamente como si respiraran</strong>. Comillas amarillas gigantes, entrada con "pop" escalonado y avatar de iniciales. La forma dice literalmente "los papás hablan".</p>
+</div>
+<section class="band vaa">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Lo que dicen las familias</span>
+      <h2>Papás nos <span style="color:var(--pink)">cuentan</span></h2>
+    </div>
+    <div class="blob-grid">
+      <div class="blob b1 reveal">
+        <div class="qmark">"</div>
+        <p class="quote">Mi hijo llegaba callado, tímido. En Mondomío floreció. Las rotaciones lo ayudaron a encontrar sus talentos. Ahora canta, pinta, juega con confianza.</p>
+        <div class="author"><div class="avatar">MR</div><div><div class="name">María & Roberto</div><div class="role">Papás de Mateo, 3 años</div></div></div>
+      </div>
+      <div class="blob b2 reveal">
+        <div class="qmark">"</div>
+        <p class="quote">Lo mejor es que realmente trabajan en equipo con los papás. Cada mes nos cuentan qué está aprendiendo, qué le cuesta, cómo apoyarlo en casa.</p>
+        <div class="author"><div class="avatar">SP</div><div><div class="name">Sofía Pérez</div><div class="role">Mamá de Lucía, 2 años</div></div></div>
+      </div>
+      <div class="blob b3 reveal">
+        <div class="qmark">"</div>
+        <p class="quote">Buscábamos un lugar donde la maestra conociera a mi hijo, no solo que lo cuidara. En Mondomío eso sucede. Se nota que aman lo que hacen.</p>
+        <div class="author"><div class="avatar">AC</div><div><div class="name">Andrés & Carolina</div><div class="role">Papás de Santiago, 1 año</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════ VARIANTE B ════════════ -->
+<div class="variant-label" id="vb">
+  <span class="tag" style="background:var(--sky-deep);box-shadow:0 5px 0 rgba(30,90,150,.4)">Variante B · El chat de los papás</span>
+  <p>Los testimonios llegan como mensajes en un chat: aparecen los <strong>tres puntitos de "escribiendo…"</strong>, luego el mensaje entra con rebote, y al final le cae su reacción de corazón. Se reproduce solo cuando llegas a la sección (con botón para verlo de nuevo). El formato que todo papá reconoce al instante: el grupo de WhatsApp del kínder.</p>
+</div>
+<section class="band vbb">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Lo que dicen las familias</span>
+      <h2>Papás nos <span style="color:var(--pink)">cuentan</span></h2>
+    </div>
+    <div class="phone reveal" id="phone">
+      <div class="phone-top">
+        <div class="pfp">🐣</div>
+        <div class="who"><b>Familias Mondomío</b><span>3 papás en línea</span></div>
+      </div>
+      <div class="chat" id="chat"></div>
+    </div>
+    <button class="replay" id="replay">↻ Ver de nuevo</button>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════ VARIANTE C ════════════ -->
+<div class="variant-label" id="vc">
+  <span class="tag" style="background:var(--pink);box-shadow:0 5px 0 var(--pink-d)">Variante C · Río de cariñitos</span>
+  <p>Dos ríos de testimonios fluyendo en direcciones opuestas sobre azul marino, con stickers (❤️ ⭐ 🌈) flotando entre tarjeta y tarjeta. Se pausa al pasar el cursor para leer. Da sensación de "muchas familias felices" — y es fácil agregar más testimonios después: solo se suman al río.</p>
+</div>
+<section class="band vcc">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Lo que dicen las familias</span>
+      <h2>Papás nos <span style="color:var(--yellow)">cuentan</span></h2>
+    </div>
+  </div>
+  <div class="mrow reveal" id="mrow1"></div>
+  <div class="mrow rev reveal" id="mrow2"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════ VARIANTE D ════════════ -->
+<div class="variant-label" id="vd">
+  <span class="tag" style="background:var(--yellow);color:var(--ink);box-shadow:0 5px 0 var(--yellow-d)">Variante D · La cita gigante</span>
+  <p>Un solo testimonio al centro, en grande, entre comillas monumentales: las palabras <strong>entran una por una en cascada</strong>, luego aparece el autor, y cada 7 segundos rota al siguiente (o toca los puntos para cambiar). La más editorial y serena — deja que cada historia respire.</p>
+</div>
+<section class="band vdd">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Lo que dicen las familias</span>
+      <h2>Papás nos <span style="color:var(--pink)">cuentan</span></h2>
+    </div>
+    <div class="bigquote reveal">
+      <div class="qq l">"</div><div class="qq r">"</div>
+      <div class="bq-slide">
+        <p class="bq-text" id="bqText"></p>
+        <div class="bq-author" id="bqAuthor">
+          <div class="avatar" id="bqAvatar">MR</div>
+          <div><div class="name" id="bqName"></div><div class="role" id="bqRole"></div></div>
+        </div>
+        <div class="bq-dots" id="bqDots"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="pfoot">
+  <strong>Mondomío · exploración de diseño</strong> — 4 variantes animadas para "Papás nos cuentan".<br>
+  Dime cuál te late y la integro al index.
+</div>
+
+<script>
+const TESTS = [
+  {q:'Mi hijo llegaba callado, tímido. En Mondomío floreció. Las rotaciones lo ayudaron a encontrar sus talentos. Ahora canta, pinta, juega con confianza.', ini:'MR', n:'María & Roberto', r:'Papás de Mateo, 3 años', c:'#46B2DD', hora:'9:14'},
+  {q:'Lo mejor es que realmente trabajan en equipo con los papás. Cada mes nos cuentan qué está aprendiendo, qué le cuesta, cómo apoyarlo en casa.', ini:'SP', n:'Sofía Pérez', r:'Mamá de Lucía, 2 años', c:'#C0539F', hora:'9:16'},
+  {q:'Buscábamos un lugar donde la maestra conociera a mi hijo, no solo que lo cuidara. En Mondomío eso sucede. Se nota que aman lo que hacen.', ini:'AC', n:'Andrés & Carolina', r:'Papás de Santiago, 1 año', c:'#8CC63E', hora:'9:21'}
+];
+
+/* ---------- reveal ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } }), {threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i) => { el.style.transitionDelay = (i%3)*130+'ms'; io.observe(el); });
+
+/* ---------- Variante B: chat ---------- */
+const chat = document.getElementById('chat');
+let chatTimers = [];
+function clearChat(){ chatTimers.forEach(clearTimeout); chatTimers = []; chat.innerHTML = ''; }
+function playChat(){
+  clearChat();
+  let t = 400;
+  TESTS.forEach((m,i) => {
+    const typing = document.createElement('div');
+    typing.className = 'typing';
+    typing.innerHTML = `<div class="mavatar" style="background:${m.c}">${m.ini}</div><div class="bub"><div class="d"></div><div class="d"></div><div class="d"></div></div>`;
+    const msg = document.createElement('div');
+    msg.className = 'msg';
+    msg.innerHTML = `<div class="mavatar" style="background:${m.c}">${m.ini}</div>
+      <div class="bub"><p>"${m.q}"</p><div class="meta" style="color:${m.c}">${m.n} <span>${m.r} · ${m.hora} a. m.</span></div>
+      <div class="heart">❤️ 12</div></div>`;
+    chatTimers.push(setTimeout(() => { chat.appendChild(typing); requestAnimationFrame(() => typing.classList.add('show')); }, t));
+    t += 1500;
+    chatTimers.push(setTimeout(() => {
+      typing.remove(); chat.appendChild(msg);
+      requestAnimationFrame(() => msg.classList.add('show'));
+    }, t));
+    t += 900;
+    chatTimers.push(setTimeout(() => msg.querySelector('.heart').classList.add('pop'), t + 600 + i*200));
+    t += 500;
+  });
+}
+const phoneIO = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ playChat(); phoneIO.disconnect(); } }), {threshold:.4});
+phoneIO.observe(document.getElementById('phone'));
+document.getElementById('replay').addEventListener('click', playChat);
+
+/* ---------- Variante C: río ---------- */
+const STICKERS = ['❤️','⭐','🌈','💛','🎨'];
+function riverTrack(order){
+  const track = document.createElement('div');
+  track.className = 'mtrack';
+  order.forEach((idx,k) => {
+    const m = TESTS[idx];
+    const card = document.createElement('div');
+    card.className = 'mcard';
+    card.innerHTML = `<p class="quote">"${m.q}"</p>
+      <div class="author"><div class="avatar" style="background:${m.c}">${m.ini}</div>
+      <div><div class="name">${m.n}</div><div class="role">${m.r}</div></div></div>`;
+    track.appendChild(card);
+    const st = document.createElement('div');
+    st.className = 'mcard sticker';
+    st.innerHTML = `<span style="animation-delay:${-k*0.9}s">${STICKERS[k % STICKERS.length]}</span>`;
+    track.appendChild(st);
+  });
+  return track;
+}
+[['mrow1',[0,1,2,0,1,2]],['mrow2',[2,0,1,2,0,1]]].forEach(([id,order]) => {
+  const row = document.getElementById(id);
+  row.appendChild(riverTrack(order));
+  row.appendChild(riverTrack(order)); /* duplicado para loop perfecto */
+});
+
+/* ---------- Variante D: cita gigante ---------- */
+const bqText = document.getElementById('bqText');
+const bqAuthor = document.getElementById('bqAuthor');
+const bqAvatar = document.getElementById('bqAvatar');
+const bqName = document.getElementById('bqName');
+const bqRole = document.getElementById('bqRole');
+const bqDots = document.getElementById('bqDots');
+const dots = TESTS.map((_,i) => {
+  const b = document.createElement('button');
+  b.setAttribute('aria-label','Testimonio '+(i+1));
+  b.addEventListener('click', () => { setQuote(i); restartQuote(); });
+  bqDots.appendChild(b); return b;
+});
+let qi = -1, qtimer;
+function setQuote(i){
+  if(i === qi) return; qi = i;
+  const m = TESTS[i];
+  bqText.innerHTML = '';
+  m.q.split(' ').forEach((w,k) => {
+    const s = document.createElement('span');
+    s.className = 'w'; s.textContent = w + ' ';
+    s.style.transitionDelay = (k*32)+'ms';
+    bqText.appendChild(s);
+  });
+  requestAnimationFrame(() => requestAnimationFrame(() => bqText.querySelectorAll('.w').forEach(w => w.classList.add('in'))));
+  bqAuthor.classList.remove('in');
+  const delay = m.q.split(' ').length*32 + 350;
+  setTimeout(() => bqAuthor.classList.add('in'), delay);
+  bqAvatar.textContent = m.ini; bqAvatar.style.background = m.c;
+  bqName.textContent = m.n; bqRole.textContent = m.r;
+  dots.forEach((d,j) => d.classList.toggle('on', j===i));
+}
+function restartQuote(){ clearInterval(qtimer); qtimer = setInterval(() => setQuote((qi+1)%TESTS.length), 7000); }
+setQuote(0); restartQuote();
+</script>
+</body>
+</html>
