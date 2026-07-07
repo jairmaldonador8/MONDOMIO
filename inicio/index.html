@@ -40,9 +40,36 @@ img{display:block;max-width:100%}
 .cloud{position:absolute;background:var(--cloud);border-radius:50%;filter:blur(.3px);opacity:.92;pointer-events:none}
 .cloud::before,.cloud::after{content:"";position:absolute;background:var(--cloud);border-radius:50%}
 
+/* navbar glassmorphism */
+nav.navbar{position:sticky;top:0;z-index:10;padding:16px 20px;transition:all .3s ease}
+nav.navbar .wrap{background:rgba(255,255,255,.7);backdrop-filter:blur(8px);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;border-radius:12px;border:1px solid rgba(255,255,255,.3)}
+.navbar-logo-link{text-decoration:none;display:flex;cursor:pointer;transition:transform .2s ease}
+.navbar-logo-link:hover{transform:scale(1.05)}
+.navbar-logo{width:70px;height:auto;flex:0 0 auto}
+.navbar-links{display:flex;align-items:center;gap:32px;flex:1;margin-left:40px}
+.navbar-links a{font-family:'UniformMed';font-size:14px;text-transform:uppercase;letter-spacing:.02em;color:var(--navy);text-decoration:none;transition:color .2s ease;font-weight:500}
+.navbar-links a:hover{color:var(--pink)}
+.navbar-cta{display:flex;align-items:center;gap:12px;flex:0 0 auto}
+.navbar-phone{display:flex;align-items:center;gap:8px;text-decoration:none;background:var(--pink);color:#fff;font-family:'UniformMed';font-size:13px;text-transform:uppercase;padding:10px 16px;border-radius:999px;font-weight:bold;transition:all .2s ease}
+.navbar-phone:hover{background:var(--pink-d);box-shadow:0 4px 12px rgba(192,83,159,.4)}
+nav.navbar.hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
+@media(max-width:768px){
+  nav.navbar .wrap{margin:0 10px;padding:12px 24px}
+  .navbar-links{gap:16px;font-size:12px;margin-left:24px}
+  .navbar-links a{font-size:11px}
+  .navbar-logo{width:60px}
+  .navbar-phone{font-size:11px;padding:8px 12px}
+}
+@media(max-width:480px){
+  nav.navbar .wrap{flex-wrap:wrap}
+  .navbar-links{order:3;width:100%;gap:12px;margin-top:12px;margin-left:0}
+  .navbar-links a{font-size:12px}
+  nav.navbar{padding:16px 0}
+}
+
 /* top bar */
-.bar{position:relative;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0 4px}
-.bar .logo{width:min(200px,45vw)}
+.bar{position:relative;z-index:6;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:40px 0 0}
+.bar .logo{width:min(900px,100vw)}
 .pill{display:inline-flex;align-items:center;gap:8px;background:var(--paper);color:var(--pink-d);
   font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.04em;font-size:14px;
   padding:9px 16px;border-radius:999px;box-shadow:0 6px 0 rgba(50,43,122,.12)}
@@ -50,14 +77,14 @@ img{display:block;max-width:100%}
 
 /* hero */
 .hero{position:relative;padding:30px 0 0;isolation:isolate}
-.hero .sky-bg{position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky) 55%,var(--sky) 100%)}
+.hero .sky-bg{position:absolute;inset:0;z-index:-2;background:url(assets/img/hero-ambiente.svg) no-repeat center/cover;background-size:cover;background-position:center}
 .hero-inner{position:relative;z-index:3;text-align:center;padding:40px 0 0}
 .eyebrow{display:inline-block;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.16em;
   color:var(--paper);font-size:clamp(13px,2.6vw,18px);
   background:var(--pink);padding:8px 20px;border-radius:999px;transform:rotate(-2deg);
   box-shadow:0 5px 0 rgba(166,64,138,.45)}
-.hero h1{margin:22px auto 0;color:var(--paper);font-size:clamp(42px,9vw,100px);
-  text-shadow:0 6px 0 rgba(50,43,122,.18);max-width:16ch;line-height:1}
+.hero h1{margin:-5px auto 0;color:#1e5a96;font-size:clamp(28px,3.5vw,42px);
+  text-shadow:none;max-width:100%;line-height:1.2;font-weight:500;letter-spacing:.02em}
 .hero h1 em{font-style:normal;color:var(--yellow)}
 .hero .lede{max-width:35ch;margin:20px auto 0;color:#16384a;font-size:clamp(16px,2.4vw,20px);font-weight:500}
 .btn{display:inline-flex;align-items:center;gap:9px;cursor:pointer;border:none;
@@ -68,7 +95,11 @@ img{display:block;max-width:100%}
 .btn-navy{background:var(--navy);color:#fff;box-shadow:0 7px 0 var(--navy-d)}
 .btn:hover{transform:translateY(-3px)} .btn:active{transform:translateY(2px)}
 .hero .cta{margin-top:30px}
-.hero-img{position:relative;margin-top:40px;z-index:2;height:clamp(200px,35vw,320px);background:rgba(255,255,255,.15);border-radius:var(--r);overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff;font-size:clamp(13px,2vw,16px)}
+.hero-carousel{position:relative;margin-top:40px;z-index:2;height:420px;border-radius:var(--r);overflow:hidden;display:flex;align-items:center;width:100%}
+.carousel-track{display:flex;gap:20px;animation:scroll 200s linear infinite;padding:16px 24px;align-items:center;width:fit-content}
+.carousel-track img{flex:0 0 340px;width:340px;height:340px;object-fit:cover;border-radius:20px;box-shadow:0 8px 24px rgba(50,43,122,.16);transition:transform .4s cubic-bezier(.215,.61,.355,1),box-shadow .4s ease}
+.carousel-track img:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(50,43,122,.25)}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(calc(-260px * 32 - 20px * 32))}}
 
 /* sections */
 section{position:relative}
@@ -175,11 +206,29 @@ footer .copy{margin-top:26px;color:#7f7bb8;font-size:13px;font-family:'UniformLi
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @keyframes drift{0%{transform:translateX(0)}100%{transform:translateX(40px)}}
 @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0px) rotate(0deg)}50%{transform:translateY(-20px) rotate(2deg)}}
+@keyframes float-rev{0%,100%{transform:translateY(0px) rotate(0deg)}50%{transform:translateY(-18px) rotate(-2deg)}}
 .bob{animation:bob 5s ease-in-out infinite}
 .bob.s{animation-duration:6.5s}.bob.t{animation-duration:4.2s}
+.critter{position:absolute;width:60px;height:60px;background-size:contain;background-repeat:no-repeat;background-position:center;opacity:.85;pointer-events:none;z-index:1}
+.critter.float1{animation:float 4s ease-in-out infinite}
+.critter.float2{animation:float-rev 5s ease-in-out infinite}
+.critter.float3{animation:float 6s ease-in-out infinite}
+.critter.float4{animation:float-rev 4.5s ease-in-out infinite}
 .reveal{opacity:1}
 html.js .reveal{opacity:0}
 html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+@media(max-width:768px){
+  .hero-carousel{height:300px}
+  .carousel-track img{flex:0 0 260px;width:260px;height:260px}
+  .carousel-slider{bottom:8px;left:16px;right:16px}
+}
+@media(max-width:480px){
+  .hero-carousel{height:220px}
+  .carousel-track img{flex:0 0 180px;width:180px;height:180px}
+  .carousel-slider-thumb{width:16px;height:16px}
+  .carousel-slider{height:4px}
+}
 @media(prefers-reduced-motion:reduce){
   .bob,.cloudmove{animation:none!important}
   html.js .reveal{opacity:1!important;animation:none!important}
@@ -190,8 +239,23 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
 </head>
 <body>
 
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="wrap">
+    <a href="#inicio" class="navbar-logo-link"><img class="navbar-logo" src="assets/img/logo-mondomio.png" alt="Mondomío"></a>
+    <div class="navbar-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#summer">Summer Camp</a>
+      <a href="#inscripciones">Inscripciones</a>
+      <a href="#areas">Áreas</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <a class="navbar-phone" href="tel:+528182590721">Contáctanos</a>
+  </div>
+</nav>
+
 <!-- HERO -->
-<header class="hero">
+<header class="hero" id="inicio">
   <div class="sky-bg"></div>
   <div class="cloud cloudmove" style="width:130px;height:48px;top:140px;left:10%;animation:drift 14s ease-in-out infinite alternate"></div>
   <div class="cloud cloudmove" style="width:90px;height:34px;top:160px;right:10%;animation:drift 18s ease-in-out infinite alternate-reverse"></div>
@@ -199,26 +263,62 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
   <div class="wrap">
     <div class="bar">
       <img class="logo" src="assets/img/logo-mondomio.png" alt="Mondomío Kínder">
-      <span class="pill"><span class="dot"></span>Para niños 1-4</span>
     </div>
 
     <div class="hero-inner">
-      <span class="eyebrow reveal" style="background:var(--pink);color:#fff">Discover Learning</span>
-      <h1 class="reveal">Discover learning<br>in our <em>caring</em><br>world</h1>
+      <h1 class="reveal">Discover learning in our <em>caring</em> world.</h1>
       <p class="lede light reveal">En un espacio seguro donde cada pequeño descubre su propio talento a través del aprendizaje constructivista.</p>
       <div class="cta reveal">
         <a class="btn btn-yellow" href="#agenda">Agenda una visita</a>
       </div>
     </div>
 
-    <div class="hero-img reveal">
-      🎨 Espacio de aprendizaje cálido y seguro · Rotación diaria en 8 áreas
+    <!-- Critters decorativos -->
+    <div class="critter float1" style="width:200px;height:200px;top:200px;right:6%;background-image:url(assets/img/PAJARITO.png)"></div>
+    <div class="critter float2" style="width:190px;height:190px;top:210px;left:4%;background-image:url(assets/img/ABEJITA2.png)"></div>
+
+    <div class="hero-carousel reveal">
+      <div class="carousel-track" id="carouselTrack">
+        <img src="assets/img/CBYP8129.JPG" alt="Mondomío">
+        <img src="assets/img/CBYP8030.JPG" alt="Mondomío">
+        <img src="assets/img/IMG_3021.JPG" alt="Mondomío">
+        <img src="assets/img/DM706743.jpg" alt="Mondomío">
+        <img src="assets/img/DM706582.jpg" alt="Mondomío">
+        <img src="assets/img/DM706490.jpg" alt="Mondomío">
+        <img src="assets/img/DM706459.jpg" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0148.jpg" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0103.jpg" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0087.jpg" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0074.jpg" alt="Mondomío">
+        <img src="assets/img/IMG_2528.JPG" alt="Mondomío">
+        <img src="assets/img/IMG_2519.JPG" alt="Mondomío">
+        <img src="assets/img/IMG_2469.JPG" alt="Mondomío">
+        <img src="assets/img/IMG_2457.JPG" alt="Mondomío">
+        <img src="assets/img/D43A8458-5BDB-44C7-8261-5A04C494A5F2.jpg" alt="Mondomío">
+        <img src="assets/img/588A6DCB-2AD7-4417-8756-54571F678270.jpg" alt="Mondomío">
+        <img src="assets/img/DSC01181.JPG" alt="Mondomío">
+        <img src="assets/img/DSC01100.JPG" alt="Mondomío">
+        <img src="assets/img/DSC01086.JPG" alt="Mondomío">
+        <img src="assets/img/DSC01016.JPG" alt="Mondomío">
+        <img src="assets/img/CBYP0421.JPG" alt="Mondomío">
+        <img src="assets/img/CBYP0380.JPG" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0397.jpg" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0402.jpg" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0402 (1).jpg" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0408.jpg" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0412.jpg" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0452.jpg" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0514.jpg" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0554.jpg" alt="Mondomío">
+        <img src="assets/img/250618 - MondoMio Actividad DDP - 0563.jpg" alt="Mondomío">
+      </div>
     </div>
   </div>
 </header>
 
 <!-- POR QUÉ MONDOMÍO -->
-<section class="band why">
+<section class="band why" style="position:relative">
+  <div class="critter float3" style="width:100px;height:100px;top:60px;right:8%;background-image:url(assets/img/CATARINA.png)"></div>
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="kicker">Conócenos</span>
@@ -254,7 +354,9 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
 </section>
 
 <!-- ÁREAS DE APRENDIZAJE -->
-<section class="band areas">
+<section class="band areas" id="areas" style="position:relative">
+  <div class="critter float1" style="width:115px;height:115px;top:100px;left:2%;background-image:url(assets/img/GATO.png)"></div>
+  <div class="critter float4" style="width:95px;height:95px;bottom:180px;right:4%;background-image:url(assets/img/CARACOL.png)"></div>
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="kicker">Desarrollo Integral</span>
@@ -307,8 +409,9 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
   </div>
 </section>
 
-<!-- ACTIVIDADES ESPECIALES -->
-<section class="band specials">
+<!-- ACTIVIDADES ESPECIALES / SUMMER CAMP -->
+<section class="band specials" id="summer" style="position:relative">
+  <div class="critter float2" style="width:105px;height:105px;top:130px;right:6%;background-image:url(assets/img/PAJARITO2.png)"></div>
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="kicker">Además de la rotación</span>
@@ -336,7 +439,8 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
 </section>
 
 <!-- TIMELINE: Una semana en Mondomío -->
-<section class="band timeline">
+<section class="band timeline" style="position:relative">
+  <div class="critter float3" style="width:100px;height:100px;top:80px;left:3%;background-image:url(assets/img/RANA.png)"></div>
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="kicker">La rutina diaria</span>
@@ -421,8 +525,8 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
   </div>
 </section>
 
-<!-- CTA GRANDE -->
-<section class="band cta-big" id="agenda">
+<!-- CTA GRANDE / INSCRIPCIONES -->
+<section class="band cta-big" id="inscripciones">
   <div class="wrap">
     <h2 class="reveal">¿Listo para conocer Mondomío?</h2>
     <p class="reveal">Agenda una visita sin compromiso. Conoce las instalaciones, las maestras, las áreas de aprendizaje. Te contamos a detalle cómo trabajamos y contestamos todas tus preguntas.</p>
@@ -495,6 +599,25 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
 
 <script>
   (function(){
+    var navbar=document.querySelector('nav.navbar');
+    var lastScrollTop=0;
+
+    window.addEventListener('scroll',function(){
+      var scrollTop=window.pageYOffset||document.documentElement.scrollTop;
+
+      // Navbar hide on scroll
+      if(scrollTop>100){
+        if(scrollTop>lastScrollTop){
+          navbar.classList.add('hidden');
+        }else{
+          navbar.classList.remove('hidden');
+        }
+      }
+      lastScrollTop=scrollTop<=0?0:scrollTop;
+    });
+  })();
+
+  (function(){
     var els=document.querySelectorAll('.reveal');
     function showAll(){els.forEach(function(el){el.classList.add('in')});}
     if(!('IntersectionObserver' in window)){showAll();return;}
@@ -502,6 +625,7 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
     els.forEach(function(el,i){el.style.animationDelay=(i%4*0.08)+'s';io.observe(el);});
     window.addEventListener('load',function(){setTimeout(showAll,1500);});
   })();
+
 </script>
 </body>
 </html>

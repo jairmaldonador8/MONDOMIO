@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Section Animations - Mondomío</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Uniform', system-ui, sans-serif; background: #f5f5f5; }
+
+  :root {
+    --sky: #6CC9EC;
+    --cloud: #EAF8FD;
+    --lime: #8CC63E;
+    --pink: #C0539F;
+    --navy: #322B7A;
+    --paper: #ffffff;
+  }
+
+  .preview-section {
+    background: white;
+    margin: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    overflow: hidden;
+  }
+
+  .preview-label {
+    background: var(--navy);
+    color: white;
+    padding: 12px 20px;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  .preview-content {
+    padding: 40px 20px;
+    background: var(--sky);
+    min-height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  /* ===== ESTILO 1: Cards con Flip 3D ===== */
+  .flip-card {
+    width: 220px;
+    height: 220px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 12px;
+    font-weight: bold;
+  }
+
+  .flip-card-front {
+    background: linear-gradient(135deg, #8CC63E 0%, #B7DF57 100%);
+    color: white;
+    font-size: 48px;
+  }
+
+  .flip-card-back {
+    background: var(--navy);
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    transform: rotateY(180deg);
+  }
+
+  /* ===== ESTILO 2: Cards Slide Up ===== */
+  .slide-card {
+    width: 220px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    cursor: pointer;
+  }
+
+  .slide-card-icon {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    background: linear-gradient(135deg, var(--lime) 0%, #B7DF57 100%);
+  }
+
+  .slide-card-content {
+    padding: 20px;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+  }
+
+  .slide-card:hover .slide-card-content {
+    transform: translateY(-10px);
+    background: var(--lime);
+    color: white;
+  }
+
+  .slide-card h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .slide-card p {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  /* ===== ESTILO 3: Tabs/Accordion ===== */
+  .tabs-container {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .tab-button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    background: var(--lime);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: left;
+    transition: background 0.3s;
+    margin-bottom: 8px;
+    border-radius: 8px;
+  }
+
+  .tab-button:hover {
+    background: #79B62F;
+  }
+
+  .tab-content {
+    display: none;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+
+  .tab-content.active {
+    display: block;
+    animation: slideDown 0.3s ease;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== ESTILO 4: Circular Progress ===== */
+  .circles-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .circle-item {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  }
+
+  .circle-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 24px rgba(0,0,0,.2);
+  }
+
+  .circle-item.c1 { background: linear-gradient(135deg, #8CC63E 0%, #B7DF57 100%); }
+  .circle-item.c2 { background: linear-gradient(135deg, #6CC9EC 0%, #46B2DD 100%); }
+  .circle-item.c3 { background: linear-gradient(135deg, #C0539F 0%, #A6408A 100%); }
+  .circle-item.c4 { background: linear-gradient(135deg, #FAC81C 0%, #EBB200 100%); }
+
+  .circle-item.c1, .circle-item.c3, .circle-item.c4 { color: white; }
+  .circle-item.c2 { color: white; }
+
+  .circle-icon {
+    font-size: 36px;
+    margin-bottom: 8px;
+  }
+
+  .circle-text {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  /* ===== ESTILO 5: Animated Counter/Progress ===== */
+  .progress-container {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .progress-item {
+    margin-bottom: 24px;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    color: var(--navy);
+  }
+
+  .progress-bar {
+    height: 12px;
+    background: rgba(255,255,255,.5);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--lime), #B7DF57);
+    width: 0;
+    animation: fillProgress 1.5s ease-out forwards;
+  }
+
+  .progress-fill.delay1 { animation-delay: 0.2s; }
+  .progress-fill.delay2 { animation-delay: 0.4s; }
+  .progress-fill.delay3 { animation-delay: 0.6s; }
+  .progress-fill.delay4 { animation-delay: 0.8s; }
+
+  @keyframes fillProgress {
+    to { width: 100%; }
+  }
+
+  /* ===== ESTILO 6: Cards Stagger Grid ===== */
+  .stagger-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .stagger-card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+    opacity: 0;
+    animation: staggerIn 0.6s ease forwards;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  }
+
+  .stagger-card:nth-child(1) { animation-delay: 0s; }
+  .stagger-card:nth-child(2) { animation-delay: 0.15s; }
+  .stagger-card:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-card:nth-child(4) { animation-delay: 0.45s; }
+
+  @keyframes staggerIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .stagger-card-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .stagger-card h3 {
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .stagger-card p {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  h1 { padding: 30px 20px; color: var(--navy); text-align: center; }
+
+  .info-text {
+    text-align: center;
+    padding: 20px;
+    background: #f9f9f9;
+    border-top: 1px solid #eee;
+    font-size: 12px;
+    color: #666;
+  }
+</style>
+</head>
+<body>
+
+<h1>Sección "Por qué elegir Mondomío" - Diferentes Estilos de Animación</h1>
+
+<!-- ESTILO 1: Flip Cards 3D -->
+<div class="preview-section">
+  <div class="preview-label">Estilo 1: Cards Flip 3D (Hover para ver detrás)</div>
+  <div class="preview-content" style="gap: 30px;">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">🏗️</div>
+        <div class="flip-card-back">
+          <strong>Modelo Constructivista</strong><br>
+          Los niños aprenden haciendo. Exploramos y construimos juntos.
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">🎡</div>
+        <div class="flip-card-back">
+          <strong>8 Áreas de Rotación</strong><br>
+          Desarrollo integral en todas las dimensiones.
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">👨‍🏫</div>
+        <div class="flip-card-back">
+          <strong>Maestras Especializadas</strong><br>
+          Cada área con maestra formada en esa disciplina.
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">🤝</div>
+        <div class="flip-card-back">
+          <strong>Trabajo en Familia</strong><br>
+          Evaluaciones periódicas y comunicación constante.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="info-text">✓ Interactivo, moderno, efecto 3D impactante</div>
+</div>
+
+<!-- ESTILO 2: Slide Cards -->
+<div class="preview-section">
+  <div class="preview-label">Estilo 2: Cards Slide Up (Hover para expandir)</div>
+  <div class="preview-content" style="gap: 20px;">
+    <div class="slide-card">
+      <div class="slide-card-icon">🏗️</div>
+      <div class="slide-card-content">
+        <h3>Constructivista</h3>
+        <p>Los niños aprenden haciendo y explorando.</p>
+      </div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-card-icon">🎡</div>
+      <div class="slide-card-content">
+        <h3>8 Áreas</h3>
+        <p>Desarrollo integral en todas las dimensiones.</p>
+      </div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-card-icon">👨‍🏫</div>
+      <div class="slide-card-content">
+        <h3>Especializadas</h3>
+        <p>Maestras formadas en cada disciplina.</p>
+      </div>
+    </div>
+    <div class="slide-card">
+      <div class="slide-card-icon">🤝</div>
+      <div class="slide-card-content">
+        <h3>Familia</h3>
+        <p>Evaluaciones y comunicación constante.</p>
+      </div>
+    </div>
+  </div>
+  <div class="info-text">✓ Elegante, transiciones suaves, profesional</div>
+</div>
+
+<!-- ESTILO 3: Tabs/Accordion -->
+<div class="preview-section">
+  <div class="preview-label">Estilo 3: Tabs/Accordion (Click para expandir)</div>
+  <div class="preview-content" style="justify-content: center;">
+    <div class="tabs-container">
+      <button class="tab-button" onclick="toggleTab(0)">🏗️ Modelo Constructivista</button>
+      <div class="tab-content" id="tab0" style="display: block;">
+        Los niños aprenden haciendo. Exploramos, descubrimos, construimos conocimiento juntos. No es solo llevar información, es ayudar a cada pequeño a ser el arquitecto de su propio aprendizaje.
+      </div>
+
+      <button class="tab-button" onclick="toggleTab(1)">🎡 8 Áreas de Rotación</button>
+      <div class="tab-content" id="tab1">
+        Cada día exploran diferentes espacios: Language & Reading, Math & Science, Basic Skills, Pretend Play, Sensory, Art, Gym y Music. Desarrollo integral en todas las dimensiones.
+      </div>
+
+      <button class="tab-button" onclick="toggleTab(2)">👨‍🏫 Maestras Especializadas</button>
+      <div class="tab-content" id="tab2">
+        Cada área cuenta con una maestra formada en esa disciplina. No es lo mismo que alguien enseñe música que una especialista en desarrollo musical infantil.
+      </div>
+
+      <button class="tab-button" onclick="toggleTab(3)">🤝 Trabajo en Familia</button>
+      <div class="tab-content" id="tab3">
+        Evaluaciones periódicas, comunicación constante, reuniones con papás. Tu hijo crece en el kínder, pero la familia es el corazón. Crecemos juntos.
+      </div>
+    </div>
+  </div>
+  <div class="info-text">✓ Compacto, fácil de leer, muy interactivo</div>
+</div>
+
+<!-- ESTILO 4: Circular Items -->
+<div class="preview-section">
+  <div class="preview-label">Estilo 4: Círculos Coloridos (Hover para ampliar)</div>
+  <div class="preview-content">
+    <div class="circles-container">
+      <div class="circle-item c1">
+        <div class="circle-icon">🏗️</div>
+        <div class="circle-text">Constructivista</div>
+      </div>
+      <div class="circle-item c2">
+        <div class="circle-icon">🎡</div>
+        <div class="circle-text">8 Áreas</div>
+      </div>
+      <div class="circle-item c3">
+        <div class="circle-icon">👨‍🏫</div>
+        <div class="circle-text">Especializadas</div>
+      </div>
+      <div class="circle-item c4">
+        <div class="circle-icon">🤝</div>
+        <div class="circle-text">En Familia</div>
+      </div>
+    </div>
+  </div>
+  <div class="info-text">✓ Colorido, juguetón, moderno, perfecto para niños</div>
+</div>
+
+<!-- ESTILO 5: Progress Bars -->
+<div class="preview-section">
+  <div class="preview-label">Estilo 5: Barras de Progreso Animadas (Se llenan al cargar)</div>
+  <div class="preview-content" style="justify-content: center;">
+    <div class="progress-container">
+      <div class="progress-item">
+        <div class="progress-label">
+          <span>🏗️ Modelo Constructivista</span>
+          <span>100%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill delay1" style="width: 0;"></div>
+        </div>
+      </div>
+
+      <div class="progress-item">
+        <div class="progress-label">
+          <span>🎡 8 Áreas de Rotación</span>
+          <span>100%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill delay2" style="width: 0;"></div>
+        </div>
+      </div>
+
+      <div class="progress-item">
+        <div class="progress-label">
+          <span>👨‍🏫 Maestras Especializadas</span>
+          <span>100%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill delay3" style="width: 0;"></div>
+        </div>
+      </div>
+
+      <div class="progress-item">
+        <div class="progress-label">
+          <span>🤝 Trabajo en Familia</span>
+          <span>100%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill delay4" style="width: 0;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="info-text">✓ Dinámico, visualiza el valor propuesto</div>
+</div>
+
+<!-- ESTILO 6: Stagger Grid -->
+<div class="preview-section">
+  <div class="preview-label">Estilo 6: Grid Stagger (Cargan uno por uno)</div>
+  <div class="preview-content" style="justify-content: center;">
+    <div class="stagger-grid">
+      <div class="stagger-card">
+        <div class="stagger-card-icon">🏗️</div>
+        <h3>Constructivista</h3>
+        <p>Los niños aprenden haciendo y explorando juntos.</p>
+      </div>
+      <div class="stagger-card">
+        <div class="stagger-card-icon">🎡</div>
+        <h3>8 Áreas</h3>
+        <p>Desarrollo integral en todas las dimensiones.</p>
+      </div>
+      <div class="stagger-card">
+        <div class="stagger-card-icon">👨‍🏫</div>
+        <h3>Especializadas</h3>
+        <p>Maestras formadas en cada disciplina.</p>
+      </div>
+      <div class="stagger-card">
+        <div class="stagger-card-icon">🤝</div>
+        <h3>En Familia</h3>
+        <p>Evaluaciones y comunicación constante.</p>
+      </div>
+    </div>
+  </div>
+  <div class="info-text">✓ Fluido, aparecen uno a uno, muy moderno</div>
+</div>
+
+<div style="padding: 40px 20px; text-align: center; color: var(--navy); background: white; margin: 20px;">
+  <p style="font-size: 14px; margin-top: 20px;">
+    <strong>¿Cuál te gusta?</strong> Dime el número (1-6) y lo implemento en tu sitio 🎨
+  </p>
+</div>
+
+<script>
+  function toggleTab(index) {
+    const tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(t => t.classList.remove('active'));
+    document.getElementById('tab' + index).classList.add('active');
+  }
+</script>
+
+</body>
+</html>

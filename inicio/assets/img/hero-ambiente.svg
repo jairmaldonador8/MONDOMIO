@@ -1,0 +1,115 @@
+<svg viewBox="0 0 1440 760" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Cielo con arcoíris, nubes y pradera de flores">
+  <defs>
+    <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#BFE8F7"/>
+      <stop offset="0.55" stop-color="#86D2F0"/>
+      <stop offset="1" stop-color="#62C2EA"/>
+    </linearGradient>
+    <linearGradient id="pasto" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7BC24E"/>
+      <stop offset="1" stop-color="#5BA73C"/>
+    </linearGradient>
+    <style>
+      @keyframes rainbowGlow {
+        0%, 100% { opacity: 1; filter: drop-shadow(0 0 2px rgba(255,255,255,.3)); }
+        50% { opacity: 0.85; filter: drop-shadow(0 0 8px rgba(255,255,255,.6)); }
+      }
+      .rainbow { animation: rainbowGlow 3s ease-in-out infinite; }
+      @keyframes rainbowPulse {
+        0%, 100% { stroke-width: 30; }
+        50% { stroke-width: 35; }
+      }
+      .rainbow path { animation: rainbowPulse 3s ease-in-out infinite; }
+    </style>
+  </defs>
+
+  <!-- Cielo -->
+  <rect width="1440" height="760" fill="url(#cielo)"/>
+
+  <!-- Arcoíris -->
+  <g class="rainbow" fill="none" stroke-linecap="round">
+    <path d="M360 560 A360 360 0 0 1 1080 560" stroke="#F2603F" stroke-width="30"/>
+    <path d="M390 560 A330 330 0 0 1 1050 560" stroke="#F59A3E" stroke-width="30"/>
+    <path d="M420 560 A300 300 0 0 1 1020 560" stroke="#F4C94B" stroke-width="30"/>
+    <path d="M450 560 A270 270 0 0 1 990 560"  stroke="#5DB97C" stroke-width="30"/>
+    <path d="M480 560 A240 240 0 0 1 960 560"  stroke="#4C9FE0" stroke-width="30"/>
+    <path d="M510 560 A210 210 0 0 1 930 560"  stroke="#8A6FB6" stroke-width="30"/>
+  </g>
+
+  <!-- Nubes ambientales suaves -->
+  <g fill="#FFFFFF" opacity="0.95">
+    <g>
+      <ellipse cx="190" cy="180" rx="78" ry="44"/>
+      <ellipse cx="250" cy="160" rx="62" ry="42"/>
+      <ellipse cx="300" cy="190" rx="70" ry="40"/>
+      <rect x="150" y="180" width="200" height="44" rx="22"/>
+    </g>
+    <g opacity="0.9">
+      <ellipse cx="1180" cy="140" rx="70" ry="40"/>
+      <ellipse cx="1240" cy="122" rx="56" ry="38"/>
+      <ellipse cx="1284" cy="152" rx="62" ry="36"/>
+      <rect x="1150" y="142" width="180" height="40" rx="20"/>
+    </g>
+  </g>
+
+  <!-- Lomita de pasto -->
+  <path d="M0 620 C 240 560 480 560 720 588 C 960 616 1200 560 1440 600 L1440 760 L0 760 Z" fill="url(#pasto)"/>
+  <path d="M0 632 C 240 572 480 572 720 600 C 960 628 1200 572 1440 612" fill="none" stroke="#6CB544" stroke-width="6" opacity="0.5"/>
+
+  <!-- Cenefa de flores folk -->
+  <g stroke-linecap="round">
+    <!-- tallo+flor helper repetido a mano para control de estilo -->
+    <g transform="translate(120 600)">
+      <line x1="0" y1="0" x2="0" y2="58" stroke="#3E8E4F" stroke-width="6"/>
+      <circle cx="0" cy="-6" r="20" fill="#E0556B"/>
+      <circle cx="0" cy="-6" r="7" fill="#F4C94B"/>
+    </g>
+    <g transform="translate(230 612)">
+      <line x1="0" y1="0" x2="0" y2="48" stroke="#3E8E4F" stroke-width="6"/>
+      <path d="M-16 -4 q16 -26 32 0 q-16 22 -32 0 Z" fill="#9B7FC4"/>
+    </g>
+    <g transform="translate(330 604)">
+      <line x1="0" y1="0" x2="0" y2="54" stroke="#3E8E4F" stroke-width="6"/>
+      <circle cx="0" cy="-6" r="16" fill="#F4C94B"/>
+      <circle cx="0" cy="-6" r="6" fill="#E08A2E"/>
+    </g>
+    <g transform="translate(470 614)">
+      <line x1="0" y1="0" x2="0" y2="46" stroke="#3E8E4F" stroke-width="6"/>
+      <circle cx="0" cy="-4" r="18" fill="#5DB1E0"/>
+      <circle cx="0" cy="-4" r="6" fill="#FFFFFF"/>
+    </g>
+    <g transform="translate(600 600)">
+      <line x1="0" y1="0" x2="0" y2="58" stroke="#3E8E4F" stroke-width="6"/>
+      <circle cx="0" cy="-6" r="20" fill="#E0556B"/>
+      <circle cx="0" cy="-6" r="7" fill="#FFFFFF"/>
+    </g>
+    <g transform="translate(720 612)">
+      <line x1="0" y1="0" x2="0" y2="50" stroke="#3E8E4F" stroke-width="6"/>
+      <path d="M-16 -4 q16 -26 32 0 q-16 22 -32 0 Z" fill="#F4A0B8"/>
+    </g>
+    <g transform="translate(850 602)">
+      <line x1="0" y1="0" x2="0" y2="56" stroke="#3E8E4F" stroke-width="6"/>
+      <circle cx="0" cy="-6" r="17" fill="#F4C94B"/>
+      <circle cx="0" cy="-6" r="6" fill="#E08A2E"/>
+    </g>
+    <g transform="translate(980 612)">
+      <line x1="0" y1="0" x2="0" y2="48" stroke="#3E8E4F" stroke-width="6"/>
+      <circle cx="0" cy="-4" r="18" fill="#9B7FC4"/>
+      <circle cx="0" cy="-4" r="6" fill="#F4C94B"/>
+    </g>
+    <g transform="translate(1100 600)">
+      <line x1="0" y1="0" x2="0" y2="58" stroke="#3E8E4F" stroke-width="6"/>
+      <circle cx="0" cy="-6" r="20" fill="#E0556B"/>
+      <circle cx="0" cy="-6" r="7" fill="#F4C94B"/>
+    </g>
+    <g transform="translate(1230 610)">
+      <line x1="0" y1="0" x2="0" y2="50" stroke="#3E8E4F" stroke-width="6"/>
+      <circle cx="0" cy="-4" r="16" fill="#5DB1E0"/>
+      <circle cx="0" cy="-4" r="6" fill="#FFFFFF"/>
+    </g>
+    <g transform="translate(1340 602)">
+      <line x1="0" y1="0" x2="0" y2="56" stroke="#3E8E4F" stroke-width="6"/>
+      <path d="M-16 -4 q16 -26 32 0 q-16 22 -32 0 Z" fill="#9B7FC4"/>
+    </g>
+  </g>
+</svg>

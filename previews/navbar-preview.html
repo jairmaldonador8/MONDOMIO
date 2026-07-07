@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navbar Styles Preview - Mondomío</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: system-ui, sans-serif; background: #f5f5f5; }
+
+  :root {
+    --sky: #6CC9EC; --sky-deep: #46B2DD;
+    --cloud: #EAF8FD;
+    --lime: #8CC63E; --lime-d: #79B62F;
+    --pink: #C0539F; --pink-d: #A6408A;
+    --yellow: #FAC81C;
+    --navy: #322B7A; --navy-d: #231E5C;
+    --ink: #262223; --paper: #ffffff;
+  }
+
+  .preview-section {
+    background: white;
+    margin: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    overflow: hidden;
+  }
+
+  .preview-label {
+    background: var(--navy);
+    color: white;
+    padding: 12px 20px;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  .preview-content {
+    padding: 0;
+  }
+
+  /* ===== ESTILO 1: Minimalista Actual ===== */
+  .navbar-1 {
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(50,43,122,.08);
+    padding: 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 40px;
+  }
+
+  .navbar-1 img { width: 70px; }
+  .navbar-1-links { display: flex; gap: 32px; flex: 1; margin-left: 40px; }
+  .navbar-1-links a {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: .02em;
+    transition: color .2s;
+  }
+  .navbar-1-links a:hover { color: var(--pink); }
+  .navbar-1-phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* ===== ESTILO 2: Con Fondo Colorido ===== */
+  .navbar-2 {
+    background: linear-gradient(90deg, var(--navy) 0%, var(--navy-d) 100%);
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar-2 img { width: 70px; filter: brightness(1.2); }
+  .navbar-2-links { display: flex; gap: 32px; flex: 1; margin-left: 40px; }
+  .navbar-2-links a {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all .2s;
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+  .navbar-2-links a:hover {
+    background: var(--pink);
+    color: #fff;
+  }
+  .navbar-2-phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--yellow);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  /* ===== ESTILO 3: Colorido con Lime ===== */
+  .navbar-3 {
+    background: var(--lime);
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar-3 img { width: 70px; }
+  .navbar-3-links { display: flex; gap: 28px; flex: 1; margin-left: 40px; }
+  .navbar-3-links a {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all .2s;
+  }
+  .navbar-3-links a:hover {
+    color: var(--paper);
+    transform: translateY(-2px);
+  }
+  .navbar-3-phone {
+    background: white;
+    color: var(--lime-d);
+    padding: 10px 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===== ESTILO 4: Moderno con Sombra ===== */
+  .navbar-4 {
+    background: white;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 24px rgba(50,43,122,.15);
+  }
+
+  .navbar-4 img { width: 75px; }
+  .navbar-4-links { display: flex; gap: 40px; flex: 1; margin-left: 50px; }
+  .navbar-4-links a {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: .03em;
+    transition: all .3s;
+    position: relative;
+  }
+  .navbar-4-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--pink);
+    transition: width .3s;
+  }
+  .navbar-4-links a:hover::after { width: 100%; }
+  .navbar-4-phone {
+    background: var(--pink);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all .2s;
+  }
+  .navbar-4-phone:hover {
+    background: var(--pink-d);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(192,83,159,.3);
+  }
+
+  /* ===== ESTILO 5: Glassmorphism ===== */
+  .navbar-5-wrapper {
+    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky) 100%);
+    padding: 20px 0;
+  }
+
+  .navbar-5 {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 40px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .navbar-5 img { width: 70px; }
+  .navbar-5-links { display: flex; gap: 32px; flex: 1; margin-left: 40px; }
+  .navbar-5-links a {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all .2s;
+  }
+  .navbar-5-links a:hover { color: var(--pink); }
+  .navbar-5-phone {
+    background: var(--pink);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all .2s;
+  }
+  .navbar-5-phone:hover {
+    background: var(--pink-d);
+    box-shadow: 0 4px 12px rgba(192,83,159,.4);
+  }
+
+  .container-info {
+    padding: 20px;
+    background: #f9f9f9;
+    border-top: 1px solid #eee;
+    font-size: 13px;
+    color: #666;
+  }
+</style>
+</head>
+<body>
+
+<h1 style="padding: 30px 20px; color: var(--navy);">Mondomío - Estilos de Navbar</h1>
+
+<!-- ESTILO 1 -->
+<div class="preview-section">
+  <div class="preview-label">Estilo 1: Minimalista (Actual)</div>
+  <div class="preview-content">
+    <nav class="navbar-1">
+      <img src="assets/img/logo-mondomio.png" alt="Logo">
+      <div class="navbar-1-links">
+        <a href="#">Inicio</a>
+        <a href="#">Summer Camp</a>
+        <a href="#">Inscripciones</a>
+        <a href="#">Áreas</a>
+        <a href="#">Contacto</a>
+      </div>
+      <a class="navbar-1-phone" href="tel:">📞 818 259 0721</a>
+    </nav>
+  </div>
+  <div class="container-info">✓ Limpio, profesional, fácil de leer</div>
+</div>
+
+<!-- ESTILO 2 -->
+<div class="preview-section">
+  <div class="preview-label">Estilo 2: Fondo Navy Oscuro</div>
+  <div class="preview-content">
+    <nav class="navbar-2">
+      <img src="assets/img/logo-mondomio.png" alt="Logo">
+      <div class="navbar-2-links">
+        <a href="#">Inicio</a>
+        <a href="#">Summer Camp</a>
+        <a href="#">Inscripciones</a>
+        <a href="#">Áreas</a>
+        <a href="#">Contacto</a>
+      </div>
+      <a class="navbar-2-phone" href="tel:">📞 818 259 0721</a>
+    </nav>
+  </div>
+  <div class="container-info">✓ Elegante, contraste alto, botones con hover</div>
+</div>
+
+<!-- ESTILO 3 -->
+<div class="preview-section">
+  <div class="preview-label">Estilo 3: Fondo Verde Lime (Juguetón)</div>
+  <div class="preview-content">
+    <nav class="navbar-3">
+      <img src="assets/img/logo-mondomio.png" alt="Logo">
+      <div class="navbar-3-links">
+        <a href="#">Inicio</a>
+        <a href="#">Summer Camp</a>
+        <a href="#">Inscripciones</a>
+        <a href="#">Áreas</a>
+        <a href="#">Contacto</a>
+      </div>
+      <a class="navbar-3-phone" href="tel:">📞 818 259 0721</a>
+    </nav>
+  </div>
+  <div class="container-info">✓ Colorido, moderno, pilla la atención</div>
+</div>
+
+<!-- ESTILO 4 -->
+<div class="preview-section">
+  <div class="preview-label">Estilo 4: Moderno con Línea Subrayada</div>
+  <div class="preview-content">
+    <nav class="navbar-4">
+      <img src="assets/img/logo-mondomio.png" alt="Logo">
+      <div class="navbar-4-links">
+        <a href="#">Inicio</a>
+        <a href="#">Summer Camp</a>
+        <a href="#">Inscripciones</a>
+        <a href="#">Áreas</a>
+        <a href="#">Contacto</a>
+      </div>
+      <a class="navbar-4-phone" href="tel:">📞 818 259 0721</a>
+    </nav>
+  </div>
+  <div class="container-info">✓ Muy moderno, líneas animadas, botón destacado</div>
+</div>
+
+<!-- ESTILO 5 -->
+<div class="preview-section">
+  <div class="preview-label">Estilo 5: Glassmorphism (Moderno Premium)</div>
+  <div class="preview-content">
+    <div class="navbar-5-wrapper">
+      <nav class="navbar-5">
+        <img src="assets/img/logo-mondomio.png" alt="Logo">
+        <div class="navbar-5-links">
+          <a href="#">Inicio</a>
+          <a href="#">Summer Camp</a>
+          <a href="#">Inscripciones</a>
+          <a href="#">Áreas</a>
+          <a href="#">Contacto</a>
+        </div>
+        <a class="navbar-5-phone" href="tel:">📞 818 259 0721</a>
+      </nav>
+    </div>
+  </div>
+  <div class="container-info">✓ Premium, efecto cristal, integra bien con hero</div>
+</div>
+
+<div style="padding: 40px 20px; text-align: center; color: var(--navy);">
+  <p style="font-size: 14px; margin-top: 20px;">
+    <strong>¿Cuál te gusta?</strong> Dime el número (1-5) y lo implemento en tu sitio 🎨
+  </p>
+</div>
+
+</body>
+</html>
