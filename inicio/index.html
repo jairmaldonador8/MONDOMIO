@@ -124,16 +124,42 @@ section{position:relative}
 .pillar.alt{background:linear-gradient(135deg,rgba(140,198,62,.1) 0%,rgba(179,223,87,.1) 100%)}
 .pillar.alt2{background:linear-gradient(135deg,rgba(192,83,159,.08) 0%,rgba(192,83,159,.04) 100%)}
 
-/* timeline */
+/* timeline — el viaje del sol */
 .timeline{background:linear-gradient(180deg,var(--sky) 0%,var(--sky-top) 100%)}
 .timeline .sec-head h2{color:#fff}
 .timeline .sec-head p{color:#15384a}
-.week{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:40px;max-width:900px;margin-left:auto;margin-right:auto}
-.day-block{background:var(--paper);border-radius:20px;padding:24px;text-align:center;box-shadow:0 10px 0 rgba(50,43,122,.12);position:relative;overflow:hidden}
-.day-block::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--lime),var(--sky-deep),var(--pink))}
-.day-block .time{font-family:'UniformBlack';font-size:clamp(16px,2vw,20px);color:var(--navy);text-transform:uppercase;margin-bottom:8px}
-.day-block .act{font-size:14px;color:#6f6f6f}
-.day-block .act+.act{margin-top:12px;padding-top:12px;border-top:1px solid #f0f0f0}
+.timeline .sec-head .kicker{color:#15384a}
+.sunline{position:relative;max-width:820px;margin:30px auto 0;padding:20px 0 40px}
+.sunline .rail{position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);
+  background:rgba(255,255,255,.35);border-radius:999px;overflow:hidden}
+.sunline .rail .fill{position:absolute;top:0;left:0;right:0;height:0%;background:linear-gradient(180deg,var(--yellow),var(--yellow-d));border-radius:999px}
+.sun{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);width:74px;height:74px;z-index:5;pointer-events:none;transition:top .15s linear}
+.sun .core{position:absolute;inset:12px;background:var(--yellow);border-radius:50%;box-shadow:0 0 0 8px rgba(250,200,28,.35),0 6px 0 rgba(0,0,0,.08)}
+.sun .core::before{content:"";position:absolute;left:20px;top:20px;width:5px;height:5px;border-radius:50%;background:var(--ink);box-shadow:12px 0 0 var(--ink)}
+.sun .core::after{content:"";position:absolute;left:23px;top:29px;width:11px;height:6px;border-bottom:2.5px solid var(--ink);border-radius:0 0 10px 10px}
+.sun .rays{position:absolute;inset:0;animation:sunspin 14s linear infinite}
+.sun .rays::before{content:"";position:absolute;inset:0;border-radius:50%;
+  background:repeating-conic-gradient(rgba(250,200,28,.9) 0 8deg,transparent 8deg 30deg);
+  -webkit-mask:radial-gradient(circle,transparent 55%,#000 56%,#000 72%,transparent 73%);mask:radial-gradient(circle,transparent 55%,#000 56%,#000 72%,transparent 73%)}
+@keyframes sunspin{to{transform:rotate(360deg)}}
+.tstop{position:relative;display:flex;align-items:center;margin:34px 0;width:100%}
+.tstop .card{width:calc(50% - 52px);background:#fff;border-radius:22px;padding:20px 24px;box-shadow:0 10px 0 rgba(50,43,122,.12);position:relative;transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+.tstop:nth-child(odd) .card{margin-left:auto}
+.tstop .card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 16px 0 rgba(50,43,122,.16)}
+.tstop .card .time{font-family:'UniformBlack';font-size:clamp(15px,1.8vw,19px);color:var(--navy);text-transform:uppercase}
+.tstop .card .act{font-size:14.5px;color:#5c6672;margin-top:4px;font-family:'UniformLight'}
+.tstop .card .em{position:absolute;top:-16px;right:16px;width:44px;height:44px;border-radius:50%;background:var(--cloud);display:grid;place-items:center;font-size:21px;box-shadow:0 4px 0 rgba(50,43,122,.12)}
+.tstop .dotk{position:absolute;left:50%;transform:translate(-50%,0);width:20px;height:20px;border-radius:50%;background:#fff;border:5px solid var(--sky-deep);z-index:2;transition:background .3s,border-color .3s,transform .3s}
+.tstop.lit .dotk{background:var(--yellow);border-color:var(--yellow-d);transform:translate(-50%,0) scale(1.25)}
+html.js .tstop.reveal{transform:translateX(-40px);transition:opacity .6s ease,transform .7s cubic-bezier(.215,.61,.355,1)}
+html.js .sunline .tstop.reveal:nth-child(odd){transform:translateX(40px)}
+html.js .tstop.reveal.in{animation:none;opacity:1;transform:none}
+@media(max-width:640px){
+  .sunline .rail{left:26px}
+  .sun{left:26px}
+  .tstop .card{width:calc(100% - 66px);margin-left:66px!important}
+  .tstop .dotk{left:26px}
+}
 
 /* áreas — lista tipográfica */
 .areas{background:var(--navy)}
@@ -261,6 +287,8 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
   html.js .reveal{opacity:1!important;animation:none!important}
   html.js .pol.reveal{transform:rotate(var(--rot))!important;transition:none!important}
   .doodle path{animation:none!important}
+  .sun .rays{animation:none!important}
+  html.js .tstop.reveal{transform:none!important;transition:none!important}
   html{scroll-behavior:auto}
 }
 </style>
@@ -564,34 +592,15 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
       <p>Lunes a viernes: entrada 9:00 AM | Salida 12:20 o 12:45 (según edad) | Horario extendido hasta 13:45</p>
     </div>
 
-    <div class="week">
-      <div class="day-block reveal">
-        <div class="time">9:00 - 9:30</div>
-        <div class="act">Recepción & Juego Libre</div>
-      </div>
-      <div class="day-block reveal">
-        <div class="time">9:30 - 10:10</div>
-        <div class="act">Rotación 1</div>
-        <div class="act">(Language/Art/Gym/etc)</div>
-      </div>
-      <div class="day-block reveal">
-        <div class="time">10:10 - 10:30</div>
-        <div class="act">Snack & Descanso</div>
-      </div>
-      <div class="day-block reveal">
-        <div class="time">10:30 - 11:10</div>
-        <div class="act">Rotación 2</div>
-        <div class="act">(Área diferente)</div>
-      </div>
-      <div class="day-block reveal">
-        <div class="time">11:10 - 11:45</div>
-        <div class="act">Actividad Especial</div>
-        <div class="act">Yoga/Huerto/Música</div>
-      </div>
-      <div class="day-block reveal">
-        <div class="time">11:45 - 12:20</div>
-        <div class="act">Cierre & Juego</div>
-      </div>
+    <div class="sunline" id="sunline">
+      <div class="rail"><div class="fill" id="railFill"></div></div>
+      <div class="sun" id="sunEl"><div class="rays"></div><div class="core"></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em">👋</div><div class="time">9:00 – 9:30</div><div class="act">Recepción & Juego Libre</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em">🎨</div><div class="time">9:30 – 10:10</div><div class="act">Rotación 1 (Language / Art / Gym…)</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em">🍎</div><div class="time">10:10 – 10:30</div><div class="act">Snack & Descanso</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em">🧩</div><div class="time">10:30 – 11:10</div><div class="act">Rotación 2 (área diferente)</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em">🧘</div><div class="time">11:10 – 11:45</div><div class="act">Actividad Especial · Yoga / Huerto / Música</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em">🎈</div><div class="time">11:45 – 12:20</div><div class="act">Cierre & Juego</div></div></div>
     </div>
   </div>
 </section>
@@ -762,6 +771,32 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
         if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}
       });
     });
+  })();
+
+  (function(){
+    var sunline=document.getElementById('sunline');
+    if(!sunline)return;
+    var sunEl=document.getElementById('sunEl');
+    var railFill=document.getElementById('railFill');
+    var stops=Array.prototype.slice.call(sunline.querySelectorAll('.tstop'));
+    var raf=false;
+    function sunTick(){
+      raf=false;
+      var r=sunline.getBoundingClientRect();
+      var mid=window.innerHeight*0.55;
+      var p=Math.min(1,Math.max(0,(mid-r.top)/r.height));
+      sunEl.style.top=(p*100)+'%';
+      railFill.style.height=(p*100)+'%';
+      var sunY=r.top+p*r.height;
+      stops.forEach(function(s){
+        var sr=s.getBoundingClientRect();
+        s.classList.toggle('lit',sr.top+sr.height/2<=sunY+8);
+      });
+    }
+    function onScroll(){if(!raf){raf=true;requestAnimationFrame(sunTick);}}
+    window.addEventListener('scroll',onScroll,{passive:true});
+    window.addEventListener('resize',onScroll);
+    sunTick();
   })();
 
 </script>
