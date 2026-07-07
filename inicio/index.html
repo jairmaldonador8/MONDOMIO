@@ -159,17 +159,35 @@ section{position:relative}
 .brow-inner .chip{display:inline-block;margin-top:12px;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--ink);background:var(--yellow);padding:6px 14px;border-radius:999px;box-shadow:0 4px 0 var(--yellow-d)}
 @media(max-width:700px){.brow .peek{display:none}.brow-inner{flex-direction:column;align-items:flex-start}.brow-inner .bphoto{flex:none;width:100%}}
 
-/* specials */
+/* specials — polaroids vivas */
 .specials{background:var(--lime-l)}
-.specials .sec-head h2{color:var(--navy)}
-.specials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
-@media(max-width:900px){.specials-grid{grid-template-columns:1fr}}
-.special-card{background:#fff;border-radius:var(--r);padding:40px 30px;text-align:center;
-  box-shadow:0 14px 0 rgba(72,110,20,.12);position:relative;overflow:hidden}
-.special-card::before{content:"";position:absolute;top:-30px;right:-30px;width:80px;height:80px;background:rgba(140,198,62,.1);border-radius:50%}
-.special-icon{font-size:64px;margin-bottom:20px;position:relative;z-index:2}
-.special-card h3{font-size:clamp(20px,3vw,26px);color:var(--navy);text-transform:none;margin-bottom:12px}
-.special-card p{font-size:16px;color:#3a4528;line-height:1.6}
+.specials::before{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.5) 1.5px,transparent 1.5px);background-size:26px 26px}
+.specials .sec-head h2{color:#fff;text-shadow:0 4px 0 rgba(50,43,122,.18)}
+.specials .sec-head .kicker{color:var(--navy)}
+.doodle{position:absolute;left:50%;top:120px;transform:translateX(-50%);width:min(900px,92vw);z-index:1;pointer-events:none}
+.doodle path{stroke:var(--paper);stroke-width:4;fill:none;stroke-dasharray:12 14;stroke-linecap:round;opacity:.8;animation:dash 30s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-520}}
+.pol-row{display:flex;justify-content:center;gap:clamp(16px,4vw,52px);flex-wrap:wrap;position:relative;z-index:2;padding-top:20px}
+.pol{--rot:-4deg;position:relative;width:min(320px,84vw);background:#fff;padding:14px 14px 0;border-radius:8px;
+  box-shadow:0 16px 34px rgba(50,43,122,.22);transform:rotate(var(--rot));cursor:pointer;
+  transition:opacity .5s ease,transform .85s cubic-bezier(.34,1.56,.64,1),box-shadow .35s}
+.pol:nth-child(2){--rot:2.5deg;margin-top:34px}
+.pol:nth-child(3){--rot:-1.8deg;margin-top:10px}
+.pol:hover{transform:rotate(0) translateY(-12px) scale(1.03);box-shadow:0 30px 50px rgba(50,43,122,.3);z-index:5}
+html.js .pol.reveal{transform:translateY(-60px) rotate(calc(var(--rot) * 3))}
+html.js .pol.reveal.in{animation:none;opacity:1;transform:rotate(var(--rot))}
+html.js .pol.reveal.in:hover{transform:rotate(0) translateY(-12px) scale(1.03);transition:opacity .5s ease,transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s}
+.pol .tape{position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-3deg);width:110px;height:30px;
+  background:rgba(250,200,28,.85);border-left:2px dashed rgba(255,255,255,.6);border-right:2px dashed rgba(255,255,255,.6)}
+.pol .ph{aspect-ratio:1/1.05;background-size:cover;background-position:center;border-radius:4px;filter:saturate(1.05)}
+.pol .cap{padding:16px 6px 20px;text-align:center}
+.pol .cap h3{font-size:22px;color:var(--navy);text-transform:none;margin-bottom:6px}
+.pol .cap p{font-size:13.5px;line-height:1.45;color:#555;font-family:'UniformLight';max-height:0;opacity:0;overflow:hidden;transition:max-height .4s,opacity .4s}
+.pol:hover .cap p,.pol:focus-within .cap p{max-height:120px;opacity:1}
+.pol .pbadge{position:absolute;top:-20px;right:-16px;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:30px;
+  box-shadow:0 6px 0 rgba(0,0,0,.15);transform:rotate(10deg);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.pol:hover .pbadge{transform:rotate(-8deg) scale(1.18)}
 
 /* testimonios */
 .testimonios{background:var(--paper)}
@@ -241,6 +259,8 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
 @media(prefers-reduced-motion:reduce){
   .bob,.cloudmove{animation:none!important}
   html.js .reveal{opacity:1!important;animation:none!important}
+  html.js .pol.reveal{transform:rotate(var(--rot))!important;transition:none!important}
+  .doodle path{animation:none!important}
   html{scroll-behavior:auto}
 }
 </style>
@@ -493,27 +513,42 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
 <!-- ACTIVIDADES ESPECIALES / SUMMER CAMP -->
 <section class="band specials" id="summer" style="position:relative">
   <div class="critter float2" style="width:105px;height:105px;top:130px;right:6%;background-image:url(assets/img/PAJARITO2.png)"></div>
+  <svg class="doodle" viewBox="0 0 900 260" aria-hidden="true">
+    <path d="M60 200 C 200 60, 340 260, 460 140 S 740 60, 850 170"/>
+  </svg>
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="kicker">Además de la rotación</span>
       <h2>Actividades <span style="color:var(--navy)">Especiales</span></h2>
     </div>
 
-    <div class="specials-grid">
-      <div class="special-card reveal">
-        <div class="special-icon">🌱</div>
-        <h3>Huerto Escolar</h3>
-        <p>Los niños aprenden sobre la naturaleza, el ciclo de las plantas y la importancia del cuidado ambiental. De la semilla a la cosecha, con sus manos.</p>
+    <div class="pol-row">
+      <div class="pol reveal" tabindex="0">
+        <div class="tape"></div>
+        <div class="pbadge" style="background:var(--lime)">🌱</div>
+        <div class="ph" style="background-image:url('assets/img/D43A8458-5BDB-44C7-8261-5A04C494A5F2.jpg');background-position:center 40%"></div>
+        <div class="cap">
+          <h3>Huerto Escolar</h3>
+          <p>De la semilla a la cosecha, con sus manos. Naturaleza, ciclo de las plantas y cuidado ambiental.</p>
+        </div>
       </div>
-      <div class="special-card reveal">
-        <div class="special-icon">🧘</div>
-        <h3>Yoga para Niños</h3>
-        <p>Clases especiales para trabajar concentración, emociones y bienestar. Calmarse, respirar, conectar con el cuerpo.</p>
+      <div class="pol reveal" tabindex="0">
+        <div class="tape" style="background:rgba(108,201,236,.85)"></div>
+        <div class="pbadge" style="background:var(--sky)">🧘</div>
+        <div class="ph" style="background-image:url(assets/img/CBYP8030.JPG)"></div>
+        <div class="cap">
+          <h3>Yoga para Niños</h3>
+          <p>Concentración, emociones y bienestar. Calmarse, respirar, conectar con el cuerpo.</p>
+        </div>
       </div>
-      <div class="special-card reveal">
-        <div class="special-icon">🎼</div>
-        <h3>Clase de Música</h3>
-        <p>Con maestra especializada. Descubrimiento de instrumentos, ritmo, canto y expresión musical desde temprana edad.</p>
+      <div class="pol reveal" tabindex="0">
+        <div class="tape" style="background:rgba(192,83,159,.75)"></div>
+        <div class="pbadge" style="background:var(--pink)">🎼</div>
+        <div class="ph" style="background-image:url(assets/img/DM706582.jpg)"></div>
+        <div class="cap">
+          <h3>Clase de Música</h3>
+          <p>Con maestra especializada: instrumentos, ritmo, canto y expresión desde temprana edad.</p>
+        </div>
       </div>
     </div>
   </div>
