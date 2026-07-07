@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mondomío · Variantes "¿Por qué elegir Mondomío?"</title>
+<style>
+@font-face{font-family:'UniformBlack';src:url(../inicio/assets/fonts/uniform-black.woff2) format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'UniformMed';src:url(../inicio/assets/fonts/uniform-medium.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'UniformLight';src:url(../inicio/assets/fonts/uniform-light.woff2) format('woff2');font-weight:300;font-display:swap}
+
+:root{
+  --sky:#6CC9EC; --sky-deep:#46B2DD; --sky-top:#8BD6F1;
+  --cloud:#EAF8FD; --cloud2:#C9EDF8;
+  --lime:#8CC63E; --lime-d:#79B62F; --lime-l:#B7DF57;
+  --pink:#C0539F; --pink-d:#A6408A;
+  --yellow:#FAC81C; --yellow-d:#EBB200;
+  --navy:#322B7A; --navy-d:#231E5C;
+  --ink:#262223; --paper:#ffffff;
+  --r:30px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'UniformMed',system-ui,sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+h1,h2,h3,.disp{font-family:'UniformBlack',system-ui,sans-serif;font-weight:900;line-height:.92;text-transform:uppercase;letter-spacing:.01em}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.wrap{width:min(1140px,90vw);margin-inline:auto}
+
+.preview-bar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.preview-bar strong{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin-right:8px}
+.preview-bar a{font-size:13px;padding:7px 16px;border-radius:999px;background:rgba(255,255,255,.12);transition:background .2s}
+.preview-bar a:hover{background:var(--pink)}
+.variant-label{background:var(--cloud);padding:60px 0 0;text-align:center}
+.variant-label .tag{display:inline-block;background:var(--navy);color:#fff;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.14em;font-size:13px;padding:9px 22px;border-radius:999px;transform:rotate(-1.5deg);box-shadow:0 5px 0 rgba(35,30,92,.35)}
+.variant-label p{max-width:64ch;margin:16px auto 0;padding:0 20px;font-size:15px;color:#4a5568}
+.band{padding:clamp(60px,9vw,110px) 0;position:relative;overflow:hidden}
+.sec-head{text-align:center;margin-bottom:48px;position:relative;z-index:3}
+.sec-head .kicker{display:inline-block;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.16em;font-size:14px;color:var(--pink);margin-bottom:14px}
+.sec-head h2{font-size:clamp(32px,6.5vw,64px);color:var(--navy)}
+.divider{height:14px;background:repeating-linear-gradient(-45deg,var(--sky) 0 22px,var(--yellow) 22px 44px,var(--pink) 44px 66px,var(--lime) 66px 88px)}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.215,.61,.355,1),transform .7s cubic-bezier(.215,.61,.355,1)}
+.reveal.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* ══════════════════════════════════════════════
+   VARIANTE A · LA TORRE DE BLOQUES
+   ══════════════════════════════════════════════ */
+.vaa{background:var(--paper)}
+.tower{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:10px}
+.trow{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.blk{--tilt:-1.2deg;position:relative;width:min(300px,86vw);aspect-ratio:1/0.82;border-radius:22px;cursor:pointer;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:24px;
+  transform:rotate(var(--tilt));transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.blk:nth-child(2){--tilt:1.4deg}
+.blk::before{content:"";position:absolute;inset:12px;border:3px dashed rgba(255,255,255,.4);border-radius:14px;pointer-events:none}
+.blk:hover{transform:rotate(0) translateY(-8px) scale(1.02);z-index:4}
+.blk .bic{font-size:56px;line-height:1;filter:drop-shadow(0 4px 0 rgba(0,0,0,.15))}
+.blk h3{color:#fff;font-size:clamp(19px,2.2vw,24px);text-transform:none}
+.blk .peg{position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.blk .peg i{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.45)}
+.blk .desc{position:absolute;inset:0;background:rgba(38,34,35,.88);color:#fff;padding:26px 24px;display:flex;align-items:center;justify-content:center;
+  font-size:14.5px;line-height:1.6;font-family:'UniformLight';opacity:0;transform:translateY(18px);transition:opacity .35s,transform .4s cubic-bezier(.215,.61,.355,1)}
+.blk:hover .desc,.blk:focus-visible .desc{opacity:1;transform:none}
+.blk.c1{background:var(--pink);box-shadow:0 10px 0 var(--pink-d)}
+.blk.c2{background:var(--sky-deep);box-shadow:0 10px 0 #2f96c4}
+.blk.c3{background:var(--lime);box-shadow:0 10px 0 var(--lime-d)}
+.blk.c4{background:var(--yellow);box-shadow:0 10px 0 var(--yellow-d)}
+.blk.c4 h3{color:var(--navy)}
+/* caen y se apilan */
+.blk.reveal{opacity:0;transform:translateY(-130px) rotate(calc(var(--tilt) * 5))}
+.blk.reveal.on{opacity:1;transform:rotate(var(--tilt));transition:opacity .4s ease,transform .75s cubic-bezier(.34,1.56,.64,1)}
+.blk.reveal.on:hover{transform:rotate(0) translateY(-8px) scale(1.02)}
+.tower-base{width:min(680px,92vw);height:16px;border-radius:999px;background:var(--cloud2);margin-top:6px}
+
+/* ══════════════════════════════════════════════
+   VARIANTE B · SELLOS DE GARANTÍA
+   ══════════════════════════════════════════════ */
+.vbb{background:linear-gradient(180deg,var(--cloud) 0%,#fff 100%)}
+.stamp-row{display:flex;justify-content:center;gap:clamp(18px,3.4vw,44px);flex-wrap:wrap;margin-top:16px}
+.stamp{--rot:-4deg;position:relative;width:min(250px,74vw);aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;text-align:center;padding:34px;color:#fff;cursor:pointer;transform:rotate(var(--rot));
+  border:3px dashed rgba(255,255,255,.75)}
+.stamp:nth-child(2){--rot:3deg;margin-top:36px}
+.stamp:nth-child(3){--rot:-2deg}
+.stamp:nth-child(4){--rot:4.5deg;margin-top:26px}
+.stamp.s1{background:var(--pink);box-shadow:0 0 0 7px #fff,0 0 0 10px var(--pink),0 14px 24px rgba(50,43,122,.16)}
+.stamp.s2{background:var(--sky-deep);box-shadow:0 0 0 7px #fff,0 0 0 10px var(--sky-deep),0 14px 24px rgba(50,43,122,.16)}
+.stamp.s3{background:var(--lime);box-shadow:0 0 0 7px #fff,0 0 0 10px var(--lime),0 14px 24px rgba(50,43,122,.16)}
+.stamp.s4{background:var(--yellow);box-shadow:0 0 0 7px #fff,0 0 0 10px var(--yellow),0 14px 24px rgba(50,43,122,.16);color:var(--navy)}
+.stamp .sic{font-size:44px;line-height:1}
+.stamp h3{font-size:clamp(16px,1.9vw,20px);text-transform:none}
+.stamp p{font-size:12.5px;line-height:1.45;font-family:'UniformLight';opacity:.95}
+.stamp:hover{animation:jig .45s ease-in-out}
+@keyframes jig{0%,100%{transform:rotate(var(--rot))}30%{transform:rotate(calc(var(--rot) + 4deg)) scale(1.04)}60%{transform:rotate(calc(var(--rot) - 3deg))}}
+/* estampado */
+.stamp.reveal{opacity:0;transform:scale(2.1) rotate(calc(var(--rot) + 22deg))}
+.stamp.reveal.on{opacity:1;transform:rotate(var(--rot));transition:opacity .3s ease,transform .55s cubic-bezier(.25,1.4,.4,1)}
+
+/* ══════════════════════════════════════════════
+   VARIANTE C · EL CUADERNO DE MONDOMÍO
+   ══════════════════════════════════════════════ */
+.vcc{background:var(--sky)}
+.vcc .sec-head h2{color:#fff}
+.vcc .sec-head .kicker{color:var(--navy)}
+.notebook{position:relative;max-width:820px;margin:0 auto;display:flex}
+.nb-spine{flex:0 0 44px;background-image:radial-gradient(circle at 50% 50%,var(--navy) 7px,rgba(35,30,92,.25) 8px,transparent 9px);background-size:44px 38px;background-repeat:repeat-y;background-position:center}
+.nb-page{flex:1;background:#fffef8;border-radius:0 22px 22px 0;box-shadow:0 16px 0 rgba(50,43,122,.14);position:relative;overflow:hidden;min-height:360px;
+  background-image:repeating-linear-gradient(transparent 0 30px,rgba(108,201,236,.25) 30px 32px);perspective:900px}
+.nb-page::before{content:"";position:absolute;top:0;bottom:0;left:52px;width:2px;background:rgba(192,83,159,.35)}
+.pg{position:absolute;inset:0;padding:44px 44px 44px 80px;opacity:0;transform:rotateX(-70deg);transform-origin:top;transition:opacity .4s,transform .55s cubic-bezier(.215,.61,.355,1);pointer-events:none}
+.pg.on{opacity:1;transform:none;pointer-events:auto}
+.pg .pic{font-size:46px;line-height:1}
+.pg h3{color:var(--navy);font-size:clamp(22px,3vw,30px);text-transform:none;margin:10px 0 12px}
+.pg p{font-size:16px;line-height:1.9;color:#4a4a55;font-family:'UniformLight';max-width:52ch}
+.pg .subr{display:inline-block;margin-top:14px;font-family:'UniformBlack';font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);
+  border-bottom:3px solid var(--yellow);padding-bottom:3px}
+.nb-tabs{position:absolute;right:-14px;top:44px;display:flex;flex-direction:column;gap:12px;z-index:5}
+.nb-tab{border:none;cursor:pointer;color:#fff;font-family:'UniformBlack';font-size:16px;width:52px;height:52px;border-radius:14px 14px 14px 14px;
+  display:grid;place-items:center;box-shadow:0 5px 0 rgba(0,0,0,.18);transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.nb-tab:hover{transform:translateX(-6px) scale(1.08)}
+.nb-tab.on{transform:translateX(-10px) scale(1.14)}
+.notebook-wrap{position:relative;padding-right:30px}
+@media(max-width:640px){.pg{padding:34px 24px 34px 66px}.nb-tabs{right:-8px}.nb-tab{width:44px;height:44px;font-size:14px}}
+
+/* ══════════════════════════════════════════════
+   VARIANTE D · CARTITAS PARA LOS PAPÁS
+   ══════════════════════════════════════════════ */
+.vdd{background:linear-gradient(180deg,#fff 0%,var(--cloud) 100%)}
+.mail-row{display:flex;justify-content:center;gap:clamp(18px,3vw,38px);flex-wrap:wrap;margin-top:150px}
+.env{position:relative;width:min(260px,80vw);cursor:pointer}
+.env .body{position:relative;height:170px;border-radius:14px;overflow:visible}
+.env .back{position:absolute;inset:0;border-radius:14px}
+.env .letter{position:absolute;left:12px;right:12px;bottom:10px;height:230px;background:#fffef8;border-radius:10px;padding:18px 16px;
+  box-shadow:0 6px 18px rgba(50,43,122,.18);transform:translateY(0);transition:transform .6s cubic-bezier(.215,.61,.355,1) .12s;z-index:2;
+  background-image:repeating-linear-gradient(transparent 0 22px,rgba(108,201,236,.2) 22px 23px)}
+.env.open .letter{transform:translateY(-150px)}
+.env .letter h3{color:var(--navy);font-size:16.5px;text-transform:none;margin-bottom:6px}
+.env .letter p{font-size:12.5px;line-height:1.55;color:#4a4a55;font-family:'UniformLight'}
+.env .front{position:absolute;inset:0;border-radius:14px;z-index:3;
+  clip-path:polygon(0 100%,0 26%,50% 62%,100% 26%,100% 100%)}
+.env .flap{position:absolute;top:0;left:0;right:0;height:76px;z-index:4;transform-origin:top;transition:transform .45s cubic-bezier(.4,0,.2,1),z-index 0s .2s;
+  clip-path:polygon(0 0,100% 0,50% 100%)}
+.env.open .flap{transform:rotateX(180deg);z-index:1}
+.env .seal{position:absolute;left:50%;top:56px;transform:translate(-50%,0) rotate(-6deg);z-index:5;width:52px;height:52px;border-radius:50%;
+  background:#fff;display:grid;place-items:center;font-size:25px;box-shadow:0 5px 0 rgba(0,0,0,.15);transition:transform .3s,opacity .3s}
+.env.open .seal{transform:translate(-50%,-16px) rotate(14deg) scale(.4);opacity:0}
+.env .who{position:absolute;left:0;right:0;bottom:14px;z-index:4;text-align:center;color:#fff;font-family:'UniformBlack';font-size:14.5px;
+  text-transform:uppercase;letter-spacing:.05em;text-shadow:0 2px 0 rgba(0,0,0,.14);pointer-events:none}
+.env.e1 .back,.env.e1 .front{background:var(--pink)}.env.e1 .flap{background:var(--pink-d)}
+.env.e2 .back,.env.e2 .front{background:var(--sky-deep)}.env.e2 .flap{background:#2f96c4}
+.env.e3 .back,.env.e3 .front{background:var(--lime)}.env.e3 .flap{background:var(--lime-d)}
+.env.e4 .back,.env.e4 .front{background:var(--yellow)}.env.e4 .flap{background:var(--yellow-d)}
+.env.e4 .who{color:var(--navy);text-shadow:none}
+.env:hover .body{animation:envnudge .5s ease-in-out}
+@keyframes envnudge{0%,100%{transform:rotate(0)}35%{transform:rotate(-2deg)}70%{transform:rotate(1.6deg)}}
+.mail-hint{text-align:center;margin-top:26px;font-size:13px;color:#8a94a6;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.1em}
+
+.pfoot{background:var(--ink);color:#9aa3b2;text-align:center;padding:34px 20px;font-size:14px}
+.pfoot strong{color:#fff}
+</style>
+</head>
+<body>
+
+<div class="preview-bar">
+  <strong>Preview · ¿Por qué Mondomío?</strong>
+  <a href="#va">A · Bloques</a>
+  <a href="#vb">B · Sellos</a>
+  <a href="#vc">C · Cuaderno</a>
+  <a href="#vd">D · Cartitas</a>
+</div>
+
+<!-- ════════════ VARIANTE A ════════════ -->
+<div class="variant-label" id="va">
+  <span class="tag">Variante A · La torre de bloques</span>
+  <p>Constructivismo hecho literal: los 4 pilares son bloques de juguete que <strong>caen del cielo y se apilan uno por uno</strong> (primero la base, luego arriba) con rebote de madera. Cada bloque tiene sus taquetes y borde punteado; al pasar el cursor se asoma la explicación completa. "Los niños construyen su aprendizaje" — y la sección se construye sola.</p>
+</div>
+<section class="band vaa">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Conócenos</span>
+      <h2>¿Por qué elegir <span style="color:var(--pink)">Mondomío</span>?</h2>
+    </div>
+    <div class="tower">
+      <div class="trow">
+        <div class="blk c1 reveal" tabindex="0" style="transition-delay:.5s">
+          <div class="peg"><i></i><i></i><i></i></div>
+          <div class="bic">🏗️</div>
+          <h3>Modelo Constructivista</h3>
+          <div class="desc">Los niños aprenden haciendo. Exploramos, descubrimos, construimos conocimiento juntos. Cada pequeño es el arquitecto de su propio aprendizaje.</div>
+        </div>
+        <div class="blk c2 reveal" tabindex="0" style="transition-delay:.68s">
+          <div class="peg"><i></i><i></i><i></i></div>
+          <div class="bic">🎡</div>
+          <h3>8 Áreas de Rotación</h3>
+          <div class="desc">Cada día exploran diferentes espacios: Language & Reading, Math & Science, Basic Skills, Pretend Play, Sensory, Art, Gym y Music.</div>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="blk c3 reveal" tabindex="0" style="transition-delay:.08s">
+          <div class="peg"><i></i><i></i><i></i></div>
+          <div class="bic">👩‍🏫</div>
+          <h3>Maestras Especializadas</h3>
+          <div class="desc">Cada área cuenta con una maestra formada en esa disciplina. No es lo mismo que alguien enseñe música que una especialista en desarrollo musical infantil.</div>
+        </div>
+        <div class="blk c4 reveal" tabindex="0" style="transition-delay:.26s">
+          <div class="peg"><i></i><i></i><i></i></div>
+          <div class="bic">🤝</div>
+          <h3 style="color:var(--navy)">Trabajo en Familia</h3>
+          <div class="desc">Evaluaciones periódicas, comunicación constante, reuniones con papás. Tu hijo crece en el kínder, pero la familia es el corazón.</div>
+        </div>
+      </div>
+      <div class="tower-base"></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════ VARIANTE B ════════════ -->
+<div class="variant-label" id="vb">
+  <span class="tag" style="background:var(--pink);box-shadow:0 5px 0 var(--pink-d)">Variante B · Sellos de garantía</span>
+  <p>Los 4 pilares como sellos circulares con borde troquelado que <strong>se estampan con fuerza</strong> al hacer scroll (llegan grandes y "golpean" la página, uno tras otro). Al pasar el cursor dan un brinquito. Lenguaje de "certificado de calidad": esto es lo que garantizamos.</p>
+</div>
+<section class="band vbb">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Conócenos</span>
+      <h2>¿Por qué elegir <span style="color:var(--pink)">Mondomío</span>?</h2>
+    </div>
+    <div class="stamp-row">
+      <div class="stamp s1 reveal" style="transition-delay:.05s">
+        <div class="sic">🏗️</div>
+        <h3>Modelo Constructivista</h3>
+        <p>Los niños aprenden haciendo: exploran, descubren y construyen su propio aprendizaje.</p>
+      </div>
+      <div class="stamp s2 reveal" style="transition-delay:.28s">
+        <div class="sic">🎡</div>
+        <h3>8 Áreas de Rotación</h3>
+        <p>Cada día un espacio distinto: lenguaje, ciencia, arte, gym, música y más.</p>
+      </div>
+      <div class="stamp s3 reveal" style="transition-delay:.51s">
+        <div class="sic">👩‍🏫</div>
+        <h3>Maestras Especializadas</h3>
+        <p>Cada área con una maestra formada en esa disciplina.</p>
+      </div>
+      <div class="stamp s4 reveal" style="transition-delay:.74s">
+        <div class="sic">🤝</div>
+        <h3>Trabajo en Familia</h3>
+        <p>Evaluaciones, comunicación constante y reuniones. Crecemos juntos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════ VARIANTE C ════════════ -->
+<div class="variant-label" id="vc">
+  <span class="tag" style="background:var(--sky-deep);box-shadow:0 5px 0 rgba(30,90,150,.4)">Variante C · El cuaderno de Mondomío</span>
+  <p>Un cuaderno escolar de espiral con renglones y margen rojo: cada pilar es una página que <strong>se voltea como hoja de libreta</strong> al tocar las pestañas de colores. Rota sola cada 6 segundos. El objeto más entrañable de la escuela, hecho interfaz.</p>
+</div>
+<section class="band vcc">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Conócenos</span>
+      <h2>¿Por qué elegir <span style="color:var(--navy)">Mondomío</span>?</h2>
+    </div>
+    <div class="notebook-wrap reveal">
+      <div class="notebook">
+        <div class="nb-spine"></div>
+        <div class="nb-page" id="nbPage"></div>
+        <div class="nb-tabs" id="nbTabs"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════ VARIANTE D ════════════ -->
+<div class="variant-label" id="vd">
+  <span class="tag" style="background:var(--yellow);color:var(--ink);box-shadow:0 5px 0 var(--yellow-d)">Variante D · Cartitas para los papás</span>
+  <p>Cuatro sobres de colores sellados con su estampita: al tocar cada uno, <strong>la solapa se abre y la carta sale deslizándose</strong> con la explicación del pilar. Al pasar el cursor, el sobre se sacude con ganas de que lo abras. Interactivo, íntimo y con premio — como recibir una notita del kínder.</p>
+</div>
+<section class="band vdd">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:0">
+      <span class="kicker">Conócenos</span>
+      <h2>¿Por qué elegir <span style="color:var(--pink)">Mondomío</span>?</h2>
+    </div>
+    <div class="mail-row">
+      <div class="env e1 reveal" tabindex="0">
+        <div class="body">
+          <div class="back"></div>
+          <div class="letter"><h3>🏗️ Modelo Constructivista</h3><p>Los niños aprenden haciendo. Exploramos, descubrimos, construimos conocimiento juntos. Cada pequeño es el arquitecto de su propio aprendizaje.</p></div>
+          <div class="front"></div>
+          <div class="flap"></div>
+          <div class="seal">🏗️</div>
+          <div class="who">Constructivista</div>
+        </div>
+      </div>
+      <div class="env e2 reveal" tabindex="0">
+        <div class="body">
+          <div class="back"></div>
+          <div class="letter"><h3>🎡 8 Áreas de Rotación</h3><p>Cada día exploran diferentes espacios: Language, Math & Science, Basic Skills, Pretend Play, Sensory, Art, Gym y Music.</p></div>
+          <div class="front"></div>
+          <div class="flap"></div>
+          <div class="seal">🎡</div>
+          <div class="who">8 Áreas</div>
+        </div>
+      </div>
+      <div class="env e3 reveal" tabindex="0">
+        <div class="body">
+          <div class="back"></div>
+          <div class="letter"><h3>👩‍🏫 Maestras Especializadas</h3><p>Cada área cuenta con una maestra formada en esa disciplina, desde música hasta desarrollo motriz.</p></div>
+          <div class="front"></div>
+          <div class="flap"></div>
+          <div class="seal">👩‍🏫</div>
+          <div class="who">Maestras</div>
+        </div>
+      </div>
+      <div class="env e4 reveal" tabindex="0">
+        <div class="body">
+          <div class="back"></div>
+          <div class="letter"><h3>🤝 Trabajo en Familia</h3><p>Evaluaciones periódicas, comunicación constante, reuniones con papás. La familia es el corazón: crecemos juntos.</p></div>
+          <div class="front"></div>
+          <div class="flap"></div>
+          <div class="seal">🤝</div>
+          <div class="who">Familia</div>
+        </div>
+      </div>
+    </div>
+    <div class="mail-hint">Toca un sobre para abrir su cartita ✉️</div>
+  </div>
+</section>
+
+<div class="pfoot">
+  <strong>Mondomío · exploración de diseño</strong> — 4 variantes para "¿Por qué elegir Mondomío?".<br>
+  Dime cuál te late y la integro al index.
+</div>
+
+<script>
+/* ---------- reveal ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } }), {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ---------- Variante C: cuaderno ---------- */
+const PILLARS = [
+  {ic:'🏗️', t:'Modelo Constructivista', d:'Los niños aprenden haciendo. Exploramos, descubrimos, construimos conocimiento juntos. No es solo llevar información: es ayudar a cada pequeño a ser el arquitecto de su propio aprendizaje.', c:'var(--pink)', tab:'🏗️'},
+  {ic:'🎡', t:'8 Áreas de Rotación', d:'Cada día exploran diferentes espacios: Language & Reading, Math & Science, Basic Skills, Pretend Play, Sensory, Art, Gym y Music. Desarrollo integral en todas las dimensiones.', c:'var(--sky-deep)', tab:'🎡'},
+  {ic:'👩‍🏫', t:'Maestras Especializadas', d:'Cada área cuenta con una maestra formada en esa disciplina. No es lo mismo que alguien enseñe música que una especialista en desarrollo musical infantil.', c:'var(--lime)', tab:'👩‍🏫'},
+  {ic:'🤝', t:'Trabajo en Familia', d:'Evaluaciones periódicas, comunicación constante, reuniones con papás. Tu hijo crece en el kínder, pero la familia es el corazón. Crecemos juntos.', c:'var(--yellow)', tab:'🤝'}
+];
+const nbPage = document.getElementById('nbPage');
+const nbTabs = document.getElementById('nbTabs');
+const pages = PILLARS.map(p => {
+  const d = document.createElement('div');
+  d.className = 'pg';
+  d.innerHTML = `<div class="pic">${p.ic}</div><h3>${p.t}</h3><p>${p.d}</p><span class="subr">Pilar Mondomío</span>`;
+  nbPage.appendChild(d); return d;
+});
+const tabs = PILLARS.map((p,i) => {
+  const b = document.createElement('button');
+  b.className = 'nb-tab'; b.style.background = p.c; b.textContent = p.tab;
+  b.setAttribute('aria-label', p.t);
+  b.addEventListener('click', () => { setPage(i); restartNb(); });
+  nbTabs.appendChild(b); return b;
+});
+let npi = -1, nbTimer;
+function setPage(i){
+  if(i === npi) return; npi = i;
+  pages.forEach((p,j) => p.classList.toggle('on', j===i));
+  tabs.forEach((t,j) => t.classList.toggle('on', j===i));
+}
+function restartNb(){ clearInterval(nbTimer); nbTimer = setInterval(() => setPage((npi+1)%PILLARS.length), 6000); }
+setPage(0); restartNb();
+
+/* ---------- Variante D: sobres ---------- */
+document.querySelectorAll('.env').forEach(env => {
+  function toggle(){ env.classList.toggle('open'); }
+  env.addEventListener('click', toggle);
+  env.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+});
+</script>
+</body>
+</html>
