@@ -157,7 +157,16 @@ nav.navbar.hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 .hero .strip .ph:nth-child(2){transform:rotate(2deg);margin-top:22px}
 .hero .strip .ph:nth-child(3){transform:rotate(-1deg)}
 .hero .strip .ph:nth-child(4){transform:rotate(3deg);margin-top:16px}
-@media(max-width:640px){.hero .strip .ph:nth-child(4){display:none}.hero .strip .ph{width:30vw}}
+@media(max-width:640px){
+  .hero{padding:28px 0 60px}
+  .hero .sunbig{width:120px;height:120px;top:-38px;right:-16px}
+  .hero .sunbig .core{inset:22px}
+  .hero h1{font-size:clamp(34px,10vw,44px)}
+  .hero .strip{gap:10px;margin-top:38px;padding:0 12px}
+  .hero .strip .ph:nth-child(4){display:none}
+  .hero .strip .ph{width:29vw;border-radius:14px}
+  .hero-chips{margin-top:16px}
+}
 
 /* empatía */
 .empatia{background:var(--paper);overflow:hidden}
@@ -220,7 +229,7 @@ html.js .tstop.reveal.in{animation:none;opacity:1;transform:none}
 .talleres{background:var(--paper)}
 .week-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;max-width:1080px;margin:0 auto}
 @media(max-width:900px){.week-row{grid-template-columns:repeat(2,1fr)}.week-row .wday:last-child{grid-column:1/-1;max-width:calc(50% - 8px);margin:0 auto;width:100%}}
-@media(max-width:520px){.week-row{grid-template-columns:1fr}.week-row .wday:last-child{max-width:100%}}
+@media(max-width:520px){.week-row{grid-template-columns:1fr;gap:22px}.week-row .wday:last-child{max-width:100%}.week-row .wday .ph{aspect-ratio:16/10}.week-row .wday:hover{transform:none}}
 .wday{border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 10px 0 rgba(50,43,122,.1);transition:transform .3s cubic-bezier(.34,1.56,.64,1);cursor:pointer;position:relative}
 .wday:hover{transform:translateY(-10px) rotate(-1deg)}
 .wday .dtag{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:#fff;text-align:center;padding:10px}
@@ -253,7 +262,10 @@ html.js .tstop.reveal.in{animation:none;opacity:1;transform:none}
 .wc:hover,.wc.tap{transform:scale(1.12) rotate(0)!important;z-index:5}
 .wc .tip{position:absolute;left:50%;top:calc(100% + 10px);transform:translateX(-50%) scale(.7);opacity:0;pointer-events:none;background:var(--navy);color:#fff;font-family:'UniformLight';font-size:13px;text-transform:none;letter-spacing:0;padding:8px 14px;border-radius:12px;white-space:nowrap;box-shadow:0 8px 20px rgba(35,30,92,.3);transition:all .25s;z-index:6}
 .wc:hover .tip,.wc.tap .tip{opacity:1;transform:translateX(-50%) scale(1)}
-@media(max-width:560px){.wc .tip{white-space:normal;width:200px;text-align:center}}
+@media(max-width:560px){
+  .wc .tip{position:fixed;left:50%;top:auto;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) scale(.7);white-space:normal;width:min(320px,84vw);text-align:center;font-size:14px;padding:12px 16px;border-radius:16px}
+  .wc:hover .tip,.wc.tap .tip{transform:translateX(-50%) scale(1)}
+}
 
 /* para quién — checklist interactivo */
 .quien{background:var(--cloud)}
@@ -342,6 +354,26 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
 @media(max-width:640px){
   .critter{width:64px!important;height:64px!important}
   .hero .critter{display:none}
+  .empatia .critter{top:10px!important;right:4%!important}
+  .band{padding:56px 0}
+  .sec-head{margin-bottom:36px}
+}
+@media(max-width:480px){
+  .sec-head p{font-size:15.5px}
+  .empatia p.big{font-size:16px}
+  .q-card{font-size:15px;padding:16px 18px}
+  .qz{padding:15px 16px;gap:12px}
+  .qz span:last-child{font-size:15px}
+  .quiz-msg .inner{font-size:13px;padding:12px 18px}
+  .chat-body{padding:18px 12px 22px}
+  .chq{max-width:90%}
+  .cha{max-width:92%}
+  .cta-photos{gap:10px}
+  .cta-photos .cp{border-radius:12px}
+  .stk{padding:8px 14px 8px 10px}
+  .stk b{font-size:12px}
+  .stk .se{font-size:20px}
+  .backpack{width:min(240px,62vw)}
 }
 @media(prefers-reduced-motion:reduce){
   html.js .reveal{opacity:1!important;animation:none!important}
