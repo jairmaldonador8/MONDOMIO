@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Mondomío Kínder · Educación Constructivista para Niños 1-4 años</title>
 <meta name="description" content="Mondomío Kínder: educación constructivista en San Pedro Garza García. Rotación de 8 áreas de aprendizaje, huerto, yoga y música especializada.">
 <style>
@@ -21,13 +21,16 @@
   --r:30px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip;touch-action:pan-y}
 body{
   font-family:'UniformMed',system-ui,sans-serif;
   color:var(--ink);
   background:var(--sky);
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
+  overflow-x:clip;
+  max-width:100vw;
+  touch-action:pan-y;
   line-height:1.6;
 }
 h1,h2,h3,.disp{font-family:'UniformBlack',system-ui,sans-serif;font-weight:900;line-height:.92;text-transform:uppercase;letter-spacing:.01em}
