@@ -175,9 +175,9 @@ nav.navbar.hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 .empatia h2{font-size:clamp(28px,4.6vw,48px);color:var(--navy);text-transform:none;line-height:1.08}
 .empatia h2 em{font-style:normal;color:var(--pink)}
 .empatia .kicker{display:inline-block;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.16em;font-size:14px;color:var(--pink);margin-bottom:14px}
-.empatia p.big{font-size:18px;margin-top:20px;line-height:1.65;color:#4a4a55;font-family:'UniformLight'}
+.empatia p.big{font-size:17.5px;margin-top:20px;line-height:1.6;color:var(--ink);font-family:'UniformMed'}
 .quotes{display:flex;flex-direction:column;gap:16px}
-.q-card{background:var(--cloud);border-radius:22px;padding:20px 24px;font-size:16.5px;line-height:1.5;color:var(--navy);font-family:'UniformLight';position:relative;transform:rotate(-1deg);transition:transform .3s}
+.q-card{background:var(--cloud);border-radius:22px;padding:20px 24px;font-size:16.5px;line-height:1.35;color:var(--navy);font-family:'UniformBlack';position:relative;transform:rotate(-1deg);transition:transform .3s}
 .q-card:nth-child(2){transform:rotate(1.2deg);background:#FDF3E3}
 .q-card:nth-child(3){transform:rotate(-.6deg);background:#F4E9F5}
 .q-card:hover{transform:rotate(0) scale(1.02)}
@@ -204,7 +204,7 @@ nav.navbar.hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 .tstop:nth-child(odd) .card{margin-left:auto}
 .tstop .card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 16px 0 rgba(50,43,122,.16)}
 .tstop .card .time{font-family:'UniformBlack';font-size:clamp(15px,1.8vw,19px);color:var(--navy);text-transform:uppercase}
-.tstop .card .act{font-size:14.5px;color:#5c6672;margin-top:4px;font-family:'UniformLight'}
+.tstop .card .act{font-size:14.5px;color:#39404d;margin-top:4px;font-family:'UniformMed'}
 .tstop .card .em{position:absolute;top:-26px;right:14px;width:54px;height:54px;display:grid;place-items:center}
 .tstop .card .em img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 3px 0 rgba(50,43,122,.18))}
 .tstop .dotk{position:absolute;left:50%;transform:translate(-50%,0);width:20px;height:20px;border-radius:50%;background:#fff;border:5px solid var(--sky-deep);z-index:2;transition:background .3s,border-color .3s,transform .3s}
@@ -237,7 +237,7 @@ html.js .tstop.reveal.in{animation:none;opacity:1;transform:none}
 .wday .info{padding:16px 16px 20px;text-align:center}
 .wday .info .em{font-size:30px;line-height:1;margin-top:-34px;background:#fff;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;margin-inline:auto;box-shadow:0 4px 0 rgba(50,43,122,.14);position:relative}
 .wday .info h3{font-size:17px;color:var(--navy);text-transform:none;margin-top:8px;line-height:1.15}
-.wday .info p{font-size:12.5px;color:#5c6672;font-family:'UniformLight';margin-top:8px;line-height:1.45}
+.wday .info p{font-size:13px;color:#39404d;font-family:'UniformMed';margin-top:8px;line-height:1.45}
 
 /* incluye — la mochila con stickers */
 .incluye{background:var(--cloud);overflow:hidden}
@@ -273,7 +273,7 @@ html.js .tstop.reveal.in{animation:none;opacity:1;transform:none}
 .qz{display:flex;align-items:center;gap:16px;background:#fff;border-radius:20px;padding:18px 22px;margin-bottom:14px;cursor:pointer;box-shadow:0 6px 0 rgba(50,43,122,.08);transition:all .25s;border:3px solid transparent}
 .qz:hover{transform:translateX(6px)}
 .qz .box{flex:0 0 36px;width:36px;height:36px;border-radius:12px;border:3px solid var(--cloud2);display:grid;place-items:center;font-family:'UniformBlack';font-size:18px;color:#fff;transition:all .25s cubic-bezier(.34,1.56,.64,1)}
-.qz span:last-child{font-size:16px;color:var(--navy);line-height:1.35}
+.qz span:last-child{font-family:'UniformBlack';font-size:15px;color:var(--navy);line-height:1.35}
 .qz.on{border-color:var(--lime);background:#F4FBE8}
 .qz.on .box{background:var(--lime);border-color:var(--lime-d);transform:scale(1.1) rotate(-6deg)}
 .quiz-msg{text-align:center;margin-top:26px;min-height:86px}
@@ -296,7 +296,7 @@ html.js .tstop.reveal.in{animation:none;opacity:1;transform:none}
 .chq:hover{transform:scale(1.03)}
 .chq::after{content:"toca para ver la respuesta";display:block;font-size:10px;color:#7ba05b;font-family:'UniformLight';margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
 .chq.asked::after{content:"✓✓";color:#4FB6EC;text-align:right;font-size:12px}
-.cha{align-self:flex-start;max-width:85%;background:#fff;border-radius:18px 18px 18px 4px;padding:12px 16px;font-size:14px;color:#3d3d46;box-shadow:0 2px 4px rgba(0,0,0,.12);display:none;font-family:'UniformLight';line-height:1.5}
+.cha{align-self:flex-start;max-width:85%;background:#fff;border-radius:18px 18px 18px 4px;padding:12px 16px;font-size:14px;color:#2f2f38;box-shadow:0 2px 4px rgba(0,0,0,.12);display:none;font-family:'UniformMed';line-height:1.5}
 .cha.show{display:block;animation:pop .35s cubic-bezier(.34,1.56,.64,1)}
 .cha .dots{display:inline-block;font-family:'UniformBlack';letter-spacing:3px;animation:blink 1s ease-in-out infinite}
 .cha p{display:none}
@@ -311,7 +311,7 @@ html:not(.js) .cha p{display:block}
 /* cta final — polaroids */
 .cta-fin{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-d) 100%);color:#fff;text-align:center;overflow:hidden}
 .cta-fin h2{color:#fff;font-size:clamp(28px,5.4vw,54px);max-width:16ch;margin:0 auto 18px;text-transform:none;line-height:1.1}
-.cta-fin p{font-size:18px;margin-bottom:32px;color:#d8d6f0;max-width:44ch;margin-left:auto;margin-right:auto;font-family:'UniformLight'}
+.cta-fin p{font-size:18px;margin-bottom:32px;color:#eceafd;max-width:44ch;margin-left:auto;margin-right:auto;font-family:'UniformMed'}
 .cta-photos{display:flex;justify-content:center;gap:18px;margin-bottom:38px}
 .cta-photos .cp{width:min(200px,26vw);aspect-ratio:1/1.1;border-radius:16px;background-size:cover;background-position:center;box-shadow:0 12px 30px rgba(0,0,0,.35);transform:rotate(-4deg)}
 .cta-photos .cp:nth-child(2){transform:rotate(2.5deg);margin-top:18px}
@@ -413,7 +413,7 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
   <div class="wrap">
     <span class="newpill reveal">🌿 Nuevo · Ciclo 2026–2027</span>
     <h1 class="reveal">Mondomío <em>Extendido Plus</em></h1>
-    <p class="lede light reveal">Un día completo para aprender, explorar y crecer.</p>
+    <p class="lede reveal">Un día completo para aprender, explorar y crecer.</p>
     <div class="hero-chips reveal">
       <span class="hc">📚 Programa académico</span>
       <span class="hc">🍽️ Lunch</span>
@@ -441,12 +441,12 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
     <div class="reveal">
       <span class="kicker">Pensado para tu familia</span>
       <h2>Más tiempo para ellos, <em>tranquilidad</em> para ti.</h2>
-      <p class="big">Sabemos que muchas familias necesitan un horario más amplio sin renunciar a una educación de calidad. Por eso creamos un programa donde los niños continúan aprendiendo, jugando y desarrollándose después de su jornada escolar, en un ambiente seguro, amoroso y lleno de experiencias significativas.</p>
+      <p class="big">Muchas familias necesitan un horario más amplio sin renunciar a una educación de calidad. En Extendido Plus, tu peque sigue aprendiendo y jugando por la tarde, en un ambiente seguro y amoroso.</p>
     </div>
     <div class="quotes reveal">
-      <div class="q-card">Imagina la tranquilidad de saber que tu hijo continúa aprendiendo mientras tú trabajas.</div>
-      <div class="q-card">Cada tarde está llena de experiencias que despiertan su curiosidad.</div>
-      <div class="q-card">Queremos que llegues por él y te cuente emocionado todo lo que vivió ese día.</div>
+      <div class="q-card">Tu hijo sigue aprendiendo mientras tú trabajas.</div>
+      <div class="q-card">Tardes llenas de experiencias que despiertan su curiosidad.</div>
+      <div class="q-card">Que llegue a casa emocionado, con mil cosas que contarte.</div>
     </div>
   </div>
 </section>
@@ -457,7 +457,7 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
     <div class="sec-head reveal">
       <span class="kicker">Así se vive un día</span>
       <h2>De la mañana a la tarde</h2>
-      <p>El sol acompaña a tu peque durante todo el día: desde la bienvenida a las 8:00 hasta la salida a las 4:00 p.m.</p>
+      <p>El sol acompaña a tu peque de las 8:00 a las 4:00 p.m.</p>
     </div>
     <div class="sunline" id="sunline">
       <div class="rail"><div class="fill" id="railFill"></div></div>
@@ -469,7 +469,7 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
       <div class="tstop reveal"><div class="dotk"></div><div class="card gold"><div class="em"><img src="../assets/img/RANA.png" alt="" loading="lazy" decoding="async"></div><div class="time">2:00 · Taller del día</div><div class="act">Cada tarde una aventura diferente ↓</div></div></div>
       <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em"><img src="../assets/img/PAJARITO.png" alt="" loading="lazy" decoding="async"></div><div class="time">3:00</div><div class="act">Juego al aire libre</div></div></div>
       <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em"><img src="../assets/img/CARACOL.png" alt="" loading="lazy" decoding="async"></div><div class="time">3:30</div><div class="act">Cierre del día</div></div></div>
-      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em"><img src="../assets/img/PAJARITO2.png" alt="" loading="lazy" decoding="async"></div><div class="time">4:00</div><div class="act">Salida — ¡a contarle todo a mamá y papá! 👋</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em"><img src="../assets/img/PAJARITO2.png" alt="" loading="lazy" decoding="async"></div><div class="time">4:00</div><div class="act">Salida — ¡a casa con mil historias! 👋</div></div></div>
     </div>
   </div>
 </section>
@@ -481,14 +481,14 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
     <div class="sec-head reveal">
       <span class="kicker">Los talleres de la tarde</span>
       <h2>Cada tarde, una <span style="color:var(--pink)">nueva aventura</span></h2>
-      <p>A las 2:00 p.m. empieza el taller del día: cinco experiencias distintas a la semana, diseñadas para explorar, crear y descubrir.</p>
+      <p>Cada día a las 2:00 p.m., un taller diferente.</p>
     </div>
     <div class="week-row reveal">
-      <div class="wday"><div class="dtag" style="background:var(--pink)">Lunes</div><div class="ph" style="background-image:url('../assets/img/DSC01181.webp')"></div><div class="info"><div class="em">🎨</div><h3>Pequeños Artistas</h3><p>Pintura, collage, escultura y técnicas artísticas para explorar la creatividad.</p></div></div>
-      <div class="wday"><div class="dtag" style="background:var(--lime)">Martes</div><div class="ph" style="background-image:url('../assets/img/D43A8458-5BDB-44C7-8261-5A04C494A5F2.webp')"></div><div class="info"><div class="em">🌱</div><h3>Exploradores del Huerto</h3><p>Siembran, cuidan plantas y descubren la naturaleza que los rodea.</p></div></div>
-      <div class="wday"><div class="dtag" style="background:var(--sky-deep)">Miércoles</div><div class="ph" style="background-image:url('../assets/img/CBYP8030.webp')"></div><div class="info"><div class="em">🧘</div><h3>Yoga Kids</h3><p>Respiración, equilibrio y relajación para su bienestar físico y emocional.</p></div></div>
-      <div class="wday"><div class="dtag" style="background:var(--navy)">Jueves</div><div class="ph" style="background-image:url('../assets/img/IMG_2519.webp')"></div><div class="info"><div class="em">🔬</div><h3>Pequeños Científicos</h3><p>Experimentos divertidos que despiertan la curiosidad y el pensamiento lógico.</p></div></div>
-      <div class="wday"><div class="dtag" style="background:var(--yellow);color:var(--navy)">Viernes</div><div class="ph" style="background-image:url('../assets/img/IMG_2457.webp')"></div><div class="info"><div class="em">👩🏻‍🍳</div><h3>Mini Chefs</h3><p>Preparaciones sencillas: autonomía, trabajo en equipo y hábitos saludables.</p></div></div>
+      <div class="wday"><div class="dtag" style="background:var(--pink)">Lunes</div><div class="ph" style="background-image:url('../assets/img/DSC01181.webp')"></div><div class="info"><div class="em">🎨</div><h3>Pequeños Artistas</h3><p>Pintura, collage y escultura para crear sin límites.</p></div></div>
+      <div class="wday"><div class="dtag" style="background:var(--lime)">Martes</div><div class="ph" style="background-image:url('../assets/img/D43A8458-5BDB-44C7-8261-5A04C494A5F2.webp')"></div><div class="info"><div class="em">🌱</div><h3>Exploradores del Huerto</h3><p>Siembran, cuidan y descubren la naturaleza.</p></div></div>
+      <div class="wday"><div class="dtag" style="background:var(--sky-deep)">Miércoles</div><div class="ph" style="background-image:url('../assets/img/CBYP8030.webp')"></div><div class="info"><div class="em">🧘</div><h3>Yoga Kids</h3><p>Respiración, equilibrio y calma.</p></div></div>
+      <div class="wday"><div class="dtag" style="background:var(--navy)">Jueves</div><div class="ph" style="background-image:url('../assets/img/IMG_2519.webp')"></div><div class="info"><div class="em">🔬</div><h3>Pequeños Científicos</h3><p>Experimentos que despiertan la curiosidad.</p></div></div>
+      <div class="wday"><div class="dtag" style="background:var(--yellow);color:var(--navy)">Viernes</div><div class="ph" style="background-image:url('../assets/img/IMG_2457.webp')"></div><div class="info"><div class="em">👩🏻‍🍳</div><h3>Mini Chefs</h3><p>Recetas sencillas, autonomía y hábitos sanos.</p></div></div>
     </div>
   </div>
 </section>
@@ -499,7 +499,7 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
     <div class="sec-head reveal">
       <span class="kicker">Todo en un solo programa</span>
       <h2>La mochila de <span style="color:var(--pink)">Extendido Plus</span></h2>
-      <p>Todo lo que tu peque necesita para su día completo ya viene incluido.</p>
+      <p>Todo lo que necesita para su día, ya incluido.</p>
     </div>
     <div class="pack-stage reveal">
       <svg class="backpack" viewBox="0 0 300 340" aria-hidden="true">
@@ -557,10 +557,10 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
       <h2>Marca las que te <span style="color:var(--pink)">suenen</span></h2>
     </div>
     <div class="quiz reveal" id="quiz">
-      <div class="qz" role="checkbox" aria-checked="false" tabindex="0"><span class="box">✓</span><span>Trabajamos (o tenemos pendientes) por las tardes.</span></div>
-      <div class="qz" role="checkbox" aria-checked="false" tabindex="0"><span class="box">✓</span><span>Queremos un ambiente seguro, con las maestras de siempre.</span></div>
-      <div class="qz" role="checkbox" aria-checked="false" tabindex="0"><span class="box">✓</span><span>Nos gustaría que siguiera aprendiendo, no solo "que lo cuiden".</span></div>
-      <div class="qz" role="checkbox" aria-checked="false" tabindex="0"><span class="box">✓</span><span>Buscamos un día completo con lunch, descanso y actividades.</span></div>
+      <div class="qz" role="checkbox" aria-checked="false" tabindex="0"><span class="box">✓</span><span>Trabajamos por las tardes.</span></div>
+      <div class="qz" role="checkbox" aria-checked="false" tabindex="0"><span class="box">✓</span><span>Buscamos un ambiente seguro y conocido.</span></div>
+      <div class="qz" role="checkbox" aria-checked="false" tabindex="0"><span class="box">✓</span><span>Queremos que siga aprendiendo, no solo "que lo cuiden".</span></div>
+      <div class="qz" role="checkbox" aria-checked="false" tabindex="0"><span class="box">✓</span><span>Necesitamos un día completo, con lunch y descanso.</span></div>
     </div>
     <div class="quiz-msg" id="quizMsg" aria-live="polite"><span class="inner">¿Te identificas con alguna? Marca las casillas ☝️</span></div>
   </div>
@@ -578,17 +578,17 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
       <div class="chat-top"><div class="cav">☀️</div><div><b>Mondomío Kínder</b><span>en línea · responde al instante</span></div></div>
       <div class="chat-body">
         <div class="chq" role="button" tabindex="0">¿Incluye lunch? 🍽️</div>
-        <div class="cha"><span class="dots">•••</span><p>¡Sí! Todos los días comen su lunch a las 12:45, acompañados por sus maestras 😊</p></div>
+        <div class="cha"><span class="dots">•••</span><p>¡Sí! Todos los días a las 12:45, acompañados por sus maestras 😊</p></div>
         <div class="chq" role="button" tabindex="0">¿Los niños descansan?</div>
-        <div class="cha"><span class="dots">•••</span><p>Sí, después del lunch hay tiempo de descanso a la 1:15 para recargar pilas antes del taller. Respetamos el ritmo de cada niño 💤</p></div>
+        <div class="cha"><span class="dots">•••</span><p>Sí, a la 1:15 recargan pilas antes del taller. Respetamos el ritmo de cada niño 💤</p></div>
         <div class="chq" role="button" tabindex="0">¿Pueden salir antes de las 4:00?</div>
-        <div class="cha"><span class="dots">•••</span><p>Platícanos el horario que necesita tu familia y buscamos juntos la opción que mejor les funcione 💛</p></div>
+        <div class="cha"><span class="dots">•••</span><p>Cuéntanos tu horario ideal y buscamos la mejor opción para tu familia 💛</p></div>
         <div class="chq" role="button" tabindex="0">¿Qué edades participan?</div>
-        <div class="cha"><span class="dots">•••</span><p>Recibimos niños y niñas de 1 a 4 años, con actividades adaptadas a cada etapa 👶</p></div>
+        <div class="cha"><span class="dots">•••</span><p>Niños y niñas de 1 a 4 años 👶</p></div>
         <div class="chq" role="button" tabindex="0">¿Quién supervisa las actividades?</div>
-        <div class="cha"><span class="dots">•••</span><p>El mismo equipo Mondomío de siempre: maestras capacitadas que los acompañan con cariño todo el día 👩‍🏫</p></div>
+        <div class="cha"><span class="dots">•••</span><p>Las maestras Mondomío de siempre: capacitadas y cariñosas 👩‍🏫</p></div>
         <div class="chq" role="button" tabindex="0">¿Se pueden contratar días específicos?</div>
-        <div class="cha"><span class="dots">•••</span><p>Escríbenos y armamos el plan que mejor le quede a tu familia, sin compromiso 📅</p></div>
+        <div class="cha"><span class="dots">•••</span><p>Escríbenos y armamos el plan a tu medida, sin compromiso 📅</p></div>
       </div>
     </div>
   </div>
@@ -603,7 +603,7 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
       <div class="cp" style="background-image:url('../assets/img/DSC01086.webp')"></div>
     </div>
     <h2 class="reveal">Descubre una nueva forma de vivir las tardes.</h2>
-    <p class="reveal">Agenda una visita, conoce los talleres y platica con nuestras maestras. Sin compromiso.</p>
+    <p class="reveal">Conoce los talleres y platica con nuestras maestras. Sin compromiso.</p>
     <div class="reveal">
       <a class="btn btn-yellow" target="_blank" rel="noopener" href="https://wa.me/528182590721?text=%C2%A1Hola!%20Me%20gustar%C3%ADa%20agendar%20una%20visita%20para%20conocer%20Mondom%C3%ADo%20Extendido%20Plus%20%F0%9F%8C%BF">Agenda una visita 💬</a>
     </div>
