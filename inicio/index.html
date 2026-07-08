@@ -379,6 +379,14 @@ footer .links{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin
 footer .addr{color:#bfbce6;font-size:15px;max-width:36ch;margin:0 auto}
 footer .copy{margin-top:26px;color:#7f7bb8;font-size:13px;font-family:'UniformLight';letter-spacing:.04em}
 
+/* badge google */
+.gbadge{display:inline-flex;align-items:center;gap:10px;margin-top:18px;background:rgba(255,255,255,.08);
+  border:1.5px solid rgba(255,255,255,.2);border-radius:999px;padding:10px 20px;transition:background .2s,border-color .2s}
+.gbadge:hover{background:rgba(255,255,255,.15);border-color:var(--yellow)}
+.gbadge .gstars{color:var(--yellow);font-size:16px;letter-spacing:2px}
+.gbadge .gtxt{font-family:'UniformBlack';font-size:13px;color:#fff;text-transform:uppercase;letter-spacing:.05em}
+.gbadge .gsub{font-size:12px;color:#9aa3d0;font-family:'UniformLight'}
+
 /* faq */
 .faq{background:var(--cloud)}
 .faq-list{max-width:760px;margin:0 auto}
@@ -827,6 +835,11 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
     <div class="sec-head reveal">
       <span class="kicker">Lo que dicen las familias</span>
       <h2>Papás nos <span style="color:var(--yellow)">cuentan</span></h2>
+      <a class="gbadge" target="_blank" rel="noopener" href="https://www.google.com/maps/place/?q=place_id:ChIJixgWYeW9YoYRknJGEjsLx6E">
+        <span class="gstars">★★★★★</span>
+        <span class="gtxt">5.0 en Google</span>
+        <span class="gsub">Ver reseñas →</span>
+      </a>
     </div>
   </div>
 
