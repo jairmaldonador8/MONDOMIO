@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es" class="js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview · Mondomío Extendido Plus</title>
+<style>
+@font-face{font-family:'UniformBlack';src:url(../inicio/assets/fonts/uniform-black.woff2) format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'UniformMed';src:url(../inicio/assets/fonts/uniform-medium.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'UniformLight';src:url(../inicio/assets/fonts/uniform-light.woff2) format('woff2');font-weight:300;font-display:swap}
+:root{
+  --sky:#6CC9EC; --sky-deep:#46B2DD; --sky-top:#8BD6F1;
+  --cloud:#EAF8FD; --cloud2:#C9EDF8;
+  --lime:#8CC63E; --lime-d:#79B62F; --lime-l:#B7DF57;
+  --pink:#C0539F; --pink-d:#A6408A;
+  --yellow:#FAC81C; --yellow-d:#EBB200;
+  --navy:#322B7A; --navy-d:#231E5C;
+  --ink:#262223; --paper:#ffffff;
+  --peach:#FFDD9A; --peach-d:#FFC96B;
+  --r:30px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'UniformMed',system-ui,sans-serif;color:var(--ink);background:var(--sky);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+h1,h2,h3,.disp{font-family:'UniformBlack',system-ui,sans-serif;font-weight:900;line-height:.95;text-transform:uppercase;letter-spacing:.01em}
+.light{font-family:'UniformLight',system-ui,sans-serif;font-weight:300}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{width:min(1140px,90vw);margin-inline:auto}
+section{position:relative}
+.band{padding:clamp(60px,9vw,110px) 0}
+.sec-head{text-align:center;margin-bottom:48px}
+.sec-head .kicker{display:inline-block;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.16em;font-size:14px;color:var(--pink);margin-bottom:14px}
+.sec-head h2{font-size:clamp(30px,6vw,58px);color:var(--navy)}
+.sec-head p{max-width:52ch;margin:18px auto 0;font-size:18px;line-height:1.55}
+.btn{display:inline-flex;align-items:center;gap:9px;cursor:pointer;border:none;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.04em;font-size:16px;padding:15px 28px;border-radius:999px;text-decoration:none;transition:transform .15s ease}
+.btn-yellow{background:var(--yellow);color:var(--ink);box-shadow:0 7px 0 var(--yellow-d)}
+.btn-pink{background:var(--pink);color:#fff;box-shadow:0 7px 0 var(--pink-d)}
+.btn-navy{background:var(--navy);color:#fff;box-shadow:0 7px 0 var(--navy-d)}
+.btn:hover{transform:translateY(-3px)} .btn:active{transform:translateY(2px)}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--paper);color:var(--pink-d);font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.04em;font-size:14px;padding:9px 16px;border-radius:999px;box-shadow:0 6px 0 rgba(50,43,122,.12)}
+.pill .dot{width:9px;height:9px;border-radius:50%;background:var(--lime)}
+.reveal{opacity:0}
+.reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-18px) rotate(2deg)}}
+.critter{position:absolute;width:90px;height:90px;background-size:contain;background-repeat:no-repeat;background-position:center;opacity:.9;pointer-events:none;z-index:1;animation:float 5s ease-in-out infinite}
+
+/* ============ SWITCHER ============ */
+.switcher{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:100;display:flex;gap:6px;background:var(--navy-d);padding:8px;border-radius:999px;box-shadow:0 10px 30px rgba(35,30,92,.45)}
+.switcher button{border:none;cursor:pointer;font-family:'UniformBlack';text-transform:uppercase;font-size:12px;letter-spacing:.04em;padding:10px 16px;border-radius:999px;background:transparent;color:#bfbce6;transition:all .2s}
+.switcher button.on{background:var(--yellow);color:var(--navy)}
+@media(max-width:560px){.switcher{width:calc(100% - 24px);justify-content:center}.switcher button{padding:10px 8px;font-size:10.5px;flex:1}}
+.variant{display:none}
+.variant.show{display:block}
+.demo-note{background:var(--navy-d);color:#bfbce6;text-align:center;font-size:13px;padding:12px 20px;font-family:'UniformLight'}
+.demo-note b{color:var(--yellow);font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.06em}
+.divider-label{background:var(--ink);color:#fff;text-align:center;padding:26px 20px;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.14em;font-size:14px}
+.divider-label span{color:var(--yellow)}
+
+/* ============ NAVBAR MOCK ============ */
+nav.navbar{position:relative;z-index:10;padding:16px 20px}
+nav.navbar .wrap{background:rgba(255,255,255,.75);backdrop-filter:blur(8px);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;border-radius:12px;border:1px solid rgba(255,255,255,.3)}
+.navbar-logo{width:70px}
+.navbar-links{display:flex;align-items:center;gap:26px;flex:1;margin-left:36px;flex-wrap:wrap}
+.navbar-links a{font-size:13px;text-transform:uppercase;letter-spacing:.02em;color:var(--navy);font-weight:500}
+.navbar-links a:hover{color:var(--pink)}
+.navbar-links a.new-link{position:relative;color:var(--pink-d);font-family:'UniformBlack'}
+.navbar-links a.new-link .nbadge{display:inline-block;background:var(--lime);color:#fff;font-size:9px;font-family:'UniformBlack';padding:2px 7px;border-radius:999px;margin-left:5px;transform:translateY(-6px);animation:nbpulse 2s ease-in-out infinite}
+@keyframes nbpulse{0%,100%{transform:translateY(-6px) scale(1)}50%{transform:translateY(-6px) scale(1.15)}}
+.navbar-phone{background:var(--pink);color:#fff;font-size:13px;text-transform:uppercase;padding:10px 16px;border-radius:999px;font-weight:bold}
+@media(max-width:700px){.navbar-links{gap:12px;margin-left:14px}.navbar-links a{font-size:10.5px}.navbar-phone{display:none}}
+
+/* ============ SECCIONES COMUNES ============ */
+/* empatía */
+.empatia{background:var(--paper);overflow:hidden}
+.empatia .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,70px);align-items:center}
+@media(max-width:820px){.empatia .grid{grid-template-columns:1fr}}
+.empatia h2{font-size:clamp(28px,4.6vw,48px);color:var(--navy);text-transform:none;line-height:1.08}
+.empatia h2 em{font-style:normal;color:var(--pink)}
+.empatia .kicker{display:inline-block;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.16em;font-size:14px;color:var(--pink);margin-bottom:14px}
+.empatia p.big{font-size:18px;margin-top:20px;line-height:1.65;color:#4a4a55;font-family:'UniformLight'}
+.quotes{display:flex;flex-direction:column;gap:16px}
+.q-card{background:var(--cloud);border-radius:22px;padding:20px 24px;font-size:16.5px;line-height:1.5;color:var(--navy);font-family:'UniformLight';position:relative;transform:rotate(-1deg);transition:transform .3s}
+.q-card:nth-child(2){transform:rotate(1.2deg);background:#FDF3E3}
+.q-card:nth-child(3){transform:rotate(-.6deg);background:#F4E9F5}
+.q-card:hover{transform:rotate(0) scale(1.02)}
+.q-card::before{content:"💛";position:absolute;top:-14px;left:20px;font-size:22px}
+.q-card:nth-child(2)::before{content:"🌿"}
+.q-card:nth-child(3)::before{content:"✨"}
+
+/* qué incluye */
+.incluye{background:var(--cloud)}
+.chk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;max-width:960px;margin:0 auto}
+.chk{display:flex;align-items:center;gap:14px;background:#fff;border-radius:18px;padding:16px 20px;box-shadow:0 6px 0 rgba(50,43,122,.08);transition:transform .2s}
+.chk:hover{transform:translateY(-4px)}
+.chk .tick{flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:var(--lime);color:#fff;display:grid;place-items:center;font-family:'UniformBlack';font-size:16px;box-shadow:0 4px 0 var(--lime-d)}
+.chk b{font-family:'UniformBlack';font-size:14.5px;color:var(--navy);text-transform:uppercase;letter-spacing:.02em;line-height:1.2}
+
+/* beneficios */
+.beneficios{background:var(--navy)}
+.beneficios .sec-head h2{color:#fff}
+.beneficios .sec-head .kicker{color:var(--yellow)}
+.beneficios .sec-head p{color:var(--cloud2)}
+.dev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;max-width:980px;margin:0 auto}
+.dev{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.14);border-radius:24px;padding:26px 20px;text-align:center;transition:all .3s}
+.dev:hover{background:rgba(255,255,255,.14);border-color:var(--yellow);transform:translateY(-5px)}
+.dev .ic{font-size:36px;line-height:1;margin-bottom:12px}
+.dev b{display:block;font-family:'UniformBlack';color:#fff;font-size:16px;text-transform:uppercase;letter-spacing:.03em}
+.dev span{display:block;font-size:13px;color:#9aa3d0;font-family:'UniformLight';margin-top:6px;line-height:1.4}
+
+/* para quién */
+.quien{background:var(--paper)}
+.quien-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;max-width:1000px;margin:0 auto}
+.qn{background:var(--cloud);border-radius:24px;padding:28px 24px;position:relative;transition:transform .25s}
+.qn:hover{transform:translateY(-5px) rotate(-.5deg)}
+.qn:nth-child(2){background:#FDF3E3}.qn:nth-child(3){background:#EDF6E0}.qn:nth-child(4){background:#F4E9F5}
+.qn .em{font-size:32px;margin-bottom:12px}
+.qn b{display:block;font-family:'UniformBlack';color:var(--navy);font-size:16.5px;text-transform:none;line-height:1.25;margin-bottom:8px}
+.qn p{font-size:14px;color:#5c6672;font-family:'UniformLight';line-height:1.5}
+
+/* faq */
+.faq{background:var(--cloud)}
+.faq-list{max-width:760px;margin:0 auto}
+.fq{background:#fff;border-radius:20px;margin-bottom:14px;box-shadow:0 6px 0 rgba(50,43,122,.08);overflow:hidden}
+.fq-head{display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer}
+.fq-head h3{flex:1;font-size:16.5px;color:var(--navy);text-transform:none;line-height:1.3}
+.fq-head .fq-ic{flex:0 0 auto;font-size:22px}
+.fq-head .plus{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--cloud);display:grid;place-items:center;color:var(--navy);font-size:19px;font-family:'UniformLight';transition:transform .35s,background .3s,color .3s}
+.fq.open .plus{transform:rotate(45deg);background:var(--pink);color:#fff}
+.fq-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.215,.61,.355,1)}
+.fq.open .fq-body{max-height:400px}
+.fq-body p{padding:0 22px 20px 58px;font-family:'UniformLight';font-size:15px;color:#4a4a55;line-height:1.65}
+@media(max-width:600px){.fq-body p{padding-left:22px}}
+
+/* cta final */
+.cta-fin{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-d) 100%);color:#fff;text-align:center;overflow:hidden}
+.cta-fin h2{color:#fff;font-size:clamp(28px,5.4vw,54px);max-width:16ch;margin:0 auto 18px;text-transform:none;line-height:1.1}
+.cta-fin p{font-size:18px;margin-bottom:32px;color:#d8d6f0;max-width:44ch;margin-left:auto;margin-right:auto;font-family:'UniformLight'}
+.cta-photos{display:flex;justify-content:center;gap:18px;margin-bottom:38px}
+.cta-photos .cp{width:min(200px,26vw);aspect-ratio:1/1.1;border-radius:16px;background-size:cover;background-position:center;box-shadow:0 12px 30px rgba(0,0,0,.35);transform:rotate(-4deg)}
+.cta-photos .cp:nth-child(2){transform:rotate(2.5deg);margin-top:18px}
+.cta-photos .cp:nth-child(3){transform:rotate(-1.5deg)}
+.cta-photos .cp:hover{transform:rotate(0) scale(1.05);transition:transform .3s}
+
+/* ============ VARIANTE A · EL VIAJE DEL SOL ============ */
+.vA .heroA{background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky) 100%);padding:40px 0 90px;text-align:center;position:relative;overflow:hidden}
+.vA .heroA .sunbig{position:absolute;top:-70px;right:8%;width:190px;height:190px;pointer-events:none}
+.vA .heroA .sunbig .core{position:absolute;inset:34px;background:var(--yellow);border-radius:50%;box-shadow:0 0 0 14px rgba(250,200,28,.3)}
+.vA .heroA .sunbig .rays{position:absolute;inset:0;animation:sunspin 16s linear infinite}
+.vA .heroA .sunbig .rays::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(rgba(250,200,28,.9) 0 8deg,transparent 8deg 30deg);-webkit-mask:radial-gradient(circle,transparent 55%,#000 56%,#000 72%,transparent 73%);mask:radial-gradient(circle,transparent 55%,#000 56%,#000 72%,transparent 73%)}
+@keyframes sunspin{to{transform:rotate(360deg)}}
+.vA .heroA .newpill{display:inline-flex;align-items:center;gap:8px;background:var(--lime);color:#fff;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.08em;font-size:13.5px;padding:9px 18px;border-radius:999px;box-shadow:0 5px 0 var(--lime-d);transform:rotate(-2deg)}
+.vA .heroA h1{margin:22px auto 0;color:var(--navy);font-size:clamp(38px,7vw,76px);max-width:14ch;text-shadow:0 3px 0 rgba(255,255,255,.6)}
+.vA .heroA h1 em{font-style:normal;color:var(--pink-d)}
+.vA .heroA .lede{max-width:44ch;margin:22px auto 0;color:var(--navy);font-size:clamp(16px,2.3vw,20px);line-height:1.55;background:rgba(255,255,255,.85);padding:14px 24px;border-radius:20px;box-shadow:0 6px 0 rgba(50,43,122,.12)}
+.vA .heroA .cta{margin-top:30px}
+.vA .heroA .strip{display:flex;justify-content:center;gap:16px;margin-top:52px;padding:0 20px}
+.vA .heroA .strip .ph{width:min(230px,28vw);aspect-ratio:1/1.15;border-radius:18px;background-size:cover;background-position:center;box-shadow:0 14px 30px rgba(50,43,122,.25);transform:rotate(-3deg)}
+.vA .heroA .strip .ph:nth-child(2){transform:rotate(2deg);margin-top:22px}
+.vA .heroA .strip .ph:nth-child(3){transform:rotate(-1deg)}
+.vA .heroA .strip .ph:nth-child(4){transform:rotate(3deg);margin-top:16px}
+@media(max-width:640px){.vA .heroA .strip .ph:nth-child(4){display:none}}
+/* horario A: sol que baja y cielo que atardece */
+.vA .horaA{background:linear-gradient(180deg,var(--sky) 0%,var(--sky-top) 34%,var(--peach) 78%,var(--peach-d) 100%)}
+.vA .horaA .sec-head h2{color:#fff;text-shadow:0 3px 0 rgba(50,43,122,.2)}
+.vA .horaA .sec-head .kicker{color:var(--navy)}
+.vA .horaA .sec-head p{color:#15384a}
+.sunline2{position:relative;max-width:820px;margin:30px auto 0;padding:20px 0 40px}
+.sunline2 .rail{position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);background:rgba(255,255,255,.4);border-radius:999px;overflow:hidden}
+.sunline2 .rail .fill{position:absolute;top:0;left:0;right:0;height:0%;background:linear-gradient(180deg,var(--yellow),#f7941e);border-radius:999px}
+.sun2{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);width:74px;height:74px;z-index:5;pointer-events:none;transition:top .15s linear}
+.sun2 .core{position:absolute;inset:12px;background:var(--yellow);border-radius:50%;box-shadow:0 0 0 8px rgba(250,200,28,.35),0 6px 0 rgba(0,0,0,.08)}
+.sun2 .core::before{content:"";position:absolute;left:20px;top:20px;width:5px;height:5px;border-radius:50%;background:var(--ink);box-shadow:12px 0 0 var(--ink)}
+.sun2 .core::after{content:"";position:absolute;left:23px;top:29px;width:11px;height:6px;border-bottom:2.5px solid var(--ink);border-radius:0 0 10px 10px}
+.sun2 .rays{position:absolute;inset:0;animation:sunspin 14s linear infinite}
+.sun2 .rays::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(rgba(250,200,28,.9) 0 8deg,transparent 8deg 30deg);-webkit-mask:radial-gradient(circle,transparent 55%,#000 56%,#000 72%,transparent 73%);mask:radial-gradient(circle,transparent 55%,#000 56%,#000 72%,transparent 73%)}
+.tstop{position:relative;display:flex;align-items:center;margin:30px 0;width:100%}
+.tstop .card{width:calc(50% - 52px);background:#fff;border-radius:22px;padding:18px 22px;box-shadow:0 10px 0 rgba(50,43,122,.12);position:relative;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.tstop:nth-child(odd) .card{margin-left:auto}
+.tstop .card:hover{transform:translateY(-5px) scale(1.02)}
+.tstop .card .time{font-family:'UniformBlack';font-size:clamp(15px,1.8vw,19px);color:var(--navy);text-transform:uppercase}
+.tstop .card .act{font-size:14.5px;color:#5c6672;margin-top:4px;font-family:'UniformLight'}
+.tstop .card .em{position:absolute;top:-26px;right:14px;width:54px;height:54px;display:grid;place-items:center}
+.tstop .card .em img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 3px 0 rgba(50,43,122,.18))}
+.tstop .dotk{position:absolute;left:50%;transform:translate(-50%,0);width:20px;height:20px;border-radius:50%;background:#fff;border:5px solid var(--sky-deep);z-index:2;transition:all .3s}
+.tstop.lit .dotk{background:var(--yellow);border-color:var(--yellow-d);transform:translate(-50%,0) scale(1.25)}
+.tstop .card.gold{background:#FFF6DC;border:2px solid var(--yellow)}
+@media(max-width:640px){
+  .sunline2 .rail{left:30px}
+  .sun2{left:30px;width:58px;height:58px}
+  .sun2 .core{inset:9px}
+  .sun2 .core::before{left:12px;top:13px;box-shadow:11px 0 0 var(--ink)}
+  .sun2 .core::after{left:15px;top:21px;width:10px}
+  .tstop{margin:24px 0}
+  .tstop .card{width:calc(100% - 70px);margin-left:70px!important;padding:16px 18px}
+  .tstop .card .em{width:44px;height:44px;top:-20px;right:12px}
+  .tstop .dotk{left:30px}
+}
+/* talleres A: calendario semanal de tarjetas */
+.vA .tallA{background:var(--paper)}
+.week-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;max-width:1080px;margin:0 auto}
+@media(max-width:900px){.week-row{grid-template-columns:repeat(2,1fr)}.week-row .wday:last-child{grid-column:1/-1;max-width:calc(50% - 8px);margin:0 auto;width:100%}}
+@media(max-width:520px){.week-row{grid-template-columns:1fr}.week-row .wday:last-child{max-width:100%}}
+.wday{border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 10px 0 rgba(50,43,122,.1);transition:transform .3s cubic-bezier(.34,1.56,.64,1);cursor:pointer;position:relative}
+.wday:hover{transform:translateY(-10px) rotate(-1deg)}
+.wday .dtag{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:#fff;text-align:center;padding:10px}
+.wday .ph{aspect-ratio:1/.85;background-size:cover;background-position:center}
+.wday .info{padding:16px 16px 20px;text-align:center}
+.wday .info .em{font-size:30px;line-height:1;margin-top:-34px;background:#fff;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;margin-inline:auto;box-shadow:0 4px 0 rgba(50,43,122,.14);position:relative}
+.wday .info h3{font-size:17px;color:var(--navy);text-transform:none;margin-top:8px;line-height:1.15}
+.wday .info p{font-size:12.5px;color:#5c6672;font-family:'UniformLight';margin-top:8px;line-height:1.45}
+
+/* ============ VARIANTE B · BOLETOS A LA AVENTURA ============ */
+.vB .heroB{background:var(--navy);padding:50px 0 90px;position:relative;overflow:hidden;text-align:center}
+.vB .heroB::before{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(255,255,255,.25) 1.5px,transparent 1.5px);background-size:28px 28px}
+.vB .heroB .ticket-big{position:relative;max-width:680px;margin:0 auto;background:#fff;border-radius:22px;padding:38px 34px 34px;transform:rotate(-1.6deg);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.vB .heroB .ticket-big::before,.vB .heroB .ticket-big::after{content:"";position:absolute;top:50%;width:38px;height:38px;border-radius:50%;background:var(--navy);transform:translateY(-50%)}
+.vB .heroB .ticket-big::before{left:-19px}
+.vB .heroB .ticket-big::after{right:-19px}
+.vB .heroB .tb-top{display:flex;justify-content:center;gap:10px;align-items:center;flex-wrap:wrap}
+.vB .heroB .tb-tag{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.14em;font-size:12px;background:var(--lime);color:#fff;padding:7px 14px;border-radius:999px;box-shadow:0 4px 0 var(--lime-d)}
+.vB .heroB .tb-tag.y{background:var(--yellow);color:var(--navy);box-shadow:0 4px 0 var(--yellow-d)}
+.vB .heroB h1{color:var(--navy);font-size:clamp(32px,6vw,62px);margin-top:18px}
+.vB .heroB h1 em{font-style:normal;color:var(--pink)}
+.vB .heroB .tb-dash{border-top:3px dashed var(--cloud2);margin:22px 0 18px}
+.vB .heroB .lede{color:#4a4a55;font-size:clamp(15px,2.2vw,18px);font-family:'UniformLight';max-width:46ch;margin:0 auto}
+.vB .heroB .cta{margin-top:24px}
+.vB .heroB .stamp{position:absolute;top:-22px;right:-16px;width:96px;height:96px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-family:'UniformBlack';text-transform:uppercase;font-size:15px;transform:rotate(12deg);box-shadow:0 8px 0 var(--pink-d);animation:stampwob 3.4s ease-in-out infinite}
+@keyframes stampwob{0%,100%{transform:rotate(9deg)}50%{transform:rotate(16deg) scale(1.05)}}
+.vB .heroB .strip{display:flex;justify-content:center;gap:14px;margin-top:54px;position:relative}
+.vB .heroB .strip .ph{width:min(210px,26vw);aspect-ratio:1;border-radius:16px;background-size:cover;background-position:center;box-shadow:0 14px 34px rgba(0,0,0,.45);transform:rotate(-3deg)}
+.vB .heroB .strip .ph:nth-child(2){transform:rotate(2deg);margin-top:20px}
+.vB .heroB .strip .ph:nth-child(3){transform:rotate(-1deg)}
+/* horario B: itinerario de boletos */
+.vB .horaB{background:var(--sky)}
+.vB .horaB .sec-head h2{color:#fff;text-shadow:0 3px 0 rgba(50,43,122,.2)}
+.vB .horaB .sec-head .kicker{color:var(--navy)}
+.vB .horaB .sec-head p{color:#15384a}
+.itin{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:0;align-items:center}
+.tkt{position:relative;width:100%;background:#fff;border-radius:18px;display:flex;align-items:center;gap:18px;padding:16px 22px;box-shadow:0 8px 0 rgba(50,43,122,.12);transition:transform .25s}
+.tkt:hover{transform:scale(1.03) rotate(-.5deg);z-index:3}
+.tkt::before,.tkt::after{content:"";position:absolute;top:50%;width:26px;height:26px;border-radius:50%;background:var(--sky);transform:translateY(-50%)}
+.tkt::before{left:-13px}.tkt::after{right:-13px}
+.tkt .hh{flex:0 0 92px;font-family:'UniformBlack';font-size:clamp(17px,2.4vw,22px);color:var(--pink);text-align:center;border-right:3px dashed var(--cloud2);padding-right:14px}
+.tkt .tx b{display:block;font-family:'UniformBlack';color:var(--navy);text-transform:uppercase;font-size:15.5px;letter-spacing:.02em}
+.tkt .tx span{font-size:13.5px;color:#5c6672;font-family:'UniformLight'}
+.tkt .aem{margin-left:auto;width:46px;height:46px;flex:0 0 auto}
+.tkt .aem img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 3px 0 rgba(50,43,122,.18))}
+.tkt.gold{background:#FFF6DC;outline:3px solid var(--yellow)}
+.itin .conn{width:5px;height:26px;background:repeating-linear-gradient(180deg,#fff 0 7px,transparent 7px 13px);opacity:.75}
+@media(max-width:520px){.tkt{gap:12px;padding:14px 16px}.tkt .hh{flex-basis:66px;padding-right:10px}.tkt .aem{width:38px;height:38px}}
+/* talleres B: abanico de boletos */
+.vB .tallB{background:var(--paper);overflow:hidden}
+.fan{display:flex;justify-content:center;align-items:stretch;gap:clamp(10px,1.6vw,20px);max-width:1120px;margin:20px auto 0;padding:30px 10px 10px;flex-wrap:wrap}
+.ftk{--rot:-4deg;flex:0 1 200px;min-width:186px;border-radius:20px;padding:0 0 20px;text-align:center;color:#fff;transform:rotate(var(--rot));transition:transform .35s cubic-bezier(.34,1.56,.64,1);cursor:pointer;position:relative;box-shadow:0 12px 0 rgba(50,43,122,.16)}
+.ftk:nth-child(1){background:var(--pink)}
+.ftk:nth-child(2){background:var(--lime);--rot:2deg;margin-top:16px}
+.ftk:nth-child(3){background:var(--sky-deep);--rot:-1.5deg}
+.ftk:nth-child(4){background:var(--navy);--rot:2.5deg;margin-top:18px}
+.ftk:nth-child(5){background:var(--yellow);--rot:-3deg;color:var(--navy)}
+.ftk:hover{transform:rotate(0) translateY(-12px) scale(1.05);z-index:5}
+.ftk .fday{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;padding:12px 10px 10px;border-bottom:3px dashed rgba(255,255,255,.4)}
+.ftk:nth-child(5) .fday{border-color:rgba(50,43,122,.25)}
+.ftk .fem{font-size:38px;line-height:1;margin:16px 0 10px}
+.ftk h3{font-size:18px;text-transform:none;padding:0 14px;line-height:1.12}
+.ftk p{font-size:12.5px;font-family:'UniformLight';padding:10px 16px 0;line-height:1.45;opacity:.94}
+.ftk .fph{width:calc(100% - 28px);aspect-ratio:4/3;margin:12px auto 0;border-radius:12px;background-size:cover;background-position:center;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+
+/* ============ VARIANTE C · EL JARDÍN DE LA TARDE ============ */
+.vC .heroC{background:linear-gradient(180deg,var(--sky-top) 0%,var(--cloud) 55%,var(--lime-l) 100%);padding:50px 0 0;text-align:center;position:relative;overflow:hidden}
+.vC .heroC .newpill{display:inline-flex;align-items:center;gap:8px;background:var(--pink);color:#fff;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.08em;font-size:13.5px;padding:9px 18px;border-radius:999px;box-shadow:0 5px 0 var(--pink-d);transform:rotate(-2deg)}
+.vC .heroC h1{margin:22px auto 0;color:var(--navy);font-size:clamp(36px,6.6vw,72px);max-width:14ch}
+.vC .heroC h1 em{font-style:normal;color:var(--lime-d)}
+.vC .heroC .lede{max-width:44ch;margin:20px auto 0;color:var(--navy);font-size:clamp(16px,2.3vw,20px);line-height:1.55;background:rgba(255,255,255,.9);padding:14px 24px;border-radius:20px;box-shadow:0 6px 0 rgba(50,43,122,.12)}
+.vC .heroC .cta{margin-top:28px;margin-bottom:46px}
+.vC .heroC .hill{position:relative;height:170px}
+.vC .heroC .hill svg{position:absolute;bottom:-2px;left:0;width:100%;height:100%}
+.vC .heroC .hero-ph{position:absolute;bottom:24px;left:50%;transform:translateX(-50%) rotate(-2deg);width:min(420px,72vw);aspect-ratio:16/10;border-radius:18px;background-size:cover;background-position:center;box-shadow:0 18px 40px rgba(50,43,122,.3);border:8px solid #fff;z-index:2}
+.vC .sprout{position:absolute;bottom:0;font-size:34px;animation:float 5s ease-in-out infinite}
+/* horario C: la enredadera que crece */
+.vC .horaC{background:var(--lime-l)}
+.vC .horaC::before{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.5) 1.5px,transparent 1.5px);background-size:26px 26px}
+.vC .horaC .sec-head h2{color:#fff;text-shadow:0 4px 0 rgba(50,43,122,.18)}
+.vC .horaC .sec-head .kicker{color:var(--navy)}
+.vC .horaC .sec-head p{color:#2e4d12}
+.vine{position:relative;max-width:820px;margin:30px auto 0;padding:20px 0 40px}
+.vine .stem{position:absolute;left:50%;top:0;bottom:0;width:8px;transform:translateX(-50%);background:rgba(255,255,255,.4);border-radius:999px;overflow:hidden}
+.vine .stem .fill{position:absolute;top:0;left:0;right:0;height:0%;background:linear-gradient(180deg,var(--lime-d),#4e8a12);border-radius:999px}
+.vine .bud{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);width:56px;height:56px;z-index:5;pointer-events:none;transition:top .15s linear;font-size:40px;display:grid;place-items:center;filter:drop-shadow(0 4px 0 rgba(50,43,122,.2))}
+.leafstop{position:relative;display:flex;align-items:center;margin:30px 0;width:100%}
+.leafstop .card{width:calc(50% - 56px);background:#fff;border-radius:26px 26px 26px 6px;padding:18px 22px;box-shadow:0 10px 0 rgba(50,43,122,.14);position:relative;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.leafstop:nth-child(odd) .card{margin-left:auto;border-radius:26px 26px 6px 26px}
+.leafstop .card:hover{transform:translateY(-5px) scale(1.02)}
+.leafstop .card .time{font-family:'UniformBlack';font-size:clamp(15px,1.8vw,19px);color:var(--lime-d);text-transform:uppercase}
+.leafstop .card .act{font-size:14.5px;color:#5c6672;margin-top:4px;font-family:'UniformLight';font-weight:300}
+.leafstop .card b.tt{display:block;font-family:'UniformBlack';font-size:15.5px;color:var(--navy);text-transform:uppercase;margin-top:2px}
+.leafstop .card .em{position:absolute;top:-26px;right:14px;width:52px;height:52px}
+.leafstop .card .em img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 3px 0 rgba(50,43,122,.18))}
+.leafstop .leaf{position:absolute;left:50%;transform:translate(-50%,0) rotate(-45deg);width:26px;height:26px;background:#fff;border-radius:0 60% 0 60%;z-index:2;transition:all .3s}
+.leafstop.lit .leaf{background:var(--yellow);transform:translate(-50%,0) rotate(-45deg) scale(1.3)}
+@media(max-width:640px){
+  .vine .stem{left:30px}
+  .vine .bud{left:30px;font-size:32px}
+  .leafstop{margin:24px 0}
+  .leafstop .card{width:calc(100% - 70px);margin-left:70px!important;border-radius:26px 26px 26px 6px!important}
+  .leafstop .leaf{left:30px}
+}
+/* talleres C: flores que florecen */
+.vC .tallC{background:var(--paper)}
+.garden{display:flex;justify-content:center;gap:clamp(18px,3vw,40px);flex-wrap:wrap;max-width:1100px;margin:10px auto 0}
+.flor{width:min(190px,42vw);text-align:center;cursor:pointer}
+.flor .bloom{position:relative;width:100%;aspect-ratio:1;display:grid;place-items:center}
+.flor .petals{position:absolute;inset:0;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.flor:hover .petals{transform:rotate(30deg) scale(1.06)}
+.flor .petals::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(var(--pc) 0 22deg,transparent 22deg 45deg);-webkit-mask:radial-gradient(circle,transparent 52%,#000 53%,#000 84%,transparent 85%);mask:radial-gradient(circle,transparent 52%,#000 53%,#000 84%,transparent 85%)}
+.flor .cph{position:relative;width:62%;aspect-ratio:1;border-radius:50%;background-size:cover;background-position:center;box-shadow:0 8px 0 rgba(50,43,122,.15);border:6px solid #fff;z-index:2}
+.flor .fem{position:absolute;bottom:4%;right:4%;z-index:3;width:52px;height:52px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:26px;box-shadow:0 5px 0 rgba(50,43,122,.16);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.flor:hover .fem{transform:scale(1.2) rotate(-8deg)}
+.flor .fday{display:inline-block;margin-top:10px;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:#fff;background:var(--pc);padding:6px 14px;border-radius:999px}
+.flor h3{font-size:18px;color:var(--navy);text-transform:none;margin-top:10px;line-height:1.15}
+.flor p{font-size:12.5px;color:#5c6672;font-family:'UniformLight';margin-top:8px;line-height:1.45}
+
+/* ============ BLOQUES "NUEVO" PARA EL HOME ============ */
+.homeblocks{background:var(--sky);padding:60px 0 110px}
+.hb-demo{max-width:980px;margin:0 auto 56px}
+.hb-demo .hb-label{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.1em;font-size:13px;color:#fff;background:var(--navy);display:inline-block;padding:8px 16px;border-radius:999px;margin-bottom:18px}
+/* H1: franja destacada */
+.hb1{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-d) 100%);border-radius:26px;padding:34px 38px;display:flex;align-items:center;gap:28px;color:#fff;position:relative;overflow:hidden;flex-wrap:wrap}
+.hb1::before{content:"";position:absolute;right:-40px;top:-40px;width:190px;height:190px;border-radius:50%;background:repeating-conic-gradient(rgba(250,200,28,.35) 0 8deg,transparent 8deg 30deg)}
+.hb1 .hb-new{flex:0 0 auto;background:var(--lime);color:#fff;font-family:'UniformBlack';text-transform:uppercase;font-size:12px;letter-spacing:.1em;padding:8px 16px;border-radius:999px;box-shadow:0 4px 0 var(--lime-d);transform:rotate(-3deg)}
+.hb1 .hb-tx{flex:1;min-width:240px}
+.hb1 .hb-tx b{display:block;font-family:'UniformBlack';font-size:clamp(20px,3vw,28px);text-transform:uppercase;line-height:1.05}
+.hb1 .hb-tx b em{font-style:normal;color:var(--yellow)}
+.hb1 .hb-tx span{display:block;font-size:14.5px;color:#c9c6ea;font-family:'UniformLight';margin-top:8px;max-width:52ch}
+.hb1 .btn{flex:0 0 auto}
+/* H2: polaroid flotante */
+.hb2{background:#fff;border-radius:10px;padding:16px 16px 18px;max-width:560px;margin:0 auto;box-shadow:0 18px 40px rgba(50,43,122,.28);transform:rotate(-1.6deg);position:relative}
+.hb2 .tape{position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-3deg);width:120px;height:30px;background:rgba(250,200,28,.85);border-left:2px dashed rgba(255,255,255,.6);border-right:2px dashed rgba(255,255,255,.6)}
+.hb2 .hb2-grid{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.hb2 .ph{flex:0 0 150px;aspect-ratio:1;border-radius:6px;background-size:cover;background-position:center}
+.hb2 .tx{flex:1;min-width:220px}
+.hb2 .hb-new{display:inline-block;background:var(--pink);color:#fff;font-family:'UniformBlack';text-transform:uppercase;font-size:11px;letter-spacing:.1em;padding:6px 13px;border-radius:999px;box-shadow:0 4px 0 var(--pink-d)}
+.hb2 b{display:block;font-family:'UniformBlack';color:var(--navy);font-size:21px;text-transform:uppercase;margin-top:10px;line-height:1.05}
+.hb2 span{display:block;font-size:13.5px;color:#5c6672;font-family:'UniformLight';margin-top:6px}
+.hb2 a.more{display:inline-block;margin-top:10px;font-family:'UniformBlack';font-size:13px;color:var(--pink);text-transform:uppercase;letter-spacing:.05em}
+.hb2 a.more:hover{color:var(--pink-d)}
+/* H3: boleto amarillo */
+.hb3{position:relative;background:var(--yellow);border-radius:22px;padding:28px 34px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;box-shadow:0 10px 0 var(--yellow-d);max-width:880px;margin:0 auto}
+.hb3::before,.hb3::after{content:"";position:absolute;top:50%;width:32px;height:32px;border-radius:50%;background:var(--sky);transform:translateY(-50%)}
+.hb3::before{left:-16px}.hb3::after{right:-16px}
+.hb3 .hb3-hh{flex:0 0 auto;text-align:center;border-right:3px dashed rgba(50,43,122,.3);padding-right:22px}
+.hb3 .hb3-hh .big{font-family:'UniformBlack';font-size:34px;color:var(--navy);line-height:1}
+.hb3 .hb3-hh .sm{font-size:11px;text-transform:uppercase;font-family:'UniformBlack';color:var(--navy);letter-spacing:.1em}
+.hb3 .tx{flex:1;min-width:230px}
+.hb3 .hb-new{display:inline-block;background:var(--navy);color:var(--yellow);font-family:'UniformBlack';text-transform:uppercase;font-size:11px;letter-spacing:.12em;padding:6px 13px;border-radius:999px}
+.hb3 b{display:block;font-family:'UniformBlack';color:var(--navy);font-size:clamp(19px,2.6vw,25px);text-transform:uppercase;margin-top:8px;line-height:1.05}
+.hb3 span{display:block;font-size:13.5px;color:#4c4423;font-family:'UniformLight';margin-top:6px;max-width:50ch}
+@media(max-width:560px){.hb3 .hb3-hh{border-right:none;border-bottom:3px dashed rgba(50,43,122,.3);padding:0 0 14px;width:100%}}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-note"><b>Preview · Mondomío Extendido Plus</b> — 3 conceptos de landing (cambia con los botones de abajo). Las secciones comunes y los bloques "Nuevo" para el home están más abajo, son iguales para las 3 opciones.</div>
+
+<!-- ══════════════════ VARIANTE A · EL VIAJE DEL SOL ══════════════════ -->
+<div class="variant vA show" id="varA">
+
+<nav class="navbar">
+  <div class="wrap">
+    <img class="navbar-logo" src="../inicio/assets/img/logo-mondomio.png" alt="Mondomío">
+    <div class="navbar-links">
+      <a href="#">Inicio</a>
+      <a href="#" class="new-link">Extendido Plus<span class="nbadge">Nuevo</span></a>
+      <a href="#">Summer Camp</a>
+      <a href="#">Áreas</a>
+      <a href="#">Contacto</a>
+    </div>
+    <a class="navbar-phone" href="#">Contáctanos</a>
+  </div>
+</nav>
+
+<header class="heroA">
+  <div class="sunbig"><div class="rays"></div><div class="core"></div></div>
+  <div class="critter" style="width:150px;height:150px;top:190px;left:4%;background-image:url(../inicio/assets/img/PAJARITO.png)"></div>
+  <div class="wrap">
+    <span class="newpill reveal">🌿 Nuevo · Ciclo 2026–2027</span>
+    <h1 class="reveal">Mondomío <em>Extendido Plus</em></h1>
+    <p class="lede light reveal">Un día completo para aprender, explorar y crecer. Programa académico, lunch, descanso, taller diario y juego al aire libre — hasta las 4:00 p.m.</p>
+    <div class="cta reveal"><a class="btn btn-yellow" href="#">Solicita información</a></div>
+    <div class="strip reveal">
+      <div class="ph" style="background-image:url('../inicio/assets/img/DSC01016.webp')"></div>
+      <div class="ph" style="background-image:url('../inicio/assets/img/D43A8458-5BDB-44C7-8261-5A04C494A5F2.webp')"></div>
+      <div class="ph" style="background-image:url('../inicio/assets/img/IMG_2469.webp')"></div>
+      <div class="ph" style="background-image:url('../inicio/assets/img/CBYP0421.webp')"></div>
+    </div>
+  </div>
+</header>
+
+<section class="band empatia">
+  <div class="critter" style="width:90px;height:90px;top:40px;right:6%;background-image:url(../inicio/assets/img/CATARINA.png)"></div>
+  <div class="wrap grid">
+    <div class="reveal">
+      <span class="kicker">Pensado para tu familia</span>
+      <h2>Más tiempo para ellos, <em>tranquilidad</em> para ti.</h2>
+      <p class="big">Sabemos que muchas familias necesitan un horario más amplio sin renunciar a una educación de calidad. Por eso creamos un programa donde los niños continúan aprendiendo, jugando y desarrollándose después de su jornada escolar, en un ambiente seguro, amoroso y lleno de experiencias significativas.</p>
+    </div>
+    <div class="quotes reveal">
+      <div class="q-card">Imagina la tranquilidad de saber que tu hijo continúa aprendiendo mientras tú trabajas.</div>
+      <div class="q-card">Cada tarde está llena de experiencias que despiertan su curiosidad.</div>
+      <div class="q-card">Queremos que llegues por él y te cuente emocionado todo lo que vivió ese día.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band horaA">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Así se vive un día</span>
+      <h2>De la mañana a la tarde</h2>
+      <p>El sol acompaña a tu peque durante todo el día: desde la bienvenida a las 8:00 hasta la salida a las 4:00 p.m.</p>
+    </div>
+    <div class="sunline2">
+      <div class="rail"><div class="fill"></div></div>
+      <div class="sun2"><div class="rays"></div><div class="core"></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em"><img src="../inicio/assets/img/PAJARITO2.png" alt=""></div><div class="time">8:00</div><div class="act">Bienvenida y recepción</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em"><img src="../inicio/assets/img/CATARINA.png" alt=""></div><div class="time">9:00</div><div class="act">Programa académico — rotación de áreas</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em"><img src="../inicio/assets/img/ABEJITA2.png" alt=""></div><div class="time">12:45</div><div class="act">Lunch</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em"><img src="../inicio/assets/img/GATO.png" alt=""></div><div class="time">1:15</div><div class="act">Tiempo de descanso</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card gold"><div class="em"><img src="../inicio/assets/img/RANA.png" alt=""></div><div class="time">2:00 · Taller del día</div><div class="act">Cada tarde una aventura diferente ↓</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em"><img src="../inicio/assets/img/PAJARITO.png" alt=""></div><div class="time">3:00</div><div class="act">Juego al aire libre</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em"><img src="../inicio/assets/img/CARACOL.png" alt=""></div><div class="time">3:30</div><div class="act">Cierre del día</div></div></div>
+      <div class="tstop reveal"><div class="dotk"></div><div class="card"><div class="em"><img src="../inicio/assets/img/PAJARITO2.png" alt=""></div><div class="time">4:00</div><div class="act">Salida — ¡a contarle todo a mamá y papá! 👋</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band tallA">
+  <div class="critter" style="width:95px;height:95px;top:50px;left:3%;background-image:url(../inicio/assets/img/RANA.png)"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Los talleres de la tarde</span>
+      <h2>Cada tarde, una <span style="color:var(--pink)">nueva aventura</span></h2>
+      <p>A las 2:00 p.m. empieza el taller del día: cinco experiencias distintas a la semana, diseñadas para explorar, crear y descubrir.</p>
+    </div>
+    <div class="week-row reveal">
+      <div class="wday"><div class="dtag" style="background:var(--pink)">Lunes</div><div class="ph" style="background-image:url('../inicio/assets/img/DSC01181.webp')"></div><div class="info"><div class="em">🎨</div><h3>Pequeños Artistas</h3><p>Pintura, collage, escultura y técnicas artísticas para explorar la creatividad.</p></div></div>
+      <div class="wday"><div class="dtag" style="background:var(--lime)">Martes</div><div class="ph" style="background-image:url('../inicio/assets/img/D43A8458-5BDB-44C7-8261-5A04C494A5F2.webp')"></div><div class="info"><div class="em">🌱</div><h3>Exploradores del Huerto</h3><p>Siembran, cuidan plantas y descubren la naturaleza que los rodea.</p></div></div>
+      <div class="wday"><div class="dtag" style="background:var(--sky-deep)">Miércoles</div><div class="ph" style="background-image:url('../inicio/assets/img/CBYP8030.webp')"></div><div class="info"><div class="em">🧘</div><h3>Yoga Kids</h3><p>Respiración, equilibrio y relajación para su bienestar físico y emocional.</p></div></div>
+      <div class="wday"><div class="dtag" style="background:var(--navy)">Jueves</div><div class="ph" style="background-image:url('../inicio/assets/img/IMG_2519.webp')"></div><div class="info"><div class="em">🔬</div><h3>Pequeños Científicos</h3><p>Experimentos divertidos que despiertan la curiosidad y el pensamiento lógico.</p></div></div>
+      <div class="wday"><div class="dtag" style="background:var(--yellow);color:var(--navy)">Viernes</div><div class="ph" style="background-image:url('../inicio/assets/img/IMG_2457.webp')"></div><div class="info"><div class="em">👩🏻‍🍳</div><h3>Mini Chefs</h3><p>Preparaciones sencillas: autonomía, trabajo en equipo y hábitos saludables.</p></div></div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /vA -->
+
+<!-- ══════════════════ VARIANTE B · BOLETOS A LA AVENTURA ══════════════════ -->
+<div class="variant vB" id="varB">
+
+<nav class="navbar">
+  <div class="wrap">
+    <img class="navbar-logo" src="../inicio/assets/img/logo-mondomio.png" alt="Mondomío">
+    <div class="navbar-links">
+      <a href="#">Inicio</a>
+      <a href="#" class="new-link">Extendido Plus<span class="nbadge">Nuevo</span></a>
+      <a href="#">Summer Camp</a>
+      <a href="#">Áreas</a>
+      <a href="#">Contacto</a>
+    </div>
+    <a class="navbar-phone" href="#">Contáctanos</a>
+  </div>
+</nav>
+
+<header class="heroB">
+  <div class="wrap">
+    <div class="ticket-big reveal">
+      <div class="stamp">¡Nuevo!</div>
+      <div class="tb-top">
+        <span class="tb-tag">🌿 Ciclo 2026–2027</span>
+        <span class="tb-tag y">☀️ 8:00 – 4:00 p.m.</span>
+      </div>
+      <h1>Mondomío <em>Extendido Plus</em></h1>
+      <div class="tb-dash"></div>
+      <p class="lede">Tu boleto a un día completo para aprender, explorar y crecer: programa académico, lunch, descanso, taller diario y juego al aire libre.</p>
+      <div class="cta"><a class="btn btn-pink" href="#">Solicita información</a></div>
+    </div>
+    <div class="strip reveal">
+      <div class="ph" style="background-image:url('../inicio/assets/img/DSC01016.webp')"></div>
+      <div class="ph" style="background-image:url('../inicio/assets/img/IMG_2469.webp')"></div>
+      <div class="ph" style="background-image:url('../inicio/assets/img/CBYP0421.webp')"></div>
+    </div>
+  </div>
+</header>
+
+<section class="band empatia">
+  <div class="critter" style="width:90px;height:90px;top:40px;right:6%;background-image:url(../inicio/assets/img/ABEJITA2.png)"></div>
+  <div class="wrap grid">
+    <div class="reveal">
+      <span class="kicker">Pensado para tu familia</span>
+      <h2>Más tiempo para ellos, <em>tranquilidad</em> para ti.</h2>
+      <p class="big">Sabemos que muchas familias necesitan un horario más amplio sin renunciar a una educación de calidad. Por eso creamos un programa donde los niños continúan aprendiendo, jugando y desarrollándose después de su jornada escolar, en un ambiente seguro, amoroso y lleno de experiencias significativas.</p>
+    </div>
+    <div class="quotes reveal">
+      <div class="q-card">Imagina la tranquilidad de saber que tu hijo continúa aprendiendo mientras tú trabajas.</div>
+      <div class="q-card">Cada tarde está llena de experiencias que despiertan su curiosidad.</div>
+      <div class="q-card">Queremos que llegues por él y te cuente emocionado todo lo que vivió ese día.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band horaB">
+  <div class="critter" style="width:95px;height:95px;top:60px;right:5%;background-image:url(../inicio/assets/img/PAJARITO2.png)"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">El itinerario del día</span>
+      <h2>Un viaje de 8:00 a 4:00</h2>
+      <p>Cada momento del día es una parada del viaje: así se ve la jornada completa de Extendido Plus.</p>
+    </div>
+    <div class="itin reveal">
+      <div class="tkt"><div class="hh">8:00</div><div class="tx"><b>Bienvenida</b><span>Recepción con calma y cariño</span></div><div class="aem"><img src="../inicio/assets/img/PAJARITO2.png" alt=""></div></div>
+      <div class="conn"></div>
+      <div class="tkt"><div class="hh">9:00</div><div class="tx"><b>Programa académico</b><span>Rotación de áreas de aprendizaje</span></div><div class="aem"><img src="../inicio/assets/img/CATARINA.png" alt=""></div></div>
+      <div class="conn"></div>
+      <div class="tkt"><div class="hh">12:45</div><div class="tx"><b>Lunch</b><span>Comida rica y en buena compañía</span></div><div class="aem"><img src="../inicio/assets/img/ABEJITA2.png" alt=""></div></div>
+      <div class="conn"></div>
+      <div class="tkt"><div class="hh">1:15</div><div class="tx"><b>Tiempo de descanso</b><span>Recargar pilas para la tarde</span></div><div class="aem"><img src="../inicio/assets/img/GATO.png" alt=""></div></div>
+      <div class="conn"></div>
+      <div class="tkt gold"><div class="hh">2:00</div><div class="tx"><b>Taller del día ⭐</b><span>Cada tarde una aventura diferente</span></div><div class="aem"><img src="../inicio/assets/img/RANA.png" alt=""></div></div>
+      <div class="conn"></div>
+      <div class="tkt"><div class="hh">3:00</div><div class="tx"><b>Juego al aire libre</b><span>Correr, trepar, imaginar</span></div><div class="aem"><img src="../inicio/assets/img/PAJARITO.png" alt=""></div></div>
+      <div class="conn"></div>
+      <div class="tkt"><div class="hh">3:30</div><div class="tx"><b>Cierre del día</b><span>Recordamos todo lo que vivimos</span></div><div class="aem"><img src="../inicio/assets/img/CARACOL.png" alt=""></div></div>
+      <div class="conn"></div>
+      <div class="tkt"><div class="hh">4:00</div><div class="tx"><b>Salida</b><span>¡A contarle todo a mamá y papá! 👋</span></div><div class="aem"><img src="../inicio/assets/img/PAJARITO.png" alt=""></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band tallB">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Los talleres de la tarde</span>
+      <h2>Cada tarde, una <span style="color:var(--pink)">nueva aventura</span></h2>
+      <p>Cinco boletos a la semana, cinco experiencias distintas. El taller de las 2:00 p.m. es la joya del programa.</p>
+    </div>
+    <div class="fan reveal">
+      <div class="ftk"><div class="fday">Lunes</div><div class="fem">🎨</div><h3>Pequeños Artistas</h3><p>Pintura, collage, escultura y diferentes técnicas artísticas.</p><div class="fph" style="background-image:url('../inicio/assets/img/DSC01181.webp')"></div></div>
+      <div class="ftk"><div class="fday">Martes</div><div class="fem">🌱</div><h3>Exploradores del Huerto</h3><p>Siembran, cuidan plantas y descubren el mundo que los rodea.</p><div class="fph" style="background-image:url('../inicio/assets/img/D43A8458-5BDB-44C7-8261-5A04C494A5F2.webp')"></div></div>
+      <div class="ftk"><div class="fday">Miércoles</div><div class="fem">🧘</div><h3>Yoga Kids</h3><p>Respiración, equilibrio, movimiento consciente y relajación.</p><div class="fph" style="background-image:url('../inicio/assets/img/CBYP8030.webp')"></div></div>
+      <div class="ftk"><div class="fday">Jueves</div><div class="fem">🔬</div><h3>Pequeños Científicos</h3><p>Experimentos que despiertan la curiosidad y el pensamiento lógico.</p><div class="fph" style="background-image:url('../inicio/assets/img/IMG_2519.webp')"></div></div>
+      <div class="ftk"><div class="fday">Viernes</div><div class="fem">👩🏻‍🍳</div><h3>Mini Chefs</h3><p>Preparaciones sencillas: autonomía, equipo y hábitos saludables.</p><div class="fph" style="background-image:url('../inicio/assets/img/IMG_2457.webp')"></div></div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /vB -->
+
+<!-- ══════════════════ VARIANTE C · EL JARDÍN DE LA TARDE ══════════════════ -->
+<div class="variant vC" id="varC">
+
+<nav class="navbar">
+  <div class="wrap">
+    <img class="navbar-logo" src="../inicio/assets/img/logo-mondomio.png" alt="Mondomío">
+    <div class="navbar-links">
+      <a href="#">Inicio</a>
+      <a href="#" class="new-link">Extendido Plus<span class="nbadge">Nuevo</span></a>
+      <a href="#">Summer Camp</a>
+      <a href="#">Áreas</a>
+      <a href="#">Contacto</a>
+    </div>
+    <a class="navbar-phone" href="#">Contáctanos</a>
+  </div>
+</nav>
+
+<header class="heroC">
+  <div class="critter" style="width:130px;height:130px;top:150px;right:5%;background-image:url(../inicio/assets/img/CARACOL.png)"></div>
+  <div class="critter" style="width:110px;height:110px;top:190px;left:4%;background-image:url(../inicio/assets/img/CATARINA.png);animation-delay:-2s"></div>
+  <div class="wrap">
+    <span class="newpill reveal">🌿 Nuevo · Ciclo 2026–2027</span>
+    <h1 class="reveal">Las tardes también <em>florecen</em></h1>
+    <p class="lede light reveal"><b>Mondomío Extendido Plus:</b> un día completo para aprender, explorar y crecer — con taller diario, lunch, descanso y juego al aire libre hasta las 4:00 p.m.</p>
+    <div class="cta reveal"><a class="btn btn-pink" href="#">Solicita información</a></div>
+  </div>
+  <div class="hill">
+    <div class="hero-ph reveal" style="background-image:url('../inicio/assets/img/DSC01016.webp')"></div>
+    <svg viewBox="0 0 1440 170" preserveAspectRatio="none"><path d="M0 170 L0 90 Q 360 10 720 70 T 1440 60 L1440 170 Z" fill="#B7DF57"/></svg>
+    <div class="sprout" style="left:8%">🌼</div>
+    <div class="sprout" style="left:16%;animation-delay:-1.4s">🌱</div>
+    <div class="sprout" style="right:12%;animation-delay:-2.6s">🌷</div>
+    <div class="sprout" style="right:22%;animation-delay:-.8s">🌿</div>
+  </div>
+</header>
+
+<section class="band empatia">
+  <div class="critter" style="width:90px;height:90px;top:40px;right:6%;background-image:url(../inicio/assets/img/PAJARITO.png)"></div>
+  <div class="wrap grid">
+    <div class="reveal">
+      <span class="kicker">Pensado para tu familia</span>
+      <h2>Más tiempo para ellos, <em>tranquilidad</em> para ti.</h2>
+      <p class="big">Sabemos que muchas familias necesitan un horario más amplio sin renunciar a una educación de calidad. Por eso creamos un programa donde los niños continúan aprendiendo, jugando y desarrollándose después de su jornada escolar, en un ambiente seguro, amoroso y lleno de experiencias significativas.</p>
+    </div>
+    <div class="quotes reveal">
+      <div class="q-card">Imagina la tranquilidad de saber que tu hijo continúa aprendiendo mientras tú trabajas.</div>
+      <div class="q-card">Cada tarde está llena de experiencias que despiertan su curiosidad.</div>
+      <div class="q-card">Queremos que llegues por él y te cuente emocionado todo lo que vivió ese día.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band horaC">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Así crece un día</span>
+      <h2>De las 8:00 a las 4:00</h2>
+      <p>Como una plantita, el día de tu peque crece momento a momento hasta dar su flor.</p>
+    </div>
+    <div class="vine">
+      <div class="stem"><div class="fill"></div></div>
+      <div class="bud">🌻</div>
+      <div class="leafstop reveal"><div class="leaf"></div><div class="card"><div class="em"><img src="../inicio/assets/img/PAJARITO2.png" alt=""></div><div class="time">8:00</div><b class="tt">Bienvenida</b><div class="act">Recepción con calma y cariño</div></div></div>
+      <div class="leafstop reveal"><div class="leaf"></div><div class="card"><div class="em"><img src="../inicio/assets/img/CATARINA.png" alt=""></div><div class="time">9:00</div><b class="tt">Programa académico</b><div class="act">Rotación de áreas de aprendizaje</div></div></div>
+      <div class="leafstop reveal"><div class="leaf"></div><div class="card"><div class="em"><img src="../inicio/assets/img/ABEJITA2.png" alt=""></div><div class="time">12:45</div><b class="tt">Lunch</b><div class="act">Comida rica y en buena compañía</div></div></div>
+      <div class="leafstop reveal"><div class="leaf"></div><div class="card"><div class="em"><img src="../inicio/assets/img/GATO.png" alt=""></div><div class="time">1:15</div><b class="tt">Tiempo de descanso</b><div class="act">Recargar pilas para la tarde</div></div></div>
+      <div class="leafstop reveal"><div class="leaf"></div><div class="card" style="background:#FFF6DC;border:2px solid var(--yellow)"><div class="em"><img src="../inicio/assets/img/RANA.png" alt=""></div><div class="time">2:00</div><b class="tt">Taller del día ⭐</b><div class="act">Cada tarde una aventura diferente</div></div></div>
+      <div class="leafstop reveal"><div class="leaf"></div><div class="card"><div class="em"><img src="../inicio/assets/img/PAJARITO.png" alt=""></div><div class="time">3:00</div><b class="tt">Juego al aire libre</b><div class="act">Correr, trepar, imaginar</div></div></div>
+      <div class="leafstop reveal"><div class="leaf"></div><div class="card"><div class="em"><img src="../inicio/assets/img/CARACOL.png" alt=""></div><div class="time">3:30</div><b class="tt">Cierre del día</b><div class="act">Recordamos todo lo que vivimos</div></div></div>
+      <div class="leafstop reveal"><div class="leaf"></div><div class="card"><div class="em"><img src="../inicio/assets/img/PAJARITO2.png" alt=""></div><div class="time">4:00</div><b class="tt">Salida</b><div class="act">¡A contarle todo a mamá y papá! 👋</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band tallC">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Los talleres de la tarde</span>
+      <h2>Un jardín de <span style="color:var(--lime-d)">aventuras</span></h2>
+      <p>Cinco flores en nuestro jardín semanal: cada tarde a las 2:00 florece un taller distinto.</p>
+    </div>
+    <div class="garden reveal">
+      <div class="flor" style="--pc:var(--pink)"><div class="bloom"><div class="petals"></div><div class="cph" style="background-image:url('../inicio/assets/img/DSC01181.webp')"></div><div class="fem">🎨</div></div><span class="fday">Lunes</span><h3>Pequeños Artistas</h3><p>Pintura, collage, escultura y técnicas artísticas.</p></div>
+      <div class="flor" style="--pc:var(--lime)"><div class="bloom"><div class="petals"></div><div class="cph" style="background-image:url('../inicio/assets/img/D43A8458-5BDB-44C7-8261-5A04C494A5F2.webp')"></div><div class="fem">🌱</div></div><span class="fday">Martes</span><h3>Exploradores del Huerto</h3><p>Siembran, cuidan plantas y descubren la naturaleza.</p></div>
+      <div class="flor" style="--pc:var(--sky-deep)"><div class="bloom"><div class="petals"></div><div class="cph" style="background-image:url('../inicio/assets/img/CBYP8030.webp')"></div><div class="fem">🧘</div></div><span class="fday">Miércoles</span><h3>Yoga Kids</h3><p>Respiración, equilibrio y relajación consciente.</p></div>
+      <div class="flor" style="--pc:var(--navy)"><div class="bloom"><div class="petals"></div><div class="cph" style="background-image:url('../inicio/assets/img/IMG_2519.webp')"></div><div class="fem">🔬</div></div><span class="fday">Jueves</span><h3>Pequeños Científicos</h3><p>Experimentos que despiertan curiosidad y lógica.</p></div>
+      <div class="flor" style="--pc:var(--yellow)"><div class="bloom"><div class="petals"></div><div class="cph" style="background-image:url('../inicio/assets/img/IMG_2457.webp')"></div><div class="fem">👩🏻‍🍳</div></div><span class="fday">Viernes</span><h3>Mini Chefs</h3><p>Autonomía, trabajo en equipo y hábitos saludables.</p></div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /vC -->
+
+<!-- ══════════════════ SECCIONES COMUNES (iguales en las 3 opciones) ══════════════════ -->
+<div class="divider-label">↓ Secciones comunes — <span>iguales en las 3 opciones</span> ↓</div>
+
+<section class="band incluye">
+  <div class="critter" style="width:90px;height:90px;top:40px;left:4%;background-image:url(../inicio/assets/img/ABEJITA2.png)"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Todo en un solo programa</span>
+      <h2>¿Qué <span style="color:var(--lime-d)">incluye</span>?</h2>
+    </div>
+    <div class="chk-grid reveal">
+      <div class="chk"><span class="tick">✓</span><b>Programa académico completo</b></div>
+      <div class="chk"><span class="tick">✓</span><b>Recepción desde las 8:00</b></div>
+      <div class="chk"><span class="tick">✓</span><b>Lunch</b></div>
+      <div class="chk"><span class="tick">✓</span><b>Talleres diarios</b></div>
+      <div class="chk"><span class="tick">✓</span><b>Juego al aire libre</b></div>
+      <div class="chk"><span class="tick">✓</span><b>Tiempo de descanso</b></div>
+      <div class="chk"><span class="tick">✓</span><b>Todos los materiales</b></div>
+      <div class="chk"><span class="tick">✓</span><b>Ambiente seguro</b></div>
+      <div class="chk"><span class="tick">✓</span><b>Personal capacitado</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="band beneficios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Más que un horario</span>
+      <h2>¿Qué desarrolla <span style="color:var(--yellow)">tu hijo</span>?</h2>
+      <p>No se trata solo de más horas: cada actividad de la tarde está diseñada con una intención.</p>
+    </div>
+    <div class="dev-grid reveal">
+      <div class="dev"><div class="ic">🌱</div><b>Autonomía</b><span>Hace las cosas por sí mismo, a su ritmo</span></div>
+      <div class="dev"><div class="ic">🎨</div><b>Creatividad</b><span>Imagina, inventa y se expresa sin límites</span></div>
+      <div class="dev"><div class="ic">🤝</div><b>Habilidades sociales</b><span>Comparte, colabora y hace amigos</span></div>
+      <div class="dev"><div class="ic">🧠</div><b>Resolución de problemas</b><span>Piensa, prueba y encuentra caminos</span></div>
+      <div class="dev"><div class="ic">💛</div><b>Inteligencia emocional</b><span>Reconoce y expresa lo que siente</span></div>
+      <div class="dev"><div class="ic">🏃</div><b>Desarrollo motor</b><span>Se mueve, se equilibra, se fortalece</span></div>
+      <div class="dev"><div class="ic">📖</div><b>Lenguaje</b><span>Nuevas palabras e ideas cada día</span></div>
+      <div class="dev"><div class="ic">🌎</div><b>Curiosidad</b><span>Preguntas, asombro y ganas de saber más</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band quien">
+  <div class="critter" style="width:90px;height:90px;top:50px;right:5%;background-image:url(../inicio/assets/img/RANA.png)"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">¿Es para nosotros?</span>
+      <h2>Ideal para familias <span style="color:var(--pink)">que…</span></h2>
+    </div>
+    <div class="quien-grid reveal">
+      <div class="qn"><div class="em">💼</div><b>Trabajan por las tardes</b><p>Y quieren que ese tiempo sea tan valioso para su peque como la mañana.</p></div>
+      <div class="qn"><div class="em">🏡</div><b>Buscan un ambiente seguro</b><p>Un lugar conocido, con las mismas maestras y el mismo cariño de siempre.</p></div>
+      <div class="qn"><div class="em">📚</div><b>Quieren que siga aprendiendo</b><p>La tarde no es "guardería": es taller, juego, naturaleza y descubrimiento.</p></div>
+      <div class="qn"><div class="em">🌈</div><b>Desean un día completo enriquecedor</b><p>Con lunch, descanso y experiencias diseñadas para su etapa de desarrollo.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Dudas frecuentes</span>
+      <h2>Preguntas de <span style="color:var(--pink)">papás</span></h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="fq">
+        <div class="fq-head" role="button" tabindex="0"><span class="fq-ic">🍽️</span><h3>¿Incluye lunch?</h3><div class="plus">+</div></div>
+        <div class="fq-body"><p>Sí. Todos los días los niños comen su lunch a las 12:45, en un ambiente tranquilo y acompañados por sus maestras.</p></div>
+      </div>
+      <div class="fq">
+        <div class="fq-head" role="button" tabindex="0"><span class="fq-ic">😴</span><h3>¿Los niños descansan?</h3><div class="plus">+</div></div>
+        <div class="fq-body"><p>Sí. Después del lunch hay un tiempo de descanso (1:15 p.m.) para recargar energía antes del taller de la tarde. Respetamos el ritmo de cada niño.</p></div>
+      </div>
+      <div class="fq">
+        <div class="fq-head" role="button" tabindex="0"><span class="fq-ic">🕐</span><h3>¿Pueden salir antes de las 4:00?</h3><div class="plus">+</div></div>
+        <div class="fq-body"><p>Platícanos el horario que necesita tu familia: escríbenos por WhatsApp y buscamos juntos la opción que mejor les funcione.</p></div>
+      </div>
+      <div class="fq">
+        <div class="fq-head" role="button" tabindex="0"><span class="fq-ic">👶</span><h3>¿Qué edades participan?</h3><div class="plus">+</div></div>
+        <div class="fq-body"><p>Recibimos niños y niñas de 1 a 4 años, con actividades adaptadas a cada etapa de desarrollo.</p></div>
+      </div>
+      <div class="fq">
+        <div class="fq-head" role="button" tabindex="0"><span class="fq-ic">👩‍🏫</span><h3>¿Quién supervisa las actividades?</h3><div class="plus">+</div></div>
+        <div class="fq-body"><p>El mismo equipo Mondomío de siempre: maestras capacitadas y especializadas que acompañan a los niños con cariño durante todo el día.</p></div>
+      </div>
+      <div class="fq">
+        <div class="fq-head" role="button" tabindex="0"><span class="fq-ic">📅</span><h3>¿Se pueden contratar días específicos?</h3><div class="plus">+</div></div>
+        <div class="fq-body"><p>Escríbenos por WhatsApp y armamos el plan que mejor le quede a tu familia. Te compartimos opciones y costos sin compromiso.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band cta-fin">
+  <div class="wrap">
+    <div class="cta-photos reveal">
+      <div class="cp" style="background-image:url('../inicio/assets/img/588A6DCB-2AD7-4417-8756-54571F678270.webp')"></div>
+      <div class="cp" style="background-image:url('../inicio/assets/img/DM706490.webp')"></div>
+      <div class="cp" style="background-image:url('../inicio/assets/img/DSC01086.webp')"></div>
+    </div>
+    <h2 class="reveal">Descubre una nueva forma de vivir las tardes.</h2>
+    <p class="reveal">Agenda una visita, conoce los talleres y platica con nuestras maestras. Sin compromiso.</p>
+    <div class="reveal"><a class="btn btn-yellow" href="#">Agenda una visita 💬</a></div>
+  </div>
+</section>
+
+<!-- ══════════════════ BLOQUES "NUEVO" PARA EL HOME ══════════════════ -->
+<div class="divider-label">↓ Bloque "Nuevo" para el home — <span>elige uno (independiente de la landing)</span> ↓</div>
+
+<div class="homeblocks">
+  <div class="wrap">
+
+    <div class="hb-demo reveal">
+      <span class="hb-label">Home · Opción 1 — Franja navy</span>
+      <div class="hb1">
+        <span class="hb-new">🌿 Nuevo 2026–2027</span>
+        <div class="hb-tx">
+          <b>Mondomío <em>Extendido Plus</em></b>
+          <span>Un programa de día completo con talleres, lunch, descanso y experiencias para seguir aprendiendo hasta las 4:00 p.m.</span>
+        </div>
+        <a class="btn btn-yellow" href="#">Conoce más →</a>
+      </div>
+    </div>
+
+    <div class="hb-demo reveal">
+      <span class="hb-label">Home · Opción 2 — Polaroid flotante</span>
+      <div class="hb2">
+        <div class="tape"></div>
+        <div class="hb2-grid">
+          <div class="ph" style="background-image:url('../inicio/assets/img/DSC01016.webp')"></div>
+          <div class="tx">
+            <span class="hb-new">✨ Nuevo ciclo 2026–2027</span>
+            <b>Mondomío Extendido Plus</b>
+            <span>Talleres, lunch, descanso y juego al aire libre — hasta las 4:00 p.m.</span>
+            <a class="more" href="#">Conoce más →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hb-demo reveal">
+      <span class="hb-label">Home · Opción 3 — Boleto amarillo</span>
+      <div class="hb3">
+        <div class="hb3-hh"><div class="big">4:00</div><div class="sm">p.m. · día completo</div></div>
+        <div class="tx">
+          <span class="hb-new">🌿 Nuevo 2026–2027</span>
+          <b>Mondomío Extendido Plus</b>
+          <span>Un día completo para aprender, explorar y crecer: talleres diarios, lunch y descanso.</span>
+        </div>
+        <a class="btn btn-navy" href="#">Conoce más →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="switcher">
+  <button data-v="varA" class="on">A · Viaje del sol</button>
+  <button data-v="varB">B · Boletos</button>
+  <button data-v="varC">C · Jardín</button>
+</div>
+
+<script>
+(function(){
+  var btns=document.querySelectorAll('.switcher button');
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      btns.forEach(function(x){x.classList.remove('on')});
+      b.classList.add('on');
+      document.querySelectorAll('.variant').forEach(function(v){v.classList.remove('show')});
+      document.getElementById(b.dataset.v).classList.add('show');
+      window.scrollTo({top:0,behavior:'instant'});
+      requestAnimationFrame(tickAll);
+    });
+  });
+})();
+
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el,i){el.style.animationDelay=(i%4*0.08)+'s';io.observe(el);});
+  window.addEventListener('load',function(){setTimeout(function(){document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in')});},2500);});
+})();
+
+function tickLine(line,mover,fill,stops,litClass){
+  var r=line.getBoundingClientRect();
+  if(r.bottom<0||r.top>window.innerHeight)return;
+  var mid=window.innerHeight*0.55;
+  var p=Math.min(1,Math.max(0,(mid-r.top)/r.height));
+  mover.style.top=(p*100)+'%';
+  fill.style.height=(p*100)+'%';
+  var y=r.top+p*r.height;
+  stops.forEach(function(s){
+    var sr=s.getBoundingClientRect();
+    s.classList.toggle('lit',sr.top+sr.height/2<=y+8);
+  });
+}
+var lines=[];
+document.querySelectorAll('.sunline2').forEach(function(l){
+  lines.push({el:l,mover:l.querySelector('.sun2'),fill:l.querySelector('.fill'),stops:Array.prototype.slice.call(l.querySelectorAll('.tstop'))});
+});
+document.querySelectorAll('.vine').forEach(function(l){
+  lines.push({el:l,mover:l.querySelector('.bud'),fill:l.querySelector('.fill'),stops:Array.prototype.slice.call(l.querySelectorAll('.leafstop'))});
+});
+var raf=false;
+function tickAll(){
+  raf=false;
+  lines.forEach(function(L){tickLine(L.el,L.mover,L.fill,L.stops);});
+}
+function onScroll(){if(!raf){raf=true;requestAnimationFrame(tickAll);}}
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('resize',onScroll);
+tickAll();
+
+(function(){
+  var faqs=document.querySelectorAll('.fq');
+  faqs.forEach(function(fq){
+    var head=fq.querySelector('.fq-head');
+    function toggle(){
+      var was=fq.classList.contains('open');
+      faqs.forEach(function(f){f.classList.remove('open')});
+      if(!was)fq.classList.add('open');
+    }
+    head.addEventListener('click',toggle);
+    head.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  });
+})();
+</script>
+</body>
+</html>

@@ -54,7 +54,7 @@
   "@type": "FAQPage",
   "mainEntity": [
     {"@type":"Question","name":"¿Qué edades reciben en Mondomío?","acceptedAnswer":{"@type":"Answer","text":"Recibimos niños y niñas de 1 a 4 años, con grupos y actividades adaptadas a cada etapa de desarrollo."}},
-    {"@type":"Question","name":"¿Cuál es el horario de Mondomío Kínder?","acceptedAnswer":{"@type":"Answer","text":"Lunes a viernes. Entrada a las 9:00 AM y salida a las 12:20 o 12:45 según la edad, con horario extendido hasta la 1:45 PM."}},
+    {"@type":"Question","name":"¿Cuál es el horario de Mondomío Kínder?","acceptedAnswer":{"@type":"Answer","text":"Lunes a viernes. Entrada a las 9:00 AM y salida a las 12:20 o 12:45 según la edad, con horario extendido hasta la 1:45 PM. A partir del ciclo 2026-2027 también ofrecemos Mondomío Extendido Plus: día completo con talleres, lunch y descanso hasta las 4:00 PM."}},
     {"@type":"Question","name":"¿Cómo funcionan las 8 áreas de rotación?","acceptedAnswer":{"@type":"Answer","text":"Cada día los niños rotan por espacios diferentes — Language & Reading, Math & Science, Basic Skills, Pretend Construction, Sensory, Art, Gym y Music — cada uno con una maestra especializada."}},
     {"@type":"Question","name":"¿Qué actividades especiales tienen?","acceptedAnswer":{"@type":"Answer","text":"Además de la rotación diaria: huerto escolar, yoga para niños y clase de música con maestra especializada."}},
     {"@type":"Question","name":"¿Cuánto cuesta Mondomío Kínder?","acceptedAnswer":{"@type":"Answer","text":"Los costos dependen del programa y horario. Escríbenos por WhatsApp al 81 8259 0721 o agenda una visita y te compartimos toda la información sin compromiso."}},
@@ -114,6 +114,20 @@ nav.navbar .wrap{background:rgba(255,255,255,.7);backdrop-filter:blur(8px);paddi
 .navbar-phone{display:flex;align-items:center;gap:8px;text-decoration:none;background:var(--pink);color:#fff;font-family:'UniformMed';font-size:13px;text-transform:uppercase;padding:10px 16px;border-radius:999px;font-weight:bold;transition:all .2s ease}
 .navbar-phone:hover{background:var(--pink-d);box-shadow:0 4px 12px rgba(192,83,159,.4)}
 nav.navbar.hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
+.navbar-links a.new-link{color:var(--pink-d);font-family:'UniformBlack'}
+.navbar-links a.new-link .nbadge{display:inline-block;background:var(--lime);color:#fff;font-size:9px;font-family:'UniformBlack';padding:2px 7px;border-radius:999px;margin-left:5px;transform:translateY(-6px)}
+
+/* bloque nuevo: extendido plus */
+.xplus{background:var(--sky);padding:16px 0 60px}
+.xplus-card{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-d) 100%);border-radius:26px;padding:34px 38px;display:flex;align-items:center;gap:28px;color:#fff;position:relative;overflow:hidden;flex-wrap:wrap;box-shadow:0 14px 34px rgba(35,30,92,.3)}
+.xplus-card::before{content:"";position:absolute;right:-40px;top:-40px;width:190px;height:190px;border-radius:50%;background:repeating-conic-gradient(rgba(250,200,28,.35) 0 8deg,transparent 8deg 30deg)}
+.xplus-card .xp-new{flex:0 0 auto;background:var(--lime);color:#fff;font-family:'UniformBlack';text-transform:uppercase;font-size:12px;letter-spacing:.1em;padding:8px 16px;border-radius:999px;box-shadow:0 4px 0 var(--lime-d);transform:rotate(-3deg)}
+.xplus-card .xp-tx{flex:1;min-width:240px}
+.xplus-card .xp-tx b{display:block;font-family:'UniformBlack';font-size:clamp(20px,3vw,28px);text-transform:uppercase;line-height:1.05}
+.xplus-card .xp-tx b em{font-style:normal;color:var(--yellow)}
+.xplus-card .xp-tx span{display:block;font-size:14.5px;color:#c9c6ea;font-family:'UniformLight';margin-top:8px;max-width:52ch}
+.xplus-card .btn{flex:0 0 auto;position:relative}
+@media(max-width:560px){.xplus-card{padding:26px 24px}.xplus-card .btn{width:100%;justify-content:center}}
 @media(max-width:768px){
   nav.navbar .wrap{margin:0 10px;padding:12px 24px}
   .navbar-links{gap:16px;font-size:12px;margin-left:24px}
@@ -562,6 +576,7 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
     <a href="#inicio" class="navbar-logo-link"><img class="navbar-logo" src="assets/img/logo-mondomio.png" alt="Mondomío"></a>
     <div class="navbar-links">
       <a href="#inicio">Inicio</a>
+      <a href="extendido/" class="new-link">Extendido Plus<span class="nbadge">Nuevo</span></a>
       <a href="#summer">Summer Camp</a>
       <a href="#inscripciones">Inscripciones</a>
       <a href="#areas">Áreas</a>
@@ -638,6 +653,20 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
     </div>
   </div>
 </header>
+
+<!-- BLOQUE NUEVO: EXTENDIDO PLUS -->
+<section class="xplus" id="extendido">
+  <div class="wrap">
+    <div class="xplus-card reveal">
+      <span class="xp-new">🌿 Nuevo 2026–2027</span>
+      <div class="xp-tx">
+        <b>Mondomío <em>Extendido Plus</em></b>
+        <span>Un programa de día completo con talleres, lunch, descanso y experiencias diseñadas para seguir aprendiendo, explorando y creciendo hasta las 4:00 p.m.</span>
+      </div>
+      <a class="btn btn-yellow" href="extendido/">Conoce más →</a>
+    </div>
+  </div>
+</section>
 
 <!-- POR QUÉ MONDOMÍO -->
 <section class="band why" style="position:relative">
@@ -940,7 +969,7 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
       </div>
       <div class="fq">
         <div class="fq-head" role="button" tabindex="0" aria-expanded="false"><span class="fq-ic">⏰</span><h3>¿Cuál es el horario?</h3><div class="plus">+</div></div>
-        <div class="fq-body"><p>Lunes a viernes. Entrada a las 9:00 AM y salida a las 12:20 o 12:45 según la edad. También ofrecemos horario extendido hasta la 1:45 PM.</p></div>
+        <div class="fq-body"><p>Lunes a viernes. Entrada a las 9:00 AM y salida a las 12:20 o 12:45 según la edad, con horario extendido hasta la 1:45 PM. Y a partir del ciclo 2026–2027 tenemos <a href="extendido/" style="color:var(--pink);font-family:'UniformBlack'">Mondomío Extendido Plus</a>: día completo con talleres, lunch y descanso hasta las 4:00 PM.</p></div>
       </div>
       <div class="fq">
         <div class="fq-head" role="button" tabindex="0" aria-expanded="false"><span class="fq-ic">🎡</span><h3>¿Cómo funcionan las 8 áreas de rotación?</h3><div class="plus">+</div></div>
