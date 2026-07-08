@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botón WhatsApp flotante · 4 ideas</title>
+<style>
+@font-face{font-family:'UniformBlack';src:url(../inicio/assets/fonts/uniform-black.woff2) format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'UniformMed';src:url(../inicio/assets/fonts/uniform-medium.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'UniformLight';src:url(../inicio/assets/fonts/uniform-light.woff2) format('woff2');font-weight:300;font-display:swap}
+:root{
+  --sky:#6CC9EC; --sky-deep:#46B2DD; --cloud:#EAF8FD; --cloud2:#C9EDF8;
+  --lime:#8CC63E; --lime-l:#B7DF57; --pink:#C0539F; --pink-d:#A6408A;
+  --yellow:#FAC81C; --yellow-d:#EBB200; --navy:#322B7A; --navy-d:#231E5C;
+  --ink:#262223; --wa:#25D366; --wa-d:#1DA851; --wa-sh:#128C7E;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'UniformMed',system-ui,sans-serif;background:var(--cloud);color:var(--ink);line-height:1.6;padding-bottom:80px}
+h1{font-family:'UniformBlack';text-transform:uppercase;color:var(--navy);text-align:center;font-size:clamp(26px,5vw,44px);padding:44px 20px 6px}
+.sub{text-align:center;color:#5c6672;font-family:'UniformLight';max-width:52ch;margin:0 auto 40px;padding:0 20px}
+.variant{max-width:860px;margin:0 auto 56px;padding:0 18px}
+.vhead{display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.vchip{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.08em;font-size:13px;color:#fff;background:var(--pink);padding:7px 16px;border-radius:999px;box-shadow:0 4px 0 var(--pink-d)}
+.vhead h2{font-family:'UniformBlack';text-transform:uppercase;color:var(--navy);font-size:clamp(18px,3vw,26px)}
+.vdesc{color:#5c6672;font-size:15px;font-family:'UniformLight';margin-bottom:16px;max-width:64ch}
+.stage{position:relative;height:430px;border-radius:26px;overflow:hidden;box-shadow:0 14px 40px rgba(50,43,122,.16)}
+.fake{padding:34px 30px;max-width:65%}
+.fake .k{display:inline-block;font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.14em;font-size:11px;margin-bottom:10px}
+.fake h3{font-family:'UniformBlack';text-transform:uppercase;font-size:clamp(20px,3.4vw,30px);line-height:1;margin-bottom:12px}
+.fake .ln{height:10px;border-radius:99px;margin:10px 0;opacity:.35}
+.s-sky{background:linear-gradient(180deg,var(--sky) 0%,#8BD6F1 100%)}
+.s-sky .k{color:var(--navy)} .s-sky h3{color:#fff} .s-sky .ln{background:#fff}
+.s-paper{background:#fff}
+.s-paper .k{color:var(--pink)} .s-paper h3{color:var(--navy)} .s-paper .ln{background:var(--navy)}
+.s-navy{background:var(--navy)}
+.s-navy .k{color:var(--yellow)} .s-navy h3{color:#fff} .s-navy .ln{background:var(--cloud2)}
+.s-lime{background:var(--lime-l)}
+.s-lime .k{color:var(--navy)} .s-lime h3{color:#fff} .s-lime .ln{background:#fff}
+
+/* base del botón */
+.wa{position:absolute;right:22px;bottom:22px;z-index:5;display:grid;place-items:center;width:64px;height:64px;border-radius:50%;
+  background:var(--wa);box-shadow:0 6px 0 var(--wa-sh),0 14px 30px rgba(18,140,126,.35);cursor:pointer;text-decoration:none;
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.wa:hover{transform:scale(1.1)}
+.wa:active{transform:scale(.96) translateY(2px)}
+.wa svg{width:34px;height:34px;fill:#fff}
+
+/* ── OPCIÓN 1: ondas de radar ── */
+.v1 .wa{animation:bob1 4s ease-in-out infinite}
+@keyframes bob1{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.v1 .ring{position:absolute;inset:0;border-radius:50%;background:var(--wa);opacity:.5;z-index:-1;animation:ring 2.6s ease-out infinite}
+.v1 .ring.r2{animation-delay:1.3s}
+@keyframes ring{0%{transform:scale(1);opacity:.5}100%{transform:scale(2.1);opacity:0}}
+
+/* ── OPCIÓN 2: burbuja de saludo ── */
+.v2 .wa{animation:pop2 .7s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes pop2{from{transform:scale(0) rotate(-30deg)}to{transform:scale(1) rotate(0)}}
+.v2 .wa:hover{transform:scale(1.1)}
+.bub{position:absolute;right:100px;bottom:34px;background:#fff;color:var(--navy);font-size:14px;font-weight:500;
+  padding:12px 16px;border-radius:18px 18px 4px 18px;box-shadow:0 8px 24px rgba(50,43,122,.22);white-space:nowrap;
+  opacity:0;transform:translateY(14px) scale(.8);transform-origin:bottom right;
+  animation:bubin .55s cubic-bezier(.34,1.56,.64,1) 1.4s forwards,bubbob 3.5s ease-in-out 2s infinite}
+.bub b{font-family:'UniformBlack'}
+.bub::after{content:"";position:absolute;right:-7px;bottom:8px;border:8px solid transparent;border-left-color:#fff;border-bottom-color:#fff;border-radius:0 0 0 6px}
+@keyframes bubin{to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes bubbob{0%,100%{translate:0 0}50%{translate:0 -5px}}
+.bub .wave{display:inline-block;animation:wave 2.2s ease-in-out infinite;transform-origin:70% 70%}
+@keyframes wave{0%,55%,100%{rotate:0deg}60%{rotate:18deg}70%{rotate:-12deg}80%{rotate:16deg}90%{rotate:-6deg}}
+
+/* ── OPCIÓN 3: sol mondomío ── */
+.v3 .wa{overflow:visible;animation:tada 6s ease-in-out infinite}
+.v3 .rays{position:absolute;inset:-13px;border-radius:50%;pointer-events:none;animation:spin3 16s linear infinite;
+  background:repeating-conic-gradient(rgba(250,200,28,.95) 0 7deg,transparent 7deg 26deg);
+  -webkit-mask:radial-gradient(circle,transparent 58%,#000 59%,#000 78%,transparent 79%);
+  mask:radial-gradient(circle,transparent 58%,#000 59%,#000 78%,transparent 79%)}
+@keyframes spin3{to{rotate:360deg}}
+@keyframes tada{0%,86%,100%{transform:scale(1) rotate(0)}88%{transform:scale(1.08) rotate(-6deg)}90%{transform:scale(1.08) rotate(6deg)}92%{transform:scale(1.08) rotate(-5deg)}94%{transform:scale(1.08) rotate(4deg)}96%{transform:scale(1.04) rotate(0)}}
+.v3 .wa:hover{transform:scale(1.12);animation-play-state:paused}
+
+/* ── OPCIÓN 4: pastilla que se estira ── */
+.v4 .wa{width:auto;min-width:64px;max-width:64px;border-radius:999px;grid-auto-flow:column;gap:0;padding:0 15px;
+  justify-content:start;overflow:hidden;animation:stretch 7s cubic-bezier(.34,1.2,.4,1) infinite}
+.v4 .wa .lbl{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.05em;color:#fff;font-size:14px;
+  white-space:nowrap;margin-left:10px;opacity:0;animation:lblfade 7s ease infinite}
+@keyframes stretch{0%,18%{max-width:64px}28%,72%{max-width:240px}82%,100%{max-width:64px}}
+@keyframes lblfade{0%,22%{opacity:0}32%,68%{opacity:1}78%,100%{opacity:0}}
+.v4 .wa:hover{animation-play-state:paused}
+
+.pick{text-align:center;margin-top:60px;font-family:'UniformLight';color:#5c6672}
+.pick b{font-family:'UniformBlack';color:var(--pink);text-transform:uppercase}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+@media(max-width:600px){.fake{max-width:90%}.stage{height:380px}.bub{right:96px;font-size:13px}}
+</style>
+</head>
+<body>
+
+<h1>Botón WhatsApp flotante</h1>
+<p class="sub">4 ideas de animación. El botón siempre vive abajo a la derecha, flotando sobre todo el sitio. Pasa el mouse / tócalos — todos abren el chat de WhatsApp del kínder.</p>
+
+<!-- OPCIÓN 1 -->
+<div class="variant v1">
+  <div class="vhead"><span class="vchip">Opción 1</span><h2>Ondas de radar</h2></div>
+  <p class="vdesc">El clásico elegante: el botón respira suavecito y suelta ondas verdes que se expanden, como si "sonara". Discreto pero imposible de no ver.</p>
+  <div class="stage s-sky">
+    <div class="fake"><span class="k">Sección del sitio</span><h3>Contenido de ejemplo</h3><div class="ln" style="width:85%"></div><div class="ln" style="width:70%"></div><div class="ln" style="width:78%"></div></div>
+    <a class="wa" href="https://wa.me/528182590721?text=Hola%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Mondom%C3%ADo%20%F0%9F%98%8A" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <span class="ring"></span><span class="ring r2"></span>
+      <svg viewBox="0 0 32 32"><path d="M16.04 3C9.02 3 3.32 8.7 3.32 15.72c0 2.24.59 4.42 1.7 6.35L3.2 28.8l6.89-1.8a12.66 12.66 0 0 0 5.95 1.51h.01c7.01 0 12.72-5.7 12.72-12.72C28.77 8.7 23.06 3 16.04 3zm7.48 18.02c-.31.88-1.84 1.68-2.53 1.74-.68.06-1.32.31-4.44-.92-3.76-1.48-6.13-5.34-6.32-5.59-.18-.25-1.5-2-1.5-3.82 0-1.82.95-2.71 1.29-3.08.34-.37.74-.46.99-.46l.71.01c.23.01.53-.09.83.63.31.74 1.05 2.56 1.14 2.75.09.18.15.4.03.65-.12.25-.18.4-.37.62l-.55.65c-.18.18-.37.38-.16.75.21.37.95 1.56 2.03 2.53 1.4 1.25 2.57 1.63 2.94 1.82.37.18.58.15.8-.09.21-.25.92-1.07 1.16-1.44.25-.37.49-.31.83-.18.34.12 2.15 1.01 2.52 1.2.37.18.61.28.7.43.09.15.09.9-.22 1.78z"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- OPCIÓN 2 -->
+<div class="variant v2">
+  <div class="vhead"><span class="vchip">Opción 2</span><h2>Burbuja de saludo</h2></div>
+  <p class="vdesc">El botón entra con rebote y a los segundos aparece una burbujita de chat saludando: "¡Hola! 👋 ¿Dudas? Escríbenos". Se siente como si alguien del kínder te hablara.</p>
+  <div class="stage s-paper">
+    <div class="fake"><span class="k">Sección del sitio</span><h3>Contenido de ejemplo</h3><div class="ln" style="width:85%"></div><div class="ln" style="width:70%"></div><div class="ln" style="width:78%"></div></div>
+    <div class="bub">¡Hola! <span class="wave">👋</span> ¿Dudas? <b>Escríbenos</b></div>
+    <a class="wa" href="https://wa.me/528182590721?text=Hola%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Mondom%C3%ADo%20%F0%9F%98%8A" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 32 32"><path d="M16.04 3C9.02 3 3.32 8.7 3.32 15.72c0 2.24.59 4.42 1.7 6.35L3.2 28.8l6.89-1.8a12.66 12.66 0 0 0 5.95 1.51h.01c7.01 0 12.72-5.7 12.72-12.72C28.77 8.7 23.06 3 16.04 3zm7.48 18.02c-.31.88-1.84 1.68-2.53 1.74-.68.06-1.32.31-4.44-.92-3.76-1.48-6.13-5.34-6.32-5.59-.18-.25-1.5-2-1.5-3.82 0-1.82.95-2.71 1.29-3.08.34-.37.74-.46.99-.46l.71.01c.23.01.53-.09.83.63.31.74 1.05 2.56 1.14 2.75.09.18.15.4.03.65-.12.25-.18.4-.37.62l-.55.65c-.18.18-.37.38-.16.75.21.37.95 1.56 2.03 2.53 1.4 1.25 2.57 1.63 2.94 1.82.37.18.58.15.8-.09.21-.25.92-1.07 1.16-1.44.25-.37.49-.31.83-.18.34.12 2.15 1.01 2.52 1.2.37.18.61.28.7.43.09.15.09.9-.22 1.78z"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- OPCIÓN 3 -->
+<div class="variant v3">
+  <div class="vhead"><span class="vchip">Opción 3</span><h2>Solecito Mondomío</h2></div>
+  <p class="vdesc">Rayitos amarillos giran despacio detrás del botón — como el sol de la sección de la semana. Cada 6 segundos hace un bailecito. El más "Mondomío" de todos.</p>
+  <div class="stage s-navy">
+    <div class="fake"><span class="k">Sección del sitio</span><h3>Contenido de ejemplo</h3><div class="ln" style="width:85%"></div><div class="ln" style="width:70%"></div><div class="ln" style="width:78%"></div></div>
+    <a class="wa" href="https://wa.me/528182590721?text=Hola%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Mondom%C3%ADo%20%F0%9F%98%8A" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <span class="rays"></span>
+      <svg viewBox="0 0 32 32"><path d="M16.04 3C9.02 3 3.32 8.7 3.32 15.72c0 2.24.59 4.42 1.7 6.35L3.2 28.8l6.89-1.8a12.66 12.66 0 0 0 5.95 1.51h.01c7.01 0 12.72-5.7 12.72-12.72C28.77 8.7 23.06 3 16.04 3zm7.48 18.02c-.31.88-1.84 1.68-2.53 1.74-.68.06-1.32.31-4.44-.92-3.76-1.48-6.13-5.34-6.32-5.59-.18-.25-1.5-2-1.5-3.82 0-1.82.95-2.71 1.29-3.08.34-.37.74-.46.99-.46l.71.01c.23.01.53-.09.83.63.31.74 1.05 2.56 1.14 2.75.09.18.15.4.03.65-.12.25-.18.4-.37.62l-.55.65c-.18.18-.37.38-.16.75.21.37.95 1.56 2.03 2.53 1.4 1.25 2.57 1.63 2.94 1.82.37.18.58.15.8-.09.21-.25.92-1.07 1.16-1.44.25-.37.49-.31.83-.18.34.12 2.15 1.01 2.52 1.2.37.18.61.28.7.43.09.15.09.9-.22 1.78z"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- OPCIÓN 4 -->
+<div class="variant v4">
+  <div class="vhead"><span class="vchip">Opción 4</span><h2>Pastilla que se estira</h2></div>
+  <p class="vdesc">Cada pocos segundos el círculo se estira y muestra "Escríbenos" — igual que las pastillas de botones del sitio — y luego se vuelve a encoger. Informativo sin estorbar.</p>
+  <div class="stage s-lime">
+    <div class="fake"><span class="k">Sección del sitio</span><h3>Contenido de ejemplo</h3><div class="ln" style="width:85%"></div><div class="ln" style="width:70%"></div><div class="ln" style="width:78%"></div></div>
+    <a class="wa" href="https://wa.me/528182590721?text=Hola%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Mondom%C3%ADo%20%F0%9F%98%8A" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 32 32"><path d="M16.04 3C9.02 3 3.32 8.7 3.32 15.72c0 2.24.59 4.42 1.7 6.35L3.2 28.8l6.89-1.8a12.66 12.66 0 0 0 5.95 1.51h.01c7.01 0 12.72-5.7 12.72-12.72C28.77 8.7 23.06 3 16.04 3zm7.48 18.02c-.31.88-1.84 1.68-2.53 1.74-.68.06-1.32.31-4.44-.92-3.76-1.48-6.13-5.34-6.32-5.59-.18-.25-1.5-2-1.5-3.82 0-1.82.95-2.71 1.29-3.08.34-.37.74-.46.99-.46l.71.01c.23.01.53-.09.83.63.31.74 1.05 2.56 1.14 2.75.09.18.15.4.03.65-.12.25-.18.4-.37.62l-.55.65c-.18.18-.37.38-.16.75.21.37.95 1.56 2.03 2.53 1.4 1.25 2.57 1.63 2.94 1.82.37.18.58.15.8-.09.21-.25.92-1.07 1.16-1.44.25-.37.49-.31.83-.18.34.12 2.15 1.01 2.52 1.2.37.18.61.28.7.43.09.15.09.9-.22 1.78z"/></svg>
+      <span class="lbl">Escríbenos</span>
+    </a>
+  </div>
+</div>
+
+<p class="pick">Dime cuál te late — <b>opción 1, 2, 3 o 4</b> — y la integro al sitio (también se pueden combinar, p. ej. burbuja + ondas).</p>
+
+</body>
+</html>

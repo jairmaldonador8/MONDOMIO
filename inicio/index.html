@@ -321,6 +321,20 @@ footer .links{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin
 footer .addr{color:#bfbce6;font-size:15px;max-width:36ch;margin:0 auto}
 footer .copy{margin-top:26px;color:#7f7bb8;font-size:13px;font-family:'UniformLight';letter-spacing:.04em}
 
+/* whatsapp flotante — ondas de radar */
+.wa-float{position:fixed;right:22px;bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:50;display:grid;place-items:center;
+  width:62px;height:62px;border-radius:50%;background:#25D366;
+  box-shadow:0 6px 0 #128C7E,0 14px 30px rgba(18,140,126,.35);
+  animation:wabob 4s ease-in-out infinite;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.wa-float:hover{transform:scale(1.1)}
+.wa-float:active{transform:scale(.96) translateY(2px)}
+.wa-float svg{width:33px;height:33px;fill:#fff}
+.wa-float .ring{position:absolute;inset:0;border-radius:50%;background:#25D366;opacity:.5;z-index:-1;animation:waring 2.6s ease-out infinite}
+.wa-float .ring.r2{animation-delay:1.3s}
+@keyframes waring{0%{transform:scale(1);opacity:.5}100%{transform:scale(2.1);opacity:0}}
+@keyframes wabob{0%,100%{translate:0 0}50%{translate:0 -6px}}
+@media(max-width:480px){.wa-float{width:56px;height:56px;right:16px}.wa-float svg{width:30px;height:30px}}
+
 /* animations */
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @keyframes drift{0%{transform:translateX(0)}100%{transform:translateX(40px)}}
@@ -361,6 +375,8 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
 }
 @media(prefers-reduced-motion:reduce){
   .bob,.cloudmove{animation:none!important}
+  .wa-float,.wa-float .ring{animation:none!important}
+  .wa-float .ring{display:none}
   html.js .reveal{opacity:1!important;animation:none!important}
   html.js .pol.reveal{transform:rotate(var(--rot))!important;transition:none!important}
   .doodle path{animation:none!important}
@@ -777,6 +793,12 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
     <p class="copy">© Mondomío Kínder · Discovering & learning in our caring world</p>
   </div>
 </footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a class="wa-float" href="https://wa.me/528182590721?text=Hola%2C%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Mondom%C3%ADo%20%F0%9F%98%8A" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <span class="ring"></span><span class="ring r2"></span>
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3C9.02 3 3.32 8.7 3.32 15.72c0 2.24.59 4.42 1.7 6.35L3.2 28.8l6.89-1.8a12.66 12.66 0 0 0 5.95 1.51h.01c7.01 0 12.72-5.7 12.72-12.72C28.77 8.7 23.06 3 16.04 3zm7.48 18.02c-.31.88-1.84 1.68-2.53 1.74-.68.06-1.32.31-4.44-.92-3.76-1.48-6.13-5.34-6.32-5.59-.18-.25-1.5-2-1.5-3.82 0-1.82.95-2.71 1.29-3.08.34-.37.74-.46.99-.46l.71.01c.23.01.53-.09.83.63.31.74 1.05 2.56 1.14 2.75.09.18.15.4.03.65-.12.25-.18.4-.37.62l-.55.65c-.18.18-.37.38-.16.75.21.37.95 1.56 2.03 2.53 1.4 1.25 2.57 1.63 2.94 1.82.37.18.58.15.8-.09.21-.25.92-1.07 1.16-1.44.25-.37.49-.31.83-.18.34.12 2.15 1.01 2.52 1.2.37.18.61.28.7.43.09.15.09.9-.22 1.78z"/></svg>
+</a>
 
 <script>
   (function(){
