@@ -333,9 +333,15 @@ html.js .pol.reveal.in:hover{transform:rotate(0) translateY(-12px) scale(1.03);t
 .mrow{display:flex;overflow:hidden;padding:14px 0;
   -webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .mtrack{display:flex;gap:24px;flex:0 0 auto;padding-right:24px}
-html.js .mtrack{animation:mq 130s linear infinite}
-html.js .mrow.rev .mtrack{animation-direction:reverse;animation-duration:150s}
-.mrow:hover .mtrack{animation-play-state:paused}
+html.js .mtrack{animation:mq 65s linear infinite}
+html.js .mrow.rev .mtrack{animation-direction:reverse;animation-duration:75s}
+html.js .mrow.reveal{transition:opacity .6s ease}
+html.js .mrow.reveal.in{animation:none;opacity:1}
+@media(hover:none) and (pointer:coarse){.mrow{-webkit-mask:none;mask:none}}
+@media(max-width:768px){
+  html.js .mtrack{animation-duration:50s}
+  html.js .mrow.rev .mtrack{animation-duration:58s}
+}
 html:not(.js) .mrow{overflow-x:auto;-webkit-overflow-scrolling:touch;-webkit-mask:none;mask:none}
 @keyframes mq{to{transform:translateX(-100%)}}
 .mcard{flex:0 0 360px;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.14);border-radius:24px;padding:24px 26px;transition:background .3s,border-color .3s}
@@ -478,7 +484,7 @@ html.js .reveal{opacity:0}
 html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
 @media(max-width:768px){
   .hero-carousel{height:300px}
-  .carousel-track{animation-duration:140s}
+  .carousel-track{animation-duration:95s}
   .carousel-track img{flex:0 0 260px;width:260px;height:260px}
   .carousel-slider{bottom:8px;left:16px;right:16px}
 }
@@ -493,7 +499,7 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
 }
 @media(max-width:480px){
   .hero-carousel{height:220px}
-  .carousel-track{animation-duration:110s}
+  .carousel-track{animation-duration:75s}
   .carousel-track img{flex:0 0 180px;width:180px;height:180px}
   .carousel-slider-thumb{width:16px;height:16px}
   .carousel-slider{height:4px}
@@ -507,9 +513,6 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
   .doodle path{animation:none!important}
   .sun .rays{animation:none!important}
   html.js .tstop.reveal{transform:none!important;transition:none!important}
-  html.js .mtrack{animation:none!important}
-  .mrow{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-webkit-mask:none;mask:none}
-  .mrow::-webkit-scrollbar{display:none}
   .mcard.sticker span{animation:none!important}
   html.js .piece.reveal{transform:none!important;transition:none!important}
   .puzzle.snapped{animation:none!important}
@@ -1228,7 +1231,10 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
       row2.appendChild(t2);
     }
     document.querySelectorAll('.testimonios .mtrack').forEach(function(t){
-      t.innerHTML+=t.innerHTML;
+      var guard=0;
+      while(t.getBoundingClientRect().width<document.documentElement.clientWidth&&guard++<3){
+        t.innerHTML+=t.innerHTML;
+      }
     });
     [row1,row2].forEach(function(r){
       if(!r)return;
