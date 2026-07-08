@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El solecito de Mondomío — opciones de animación</title>
+<style>
+@font-face{font-family:'UniformBlack';src:url(../inicio/assets/fonts/uniform-black.woff2) format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'UniformMed';src:url(../inicio/assets/fonts/uniform-medium.woff2) format('woff2');font-weight:500;font-display:swap}
+:root{--sky:#6CC9EC;--sky-top:#8BD6F1;--navy:#322B7A;--navy-d:#231E5C;--pink:#C0539F;--yellow:#FAC81C;--yellow-d:#EBB200;--lime-d:#79B62F;--sky-deep:#46B2DD;--paper:#FFF9EC;--cloud2:#E9E7FA;--ink:#1E1B4B}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);font-family:'UniformMed',system-ui,sans-serif;color:var(--navy);padding-bottom:90px}
+.head{background:var(--navy);color:#fff;text-align:center;padding:34px 20px}
+.head h1{font-family:'UniformBlack';text-transform:uppercase;font-size:clamp(22px,4vw,34px)}
+.head p{color:var(--cloud2);margin-top:10px;font-size:15px;max-width:62ch;margin-left:auto;margin-right:auto;line-height:1.5}
+.grid{max-width:1120px;margin:40px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
+.card{background:#fff;border:2.5px solid var(--navy);border-radius:24px;overflow:hidden;box-shadow:0 8px 0 rgba(50,43,122,.12);display:flex;flex-direction:column}
+.card .tag{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:#fff;padding:10px 18px}
+.stage{background:linear-gradient(180deg,var(--sky) 0%,var(--sky-top) 100%);display:grid;place-items:center;height:260px;position:relative}
+.stage .rail{position:absolute;left:50%;top:18px;bottom:18px;width:6px;transform:translateX(-50%);background:rgba(255,255,255,.5);border-radius:999px}
+.card .meta{padding:16px 18px 20px;text-align:center}
+.card .meta p{font-size:13.5px;color:#5a54a0;line-height:1.5}
+
+/* base del sol: SVG, sin máscaras (a prueba de teléfonos) */
+.sol{width:110px;height:110px;position:relative;z-index:2}
+.sol svg{width:100%;height:100%;overflow:visible;display:block}
+.sol .ray{stroke:var(--yellow);stroke-width:7;stroke-linecap:round}
+.sol .halo{fill:rgba(250,200,28,.32)}
+.sol .body{fill:var(--yellow);filter:drop-shadow(0 4px 0 rgba(0,0,0,.08))}
+.sol .face{stroke:var(--ink);stroke-width:3;stroke-linecap:round;fill:none}
+.sol .eye{fill:var(--ink);stroke:none}
+
+/* 1 · giro clásico */
+.v1 .rays{transform-origin:50px 50px;animation:s1 14s linear infinite}
+@keyframes s1{to{transform:rotate(360deg)}}
+
+/* 2 · latido (respira) */
+.v2 .rays{transform-origin:50px 50px;animation:s2 2.6s ease-in-out infinite}
+.v2 .halo{transform-origin:50px 50px;animation:s2halo 2.6s ease-in-out infinite}
+@keyframes s2{0%,100%{transform:scale(.92)}50%{transform:scale(1.08)}}
+@keyframes s2halo{0%,100%{transform:scale(.95);opacity:.7}50%{transform:scale(1.12);opacity:1}}
+
+/* 3 · contorno dibujándose */
+.v3 .outline{fill:none;stroke:var(--yellow-d);stroke-width:4;stroke-linecap:round;
+  stroke-dasharray:36 200;animation:s3 3.2s linear infinite}
+@keyframes s3{to{stroke-dashoffset:-236}}
+.v3 .rays{transform-origin:50px 50px;animation:s1 24s linear infinite}
+
+/* 4 · rayitos bailarines (parpadean alternados) */
+.v4 .ray{transform-origin:50px 50px;animation:s4 1.8s ease-in-out infinite}
+.v4 .ray:nth-child(even){animation-delay:-.9s}
+@keyframes s4{0%,100%{transform:scale(.86);opacity:.55}50%{transform:scale(1.06);opacity:1}}
+
+/* 5 · girito juguetón (balanceo + saltito) */
+.v5 .rays{transform-origin:50px 50px;animation:s5 3.4s ease-in-out infinite}
+.v5 .body-group{transform-origin:50px 50px;animation:s5bob 3.4s ease-in-out infinite}
+@keyframes s5{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+@keyframes s5bob{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.04)}}
+
+.foot{position:fixed;left:0;right:0;bottom:0;background:var(--navy);color:#fff;text-align:center;padding:14px;font-size:14px;z-index:9}
+.foot b{color:var(--yellow);font-family:'UniformBlack'}
+@media(prefers-reduced-motion:reduce){.sol *{animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <h1>El solecito viajero, animado</h1>
+  <p>Cinco formas de darle vida al sol del horario. Todas están hechas con SVG (sin las máscaras CSS que fallan en los teléfonos), así que los rayos se verán en cualquier celular.</p>
+</div>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="tag" style="background:var(--pink)">Opción 1 · Rayos girando</div>
+    <div class="stage"><div class="rail"></div>
+      <div class="sol v1">
+        <svg viewBox="0 0 100 100">
+          <circle class="halo" cx="50" cy="50" r="34"/>
+          <g class="rays"></g>
+          <g class="body-group">
+            <circle class="body" cx="50" cy="50" r="26"/>
+            <circle class="eye" cx="43" cy="46" r="2.6"/><circle class="eye" cx="57" cy="46" r="2.6"/>
+            <path class="face" d="M43,55 q7,6 14,0"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="meta"><p>Los rayos dan la vuelta despacito, como rehilete. Es la idea del sol actual, pero ahora sí se verá en el teléfono.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="tag" style="background:var(--sky-deep)">Opción 2 · Latido (respira)</div>
+    <div class="stage"><div class="rail"></div>
+      <div class="sol v2">
+        <svg viewBox="0 0 100 100">
+          <circle class="halo" cx="50" cy="50" r="34"/>
+          <g class="rays"></g>
+          <g class="body-group">
+            <circle class="body" cx="50" cy="50" r="26"/>
+            <circle class="eye" cx="43" cy="46" r="2.6"/><circle class="eye" cx="57" cy="46" r="2.6"/>
+            <path class="face" d="M43,55 q7,6 14,0"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="meta"><p>Los rayos crecen y se encogen suavecito, como si el sol respirara. Tranquilo y tierno.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="tag" style="background:var(--lime-d)">Opción 3 · Contorno dibujándose</div>
+    <div class="stage"><div class="rail"></div>
+      <div class="sol v3">
+        <svg viewBox="0 0 100 100">
+          <circle class="halo" cx="50" cy="50" r="34"/>
+          <g class="rays"></g>
+          <circle class="outline" cx="50" cy="50" r="33"/>
+          <g class="body-group">
+            <circle class="body" cx="50" cy="50" r="26"/>
+            <circle class="eye" cx="43" cy="46" r="2.6"/><circle class="eye" cx="57" cy="46" r="2.6"/>
+            <path class="face" d="M43,55 q7,6 14,0"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="meta"><p>Un trazo le va dando la vuelta al contorno todo el tiempo, como si un crayón lo estuviera dibujando, con giro lento de rayos de fondo.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="tag" style="background:var(--yellow);color:var(--navy)">Opción 4 · Rayitos bailarines</div>
+    <div class="stage"><div class="rail"></div>
+      <div class="sol v4">
+        <svg viewBox="0 0 100 100">
+          <circle class="halo" cx="50" cy="50" r="34"/>
+          <g class="rays"></g>
+          <g class="body-group">
+            <circle class="body" cx="50" cy="50" r="26"/>
+            <circle class="eye" cx="43" cy="46" r="2.6"/><circle class="eye" cx="57" cy="46" r="2.6"/>
+            <path class="face" d="M43,55 q7,6 14,0"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="meta"><p>Los rayos parpadean alternados (unos crecen mientras otros se apagan), como estrellita que titila.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="tag" style="background:var(--navy)">Opción 5 · Girito juguetón</div>
+    <div class="stage"><div class="rail"></div>
+      <div class="sol v5">
+        <svg viewBox="0 0 100 100">
+          <circle class="halo" cx="50" cy="50" r="34"/>
+          <g class="rays"></g>
+          <g class="body-group">
+            <circle class="body" cx="50" cy="50" r="26"/>
+            <circle class="eye" cx="43" cy="46" r="2.6"/><circle class="eye" cx="57" cy="46" r="2.6"/>
+            <path class="face" d="M43,55 q7,6 14,0"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="meta"><p>Los rayos se mecen de lado a lado mientras el solecito da saltitos suaves. El más juguetón de todos.</p></div>
+  </div>
+
+</div>
+
+<div class="foot">¿Cuál solecito te gusta? Dime la <b>opción 1–5</b> y lo integro al horario ☀️</div>
+
+<script>
+// genera los 12 rayos de cada sol
+document.querySelectorAll('.sol .rays').forEach(function(g){
+  for(var i=0;i<12;i++){
+    var a=i*30*Math.PI/180;
+    var l=document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('class','ray');
+    l.setAttribute('x1',50+Math.cos(a)*36); l.setAttribute('y1',50+Math.sin(a)*36);
+    l.setAttribute('x2',50+Math.cos(a)*46); l.setAttribute('y2',50+Math.sin(a)*46);
+    g.appendChild(l);
+  }
+});
+</script>
+</body>
+</html>

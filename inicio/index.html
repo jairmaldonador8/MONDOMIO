@@ -132,6 +132,15 @@ nav.navbar.hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
 /* top bar */
 .bar{position:relative;z-index:6;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:40px 0 0;pointer-events:none}
 .bar .logo{width:min(900px,100vw)}
+.logo-sol{position:relative;display:block}
+.logo-sol .base{width:100%;display:block}
+.logo-sol .rayo{position:absolute;pointer-events:none;animation:rayodanza 3s ease-in-out infinite}
+.logo-sol .rayo img{width:100%;display:block}
+.logo-sol .rayo1{left:21.23%;top:27.03%;width:5.54%;transform-origin:100% 100%}
+.logo-sol .rayo2{left:27.86%;top:20.28%;width:2.92%;transform-origin:80% 100%;animation-delay:-.75s}
+.logo-sol .rayo3{left:32.38%;top:22.07%;width:4.23%;transform-origin:20% 100%;animation-delay:-1.5s}
+.logo-sol .rayo4{left:36.32%;top:32.97%;width:6.2%;transform-origin:0% 100%;animation-delay:-2.25s}
+@keyframes rayodanza{0%,100%{transform:rotate(-9deg) scale(.95)}50%{transform:rotate(9deg) scale(1.1)}}
 .pill{display:inline-flex;align-items:center;gap:8px;background:var(--paper);color:var(--pink-d);
   font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.04em;font-size:14px;
   padding:9px 16px;border-radius:999px;box-shadow:0 6px 0 rgba(50,43,122,.12)}
@@ -537,6 +546,7 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
   html.js .tstop.reveal{transform:none!important;transition:none!important}
   .mcard.sticker span{animation:none!important}
   .game-win .box{animation:none}
+  .logo-sol .rayo{animation:none!important}
   html.js .piece.reveal{transform:none!important;transition:none!important}
   .puzzle.snapped{animation:none!important}
   html{scroll-behavior:auto}
@@ -569,7 +579,13 @@ html.js .reveal.in{animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
 
   <div class="wrap">
     <div class="bar">
-      <img class="logo" src="assets/img/logo-mondomio.png" alt="Mondomío Kínder">
+      <span class="logo logo-sol">
+        <img class="base" src="assets/img/logo-mondomio-sinrayos.png" alt="Mondomío Kínder">
+        <span class="rayo rayo1"><img src="assets/img/logo-rayo-1.png" alt=""></span>
+        <span class="rayo rayo2"><img src="assets/img/logo-rayo-2.png" alt=""></span>
+        <span class="rayo rayo3"><img src="assets/img/logo-rayo-3.png" alt=""></span>
+        <span class="rayo rayo4"><img src="assets/img/logo-rayo-4.png" alt=""></span>
+      </span>
     </div>
 
     <div class="hero-inner">

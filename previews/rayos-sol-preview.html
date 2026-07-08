@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Los rayos de la O, animados de verdad</title>
+<style>
+@font-face{font-family:'UniformBlack';src:url(../inicio/assets/fonts/uniform-black.woff2) format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'UniformMed';src:url(../inicio/assets/fonts/uniform-medium.woff2) format('woff2');font-weight:500;font-display:swap}
+:root{--navy:#322B7A;--pink:#C0539F;--yellow:#FAC81C;--sky-deep:#46B2DD;--lime-d:#79B62F;--paper:#FFF9EC;--cloud2:#E9E7FA}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);font-family:'UniformMed',system-ui,sans-serif;color:var(--navy);padding-bottom:90px}
+.head{background:var(--navy);color:#fff;text-align:center;padding:34px 20px}
+.head h1{font-family:'UniformBlack';text-transform:uppercase;font-size:clamp(22px,4vw,34px)}
+.head p{color:var(--cloud2);margin-top:10px;font-size:15px;max-width:62ch;margin-left:auto;margin-right:auto;line-height:1.5}
+.grid{max-width:1160px;margin:40px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:26px}
+.card{background:#fff;border:2.5px solid var(--navy);border-radius:24px;overflow:hidden;box-shadow:0 8px 0 rgba(50,43,122,.12);display:flex;flex-direction:column}
+.card .tag{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:#fff;padding:10px 18px}
+.stage{background:linear-gradient(180deg,#BEE7F6 0%,#E9F7FD 100%);display:grid;place-items:center;padding:30px 18px}
+.card .meta{padding:16px 18px 20px;text-align:center}
+.card .meta p{font-size:13.5px;color:#5a54a0;line-height:1.5}
+.foot{position:fixed;left:0;right:0;bottom:0;background:var(--navy);color:#fff;text-align:center;padding:14px;font-size:14px;z-index:9}
+.foot b{color:var(--yellow);font-family:'UniformBlack'}
+
+/* — logo con rayos independientes (recortados del PNG real) — */
+.lg{position:relative;width:min(460px,100%)}
+.lg .base{width:100%;display:block}
+.lg .rayo{position:absolute;pointer-events:none}
+.lg .r1{left:21.23%;top:27.03%;width:5.54%;transform-origin:100% 100%}
+.lg .r2{left:27.86%;top:20.28%;width:2.92%;transform-origin:80% 100%}
+.lg .r3{left:32.38%;top:22.07%;width:4.23%;transform-origin:20% 100%}
+.lg .r4{left:36.32%;top:32.97%;width:6.20%;transform-origin:0% 100%}
+.lg .rayo img{width:100%;display:block}
+
+/* A · respiran juntos */
+.vA .rayo{animation:brA 2.8s ease-in-out infinite}
+@keyframes brA{0%,100%{transform:scale(.86)}50%{transform:scale(1.14)}}
+
+/* B · ola de brillo (se prenden en secuencia) */
+.vB .rayo{animation:brB 2.2s ease-in-out infinite}
+.vB .r2{animation-delay:.22s}
+.vB .r3{animation-delay:.44s}
+.vB .r4{animation-delay:.66s}
+@keyframes brB{0%,100%{transform:scale(.82)}28%{transform:scale(1.22)}56%{transform:scale(.95)}}
+
+/* C · bailan (giran y saltan tantito) */
+.vC .rayo{animation:brC 3s ease-in-out infinite}
+.vC .r2{animation-delay:-.75s}
+.vC .r3{animation-delay:-1.5s}
+.vC .r4{animation-delay:-2.25s}
+@keyframes brC{0%,100%{transform:rotate(-9deg) scale(.95)}50%{transform:rotate(9deg) scale(1.1)}}
+
+@media(prefers-reduced-motion:reduce){.lg .rayo{animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <h1>Los 4 rayitos de la O, con vida</h1>
+  <p>Recortamos los 4 rayos reales del logo como piezas independientes: se quedan exactamente donde estaban, pero ahora se mueven. Tres estilos — el logo no cambia de forma en ningún momento.</p>
+</div>
+
+<div class="grid">
+
+  <div class="card vA">
+    <div class="tag" style="background:var(--pink)">Opción A · Respiran juntos</div>
+    <div class="stage">
+      <div class="lg">
+        <img class="base" src="../inicio/assets/img/logo-mondomio-sinrayos.png" alt="Mondomío">
+        <span class="rayo r1"><img src="../inicio/assets/img/logo-rayo-1.png" alt=""></span>
+        <span class="rayo r2"><img src="../inicio/assets/img/logo-rayo-2.png" alt=""></span>
+        <span class="rayo r3"><img src="../inicio/assets/img/logo-rayo-3.png" alt=""></span>
+        <span class="rayo r4"><img src="../inicio/assets/img/logo-rayo-4.png" alt=""></span>
+      </div>
+    </div>
+    <div class="meta"><p>Los 4 rayos crecen y se encogen al mismo tiempo, desde el centro del sol, como si respirara. Suave y constante.</p></div>
+  </div>
+
+  <div class="card vB">
+    <div class="tag" style="background:var(--sky-deep)">Opción B · Ola de brillo</div>
+    <div class="stage">
+      <div class="lg">
+        <img class="base" src="../inicio/assets/img/logo-mondomio-sinrayos.png" alt="Mondomío">
+        <span class="rayo r1"><img src="../inicio/assets/img/logo-rayo-1.png" alt=""></span>
+        <span class="rayo r2"><img src="../inicio/assets/img/logo-rayo-2.png" alt=""></span>
+        <span class="rayo r3"><img src="../inicio/assets/img/logo-rayo-3.png" alt=""></span>
+        <span class="rayo r4"><img src="../inicio/assets/img/logo-rayo-4.png" alt=""></span>
+      </div>
+    </div>
+    <div class="meta"><p>Los rayos se encienden uno tras otro, de izquierda a derecha, como destello que recorre el sol. El clásico "efecto de sol".</p></div>
+  </div>
+
+  <div class="card vC">
+    <div class="tag" style="background:var(--lime-d)">Opción C · Bailan</div>
+    <div class="stage">
+      <div class="lg">
+        <img class="base" src="../inicio/assets/img/logo-mondomio-sinrayos.png" alt="Mondomío">
+        <span class="rayo r1"><img src="../inicio/assets/img/logo-rayo-1.png" alt=""></span>
+        <span class="rayo r2"><img src="../inicio/assets/img/logo-rayo-2.png" alt=""></span>
+        <span class="rayo r3"><img src="../inicio/assets/img/logo-rayo-3.png" alt=""></span>
+        <span class="rayo r4"><img src="../inicio/assets/img/logo-rayo-4.png" alt=""></span>
+      </div>
+    </div>
+    <div class="meta"><p>Cada rayo se mece y salta a su propio ritmo, como niños bailando alrededor del sol. El más juguetón.</p></div>
+  </div>
+
+</div>
+
+<div class="foot">Dime la <b>opción A, B o C</b> y si va en el <b>hero</b>, el <b>navbar</b> o los dos ☀️</div>
+
+</body>
+</html>

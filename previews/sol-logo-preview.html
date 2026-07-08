@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La O de Mondomío, animada — opciones</title>
+<style>
+@font-face{font-family:'UniformBlack';src:url(../inicio/assets/fonts/uniform-black.woff2) format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'UniformMed';src:url(../inicio/assets/fonts/uniform-medium.woff2) format('woff2');font-weight:500;font-display:swap}
+:root{--sky:#6CC9EC;--sky-top:#8BD6F1;--navy:#322B7A;--pink:#C0539F;--yellow:#FAC81C;--yellow-d:#EBB200;--lime-d:#79B62F;--sky-deep:#46B2DD;--paper:#FFF9EC;--cloud2:#E9E7FA}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);font-family:'UniformMed',system-ui,sans-serif;color:var(--navy);padding-bottom:90px}
+.head{background:var(--navy);color:#fff;text-align:center;padding:34px 20px}
+.head h1{font-family:'UniformBlack';text-transform:uppercase;font-size:clamp(22px,4vw,34px)}
+.head p{color:var(--cloud2);margin-top:10px;font-size:15px;max-width:62ch;margin-left:auto;margin-right:auto;line-height:1.5}
+.grid{max-width:1160px;margin:40px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:26px}
+.card{background:#fff;border:2.5px solid var(--navy);border-radius:24px;overflow:hidden;box-shadow:0 8px 0 rgba(50,43,122,.12);display:flex;flex-direction:column}
+.card .tag{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:#fff;padding:10px 18px}
+.stage{background:linear-gradient(180deg,#BEE7F6 0%,#E9F7FD 100%);display:grid;place-items:center;padding:26px 18px}
+.card .meta{padding:16px 18px 20px;text-align:center}
+.card .meta p{font-size:13.5px;color:#5a54a0;line-height:1.5}
+.foot{position:fixed;left:0;right:0;bottom:0;background:var(--navy);color:#fff;text-align:center;padding:14px;font-size:14px;z-index:9}
+.foot b{color:var(--yellow);font-family:'UniformBlack'}
+
+/* — capa animada sobre el logo — */
+.lg{position:relative;width:min(440px,100%)}
+.lg img{width:100%;display:block;position:relative;z-index:1}
+.lg svg.ov{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:visible}
+.lg .glow{position:absolute;z-index:0;left:32.8%;top:50%;width:28%;aspect-ratio:1;transform:translate(-50%,-50%);
+  border-radius:50%;background:radial-gradient(circle,rgba(250,200,28,.85) 0%,rgba(250,200,28,.35) 45%,transparent 70%)}
+
+/* 1 · contorno de crayón dibujándose */
+.v1 .trace{fill:none;stroke:var(--yellow-d);stroke-width:13;stroke-linecap:round;
+  stroke-dasharray:175 466;animation:trace 3.2s linear infinite}
+@keyframes trace{to{stroke-dashoffset:-641}}
+
+/* 2 · halo que late */
+.v2 .glow{animation:halo 2.8s ease-in-out infinite}
+@keyframes halo{0%,100%{transform:translate(-50%,-50%) scale(.82);opacity:.55}50%{transform:translate(-50%,-50%) scale(1.15);opacity:1}}
+
+/* 3 · puntitos en órbita */
+.v3 .ring{transform-origin:450px 362px;animation:spinring 9s linear infinite}
+.v3 .ring circle{fill:var(--yellow-d)}
+@keyframes spinring{to{transform:rotate(360deg)}}
+
+/* 4 · chispitas que titilan */
+.v4 .sp{fill:var(--yellow);transform-box:fill-box;transform-origin:center;animation:spk 2.2s ease-in-out infinite}
+@keyframes spk{0%,100%{transform:scale(.25);opacity:0}45%,60%{transform:scale(1);opacity:1}}
+
+/* 5 · rayitos que respiran (crecen desde la O) */
+.v5 .ring2{transform-origin:450px 362px;animation:breathe 2.6s ease-in-out infinite}
+.v5 .ring2 line{stroke:var(--yellow);stroke-width:15;stroke-linecap:round}
+@keyframes breathe{0%,100%{transform:scale(.9);opacity:.65}50%{transform:scale(1.12);opacity:1}}
+
+@media(prefers-reduced-motion:reduce){.lg *{animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <h1>La O de Mondomío, con vida</h1>
+  <p>Cinco formas de animar el solecito del logo (la O amarilla). Es una capita encima del logo — el PNG no se toca — y funciona igual en el hero y en la barra de navegación.</p>
+</div>
+
+<div class="grid">
+
+  <div class="card v1">
+    <div class="tag" style="background:var(--pink)">Opción 1 · Contorno dibujándose</div>
+    <div class="stage">
+      <div class="lg">
+        <img src="../inicio/assets/img/logo-mondomio.png" alt="Mondomío">
+        <svg class="ov" viewBox="0 0 1371 725"><circle class="trace" cx="450" cy="362" r="102"/></svg>
+      </div>
+    </div>
+    <div class="meta"><p>Un trazo de crayón amarillo le da la vuelta a la O todo el tiempo, como si alguien la estuviera dibujando.</p></div>
+  </div>
+
+  <div class="card v2">
+    <div class="tag" style="background:var(--sky-deep)">Opción 2 · Halo que late</div>
+    <div class="stage">
+      <div class="lg">
+        <div class="glow"></div>
+        <img src="../inicio/assets/img/logo-mondomio.png" alt="Mondomío">
+      </div>
+    </div>
+    <div class="meta"><p>Un resplandor suave respira detrás de la O, como si el solecito calentara. Sutil y elegante.</p></div>
+  </div>
+
+  <div class="card v3">
+    <div class="tag" style="background:var(--lime-d)">Opción 3 · Puntitos en órbita</div>
+    <div class="stage">
+      <div class="lg">
+        <img src="../inicio/assets/img/logo-mondomio.png" alt="Mondomío">
+        <svg class="ov" viewBox="0 0 1371 725"><g class="ring" id="r3"></g></svg>
+      </div>
+    </div>
+    <div class="meta"><p>Tres puntitos giran en órbita alrededor de la O, como planetitas alrededor del sol.</p></div>
+  </div>
+
+  <div class="card v4">
+    <div class="tag" style="background:var(--yellow);color:var(--navy)">Opción 4 · Chispitas</div>
+    <div class="stage">
+      <div class="lg">
+        <img src="../inicio/assets/img/logo-mondomio.png" alt="Mondomío">
+        <svg class="ov" viewBox="0 0 1371 725"><g id="r4"></g></svg>
+      </div>
+    </div>
+    <div class="meta"><p>Estrellitas aparecen y desaparecen alrededor de la O, cada una a su ritmo, como destellos de sol.</p></div>
+  </div>
+
+  <div class="card v5">
+    <div class="tag" style="background:var(--navy)">Opción 5 · Rayitos que respiran</div>
+    <div class="stage">
+      <div class="lg">
+        <img src="../inicio/assets/img/logo-mondomio.png" alt="Mondomío">
+        <svg class="ov" viewBox="0 0 1371 725"><g class="ring2" id="r5"></g></svg>
+      </div>
+    </div>
+    <div class="meta"><p>Rayitos alrededor de la O crecen y se encogen suavecito, como si el solecito respirara.</p></div>
+  </div>
+
+</div>
+
+<div class="foot">¿Cuál le queda mejor a la O? Dime la <b>opción 1–5</b> (y si la quieres en el hero, en el navbar o en los dos) ☀️</div>
+
+<script>
+var CX=450,CY=362;
+function ray(g,ang,r1,r2){
+  var a=ang*Math.PI/180;
+  var l=document.createElementNS('http://www.w3.org/2000/svg','line');
+  l.setAttribute('x1',CX+Math.cos(a)*r1);l.setAttribute('y1',CY+Math.sin(a)*r1);
+  l.setAttribute('x2',CX+Math.cos(a)*r2);l.setAttribute('y2',CY+Math.sin(a)*r2);
+  g.appendChild(l);
+  return l;
+}
+// opción 3: puntitos en órbita
+var g3=document.getElementById('r3');
+[0,120,240].forEach(function(a,i){
+  var rad=a*Math.PI/180;
+  var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx',CX+Math.cos(rad)*112);
+  c.setAttribute('cy',CY+Math.sin(rad)*112);
+  c.setAttribute('r',13-i*2);
+  g3.appendChild(c);
+});
+// opción 4: chispitas de 4 puntas alrededor
+var g4=document.getElementById('r4');
+var SPOTS=[[318,166,24],[560,190,20],[455,118,28],[345,255,16],[575,278,20],[520,138,15],[385,112,18]];
+SPOTS.forEach(function(s,i){
+  var p=document.createElementNS('http://www.w3.org/2000/svg','path');
+  var x=s[0],y=s[1],r=s[2],q=r*.32;
+  p.setAttribute('d','M'+x+','+(y-r)+' Q'+(x+q)+','+(y-q)+' '+(x+r)+','+y+' Q'+(x+q)+','+(y+q)+' '+x+','+(y+r)+' Q'+(x-q)+','+(y+q)+' '+(x-r)+','+y+' Q'+(x-q)+','+(y-q)+' '+x+','+(y-r)+' Z');
+  p.setAttribute('class','sp');
+  p.style.animationDelay=(-i*0.55)+'s';
+  g4.appendChild(p);
+});
+// opción 5: rayitos intercalados entre los rayos pintados del logo (zona de arriba)
+var g5=document.getElementById('r5');
+[190,215,246,276,304,332].forEach(function(ang){ray(g5,ang,118,168);});
+</script>
+</body>
+</html>
