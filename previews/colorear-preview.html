@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dibujos para colorear — premio del juego</title>
+<style>
+@font-face{font-family:'UniformBlack';src:url(../inicio/assets/fonts/uniform-black.woff2) format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'UniformMed';src:url(../inicio/assets/fonts/uniform-medium.woff2) format('woff2');font-weight:500;font-display:swap}
+:root{--navy:#322B7A;--navy-d:#231E5C;--pink:#C0539F;--yellow:#FAC81C;--lime:#8CC63E;--sky-deep:#46B2DD;--paper:#FFF9EC;--cloud2:#E9E7FA}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);font-family:'UniformMed',system-ui,sans-serif;color:var(--navy);padding-bottom:90px}
+.head{background:var(--navy);color:#fff;text-align:center;padding:34px 20px}
+.head h1{font-family:'UniformBlack';text-transform:uppercase;font-size:clamp(22px,4vw,34px)}
+.head p{color:var(--cloud2);margin-top:10px;font-size:15px;max-width:62ch;margin-left:auto;margin-right:auto;line-height:1.5}
+
+/* mock del premio */
+.mock{max-width:520px;margin:-26px auto 0;background:#fff;border:3px solid var(--navy);border-radius:24px;
+  box-shadow:0 10px 0 rgba(50,43,122,.15);padding:26px;text-align:center;position:relative;z-index:2}
+.mock .big{font-size:40px}
+.mock h2{font-family:'UniformBlack';text-transform:uppercase;font-size:19px;margin-top:8px}
+.mock p{font-size:14px;margin-top:6px;color:#5a54a0}
+.mock .btn{display:inline-block;margin-top:16px;background:var(--yellow);color:var(--navy);font-family:'UniformBlack';text-transform:uppercase;
+  font-size:14px;padding:13px 26px;border-radius:999px;box-shadow:0 5px 0 #EBB200;text-decoration:none;cursor:pointer;border:none}
+.mock .note{font-size:11.5px;color:#8a86bb;margin-top:12px}
+
+.grid{max-width:1120px;margin:44px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:26px}
+.card{background:#fff;border:2.5px solid var(--navy);border-radius:24px;overflow:hidden;box-shadow:0 8px 0 rgba(50,43,122,.12);display:flex;flex-direction:column}
+.card .tag{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:#fff;padding:10px 18px}
+.card .sheet{background:#f3f1ff;padding:16px;display:grid;place-items:center}
+.card svg{width:100%;height:auto;max-width:420px;background:#fff;border-radius:10px;box-shadow:0 3px 10px rgba(50,43,122,.14)}
+.card .meta{padding:16px 18px 20px;text-align:center}
+.card .meta p{font-size:13.5px;color:#5a54a0;line-height:1.45}
+.card .dl{display:inline-block;margin-top:12px;background:var(--navy);color:#fff;font-family:'UniformBlack';text-transform:uppercase;
+  font-size:12.5px;padding:11px 22px;border-radius:999px;cursor:pointer;border:none;box-shadow:0 4px 0 var(--navy-d)}
+.card .dl:active{transform:translateY(2px)}
+.foot{position:fixed;left:0;right:0;bottom:0;background:var(--navy);color:#fff;text-align:center;padding:14px;font-size:14px;z-index:9}
+.foot b{color:var(--yellow);font-family:'UniformBlack'}
+
+/* estilos de línea compartidos por los SVG */
+svg .ln{fill:#fff;stroke:#322B7A;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+svg .th{fill:none;stroke:#322B7A;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+svg .dot{fill:#322B7A;stroke:none}
+svg .tt{font-family:'UniformBlack',sans-serif;fill:#322B7A;text-anchor:middle;text-transform:uppercase}
+svg .tm{font-family:'UniformMed',sans-serif;fill:#322B7A;text-anchor:middle}
+svg .dash{fill:none;stroke:#322B7A;stroke-width:3;stroke-dasharray:10 12;stroke-linecap:round}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <h1>El premio del juego de animalitos</h1>
+  <p>Cuando alguien encuentra a todos los animalitos escondidos, le regalamos un dibujo de Mondomío listo para imprimir y colorear. Así se vería el aviso, y abajo van 4 diseños — escoge uno.</p>
+</div>
+
+<div class="mock">
+  <div class="big">🎉</div>
+  <h2>¡Encontraste a todos los amiguitos!</h2>
+  <p>Te ganaste un dibujito de Mondomío para imprimir y colorear en casa.</p>
+  <button class="btn">🖍️ Descargar mi dibujo</button>
+  <div class="note">(así se vería el premio al completar el juego — descargará el diseño que elijas abajo)</div>
+</div>
+
+<div class="grid">
+
+  <!-- DISEÑO 1: MIS AMIGUITOS -->
+  <div class="card">
+    <div class="tag" style="background:var(--pink)">Diseño 1 · Mis amiguitos de Mondomío</div>
+    <div class="sheet">
+    <svg id="d1" viewBox="0 0 620 877" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="620" height="877" fill="#fff"/>
+      <rect x="20" y="20" width="580" height="837" rx="26" class="dash"/>
+      <text x="310" y="72" class="tt" font-size="30">Mis amiguitos</text>
+      <text x="310" y="104" class="tm" font-size="17" letter-spacing="4">DE MONDOMÍO · PARA COLOREAR</text>
+
+      <!-- rana -->
+      <g>
+        <ellipse cx="170" cy="240" rx="60" ry="54" class="ln"/>
+        <circle cx="138" cy="182" r="17" class="ln"/><circle cx="202" cy="182" r="17" class="ln"/>
+        <circle cx="138" cy="184" r="5" class="dot"/><circle cx="202" cy="184" r="5" class="dot"/>
+        <path d="M148,238 q22,16 44,0" class="th"/>
+        <path d="M118,262 h104" class="th"/><path d="M122,276 h96" class="th"/>
+        <circle cx="252" cy="290" r="9" class="ln"/>
+        <g class="th">
+          <circle cx="252" cy="272" r="7"/><circle cx="268" cy="282" r="7"/><circle cx="266" cy="300" r="7"/>
+          <circle cx="252" cy="308" r="7"/><circle cx="238" cy="300" r="7"/><circle cx="236" cy="282" r="7"/>
+        </g>
+        <text x="170" y="345" class="tt" font-size="16" letter-spacing="2">Rana</text>
+      </g>
+
+      <!-- gato -->
+      <g>
+        <path d="M400,308 v-88 q0,-50 50,-50 q50,0 50,50 v88 z" class="ln"/>
+        <path d="M413,182 l10,-26 l16,18" class="ln"/>
+        <path d="M487,182 l-10,-26 l-16,18" class="ln"/>
+        <circle cx="432" cy="212" r="15" class="th"/><circle cx="468" cy="212" r="15" class="th"/>
+        <path d="M447,212 h6" class="th"/>
+        <path d="M444,236 l6,5 l6,-5" class="th"/>
+        <path d="M405,240 l-20,-4 M405,250 l-20,4 M495,240 l20,-4 M495,250 l20,4" class="th"/>
+        <text x="450" y="345" class="tt" font-size="16" letter-spacing="2">Gato</text>
+      </g>
+
+      <!-- caracol -->
+      <g>
+        <path d="M112,510 C108,452 116,420 132,418 C146,416 150,436 150,460 L150,478 C150,496 166,505 186,505 L246,505 C262,505 264,516 246,518 C186,524 128,522 112,510 Z" class="ln"/>
+        <path d="M126,420 l-9,-22 M141,419 l7,-23" class="th"/>
+        <circle cx="115" cy="390" r="8" class="ln"/><circle cx="150" cy="388" r="8" class="ln"/>
+        <circle cx="115" cy="391" r="3" class="dot"/><circle cx="150" cy="389" r="3" class="dot"/>
+        <circle cx="204" cy="455" r="46" class="ln"/>
+        <circle cx="204" cy="455" r="11" class="th"/>
+        <g class="th">
+          <circle cx="204" cy="430" r="11"/><circle cx="226" cy="443" r="11"/><circle cx="226" cy="468" r="11"/>
+          <circle cx="204" cy="480" r="11"/><circle cx="182" cy="468" r="11"/><circle cx="182" cy="443" r="11"/>
+        </g>
+        <text x="180" y="575" class="tt" font-size="16" letter-spacing="2">Caracol</text>
+      </g>
+
+      <!-- catarina -->
+      <g>
+        <rect x="370" y="428" width="160" height="72" rx="36" class="ln"/>
+        <path d="M478,432 q9,32 0,64" class="th"/>
+        <path d="M500,428 l8,-24 M520,430 l11,-21" class="th"/>
+        <circle cx="510" cy="399" r="4.5" class="dot"/><circle cx="533" cy="404" r="4.5" class="dot"/>
+        <circle cx="497" cy="458" r="4.5" class="dot"/><circle cx="516" cy="460" r="4.5" class="dot"/>
+        <g class="th">
+          <circle cx="395" cy="450" r="6"/><circle cx="420" cy="442" r="5"/><circle cx="443" cy="456" r="6"/>
+          <circle cx="402" cy="478" r="5"/><circle cx="430" cy="472" r="5"/><circle cx="455" cy="482" r="5"/>
+        </g>
+        <path d="M392,502 v13 h9 M424,502 v13 h9 M456,502 v13 h9 M488,502 v13 h9" class="th"/>
+        <path d="M368,424 c-7,-11 -24,-2 -17,9 c5,7 17,13 17,13 c0,0 12,-6 17,-13 c7,-11 -10,-20 -17,-9 z" class="ln"/>
+        <text x="450" y="575" class="tt" font-size="16" letter-spacing="2">Catarina</text>
+      </g>
+
+      <!-- pajarito -->
+      <g>
+        <path d="M238,700 l24,8 l-23,10 z" class="ln"/>
+        <ellipse cx="160" cy="716" rx="56" ry="30" class="ln"/>
+        <circle cx="218" cy="700" r="24" class="ln"/>
+        <circle cx="226" cy="695" r="3.5" class="dot"/>
+        <path d="M150,700 C140,660 176,648 196,658 C198,674 186,696 156,706 Z" class="ln"/>
+        <path d="M106,708 l-28,-12 M104,718 l-30,0 M106,728 l-28,12" class="th"/>
+        <text x="170" y="800" class="tt" font-size="16" letter-spacing="2">Pajarito</text>
+      </g>
+
+      <!-- abejita -->
+      <g>
+        <rect x="380" y="688" width="152" height="62" rx="31" class="ln"/>
+        <path d="M424,690 q-9,29 0,58" class="th"/>
+        <ellipse cx="462" cy="662" rx="13" ry="27" class="ln" transform="rotate(-14 462 662)"/>
+        <ellipse cx="492" cy="660" rx="13" ry="27" class="ln" transform="rotate(12 492 660)"/>
+        <path d="M448,696 v12 M466,695 v12 M484,695 v12 M502,696 v12" class="th"/>
+        <path d="M398,688 l-8,-20 M410,686 l-4,-21" class="th"/>
+        <circle cx="404" cy="712" r="4.5" class="dot"/>
+        <circle cx="398" cy="726" r="5" class="th"/>
+        <path d="M408,752 q-2,12 -10,16 M432,753 q-1,12 -8,17 M456,753 q0,12 -7,18 M480,753 q1,12 -5,18" class="th"/>
+        <text x="455" y="800" class="tt" font-size="16" letter-spacing="2">Abejita</text>
+      </g>
+    </svg>
+    </div>
+    <div class="meta">
+      <p>Los seis amiguitos del sitio en versión para colorear, con su nombre abajo — ideal para los más pequeños.</p>
+      <button class="dl" data-svg="d1" data-name="mis-amiguitos-mondomio">⬇️ Descargar PNG</button>
+    </div>
+  </div>
+
+  <!-- DISEÑO 2: EL JARDÍN -->
+  <div class="card">
+    <div class="tag" style="background:var(--lime)">Diseño 2 · El jardín de Mondomío</div>
+    <div class="sheet">
+    <svg id="d2" viewBox="0 0 620 877" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="620" height="877" fill="#fff"/>
+      <rect x="20" y="20" width="580" height="837" rx="26" class="dash"/>
+      <text x="310" y="76" class="tt" font-size="28">El jardín de Mondomío</text>
+
+      <!-- sol -->
+      <circle cx="120" cy="180" r="46" class="ln"/>
+      <path d="M120,112 v-22 M120,248 v22 M52,180 h-22 M188,180 h22 M72,132 l-16,-16 M168,132 l16,-16 M72,228 l-16,16 M168,228 l16,16" class="th"/>
+      <path d="M104,174 q6,6 12,0 M124,174 q6,6 12,0" class="th"/>
+      <path d="M106,196 q14,10 28,0" class="th"/>
+
+      <!-- nube + arcoíris -->
+      <path d="M402,136 q0,-28 28,-28 q9,-20 33,-20 q26,0 34,20 q30,2 30,28 q0,24 -28,24 h-70 q-27,0 -27,-24 z" class="ln"/>
+      <path d="M262,330 A166,166 0 0 1 428,164" class="th"/>
+      <path d="M292,330 A136,136 0 0 1 428,194" class="th"/>
+      <path d="M322,330 A106,106 0 0 1 428,224" class="th"/>
+
+      <!-- abejita volando -->
+      <path d="M180,410 q40,-30 90,-6" class="dash" stroke-width="2.5"/>
+      <g>
+        <rect x="270" y="388" width="76" height="34" rx="17" class="ln"/>
+        <path d="M292,390 q-5,15 0,30" class="th"/>
+        <ellipse cx="312" cy="374" rx="8" ry="16" class="ln" transform="rotate(-12 312 374)"/>
+        <ellipse cx="330" cy="373" rx="8" ry="16" class="ln" transform="rotate(10 330 373)"/>
+        <circle cx="282" cy="402" r="3" class="dot"/>
+      </g>
+
+      <!-- flores -->
+      <g>
+        <path d="M150,760 v-110" class="th"/>
+        <ellipse cx="136" cy="700" rx="16" ry="8" class="ln" transform="rotate(-28 136 700)"/>
+        <circle cx="150" cy="630" r="12" class="ln"/>
+        <g class="th"><circle cx="150" cy="606" r="12"/><circle cx="171" cy="618" r="12"/><circle cx="171" cy="642" r="12"/><circle cx="150" cy="654" r="12"/><circle cx="129" cy="642" r="12"/><circle cx="129" cy="618" r="12"/></g>
+      </g>
+      <g>
+        <path d="M310,760 v-140" class="th"/>
+        <ellipse cx="326" cy="680" rx="16" ry="8" class="ln" transform="rotate(24 326 680)"/>
+        <circle cx="310" cy="580" r="13" class="ln"/>
+        <g class="th"><circle cx="310" cy="554" r="13"/><circle cx="333" cy="567" r="13"/><circle cx="333" cy="593" r="13"/><circle cx="310" cy="606" r="13"/><circle cx="287" cy="593" r="13"/><circle cx="287" cy="567" r="13"/></g>
+      </g>
+
+      <!-- caracol en el pasto -->
+      <g>
+        <path d="M448,752 C446,712 452,690 464,688 C474,687 477,701 477,718 L477,728 C477,741 488,748 502,748 L544,748 C555,748 556,756 544,757 C502,761 460,760 448,752 Z" class="ln"/>
+        <path d="M458,690 l-7,-16 M469,689 l5,-17" class="th"/>
+        <circle cx="450" cy="668" r="6" class="ln"/><circle cx="475" cy="666" r="6" class="ln"/>
+        <circle cx="514" cy="714" r="32" class="ln"/>
+        <path d="M514,714 m22,0 a22,22 0 1 1 -22,-22 a15,15 0 1 1 -15,15 a8,8 0 1 0 8,-8" class="th"/>
+      </g>
+
+      <!-- pasto -->
+      <path d="M40,760 q40,-14 80,0 t80,0 t80,0 t80,0 t80,0 t80,0 t80,0" class="th"/>
+      <path d="M95,758 q-4,-18 4,-30 M105,758 q2,-16 12,-24 M405,758 q-4,-16 2,-26 M415,758 q3,-14 12,-20 M245,758 q-4,-16 2,-26 M255,758 q3,-14 11,-20" class="th"/>
+      <text x="310" y="822" class="tm" font-size="15" letter-spacing="3">COLOREA NUESTRO HUERTO 🌼</text>
+    </svg>
+    </div>
+    <div class="meta">
+      <p>Una escena completa para colorear: sol, arcoíris, flores del huerto, la abejita y el caracol paseando.</p>
+      <button class="dl" data-svg="d2" data-name="el-jardin-de-mondomio">⬇️ Descargar PNG</button>
+    </div>
+  </div>
+
+  <!-- DISEÑO 3: DIPLOMA -->
+  <div class="card">
+    <div class="tag" style="background:var(--sky-deep)">Diseño 3 · Diploma de explorador</div>
+    <div class="sheet">
+    <svg id="d3" viewBox="0 0 620 877" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="620" height="877" fill="#fff"/>
+      <rect x="18" y="18" width="584" height="841" rx="24" fill="none" stroke="#322B7A" stroke-width="5"/>
+      <rect x="36" y="36" width="548" height="805" rx="18" class="dash"/>
+      <path id="star" d="M0,-16 L4.7,-4.9 L16.5,-4.9 L7,2.5 L10.8,14 L0,7 L-10.8,14 L-7,2.5 L-16.5,-4.9 L-4.7,-4.9 Z" fill="#fff" stroke="#322B7A" stroke-width="3.5" stroke-linejoin="round" transform="translate(70,70)"/>
+      <use href="#star" x="480" y="0"/>
+      <use href="#star" x="0" y="737"/>
+      <use href="#star" x="480" y="737"/>
+
+      <text x="310" y="150" class="tt" font-size="34">¡Diploma de</text>
+      <text x="310" y="192" class="tt" font-size="34">Explorador!</text>
+
+      <!-- medalla -->
+      <path d="M282,462 l-26,84 l38,-22 l16,32 l20,-94 z" class="ln"/>
+      <path d="M338,462 l26,84 l-38,-22 l-16,32" class="ln"/>
+      <circle cx="310" cy="380" r="78" class="ln"/>
+      <circle cx="310" cy="380" r="62" class="th"/>
+      <path d="M310,330 L324,363 L360,366 L333,390 L341,425 L310,406 L279,425 L287,390 L260,366 L296,363 Z" class="ln"/>
+
+      <text x="310" y="600" class="tm" font-size="21">¡Encontré a todos los animalitos</text>
+      <text x="310" y="630" class="tm" font-size="21">escondidos de Mondomío!</text>
+
+      <text x="200" y="700" class="tm" font-size="18">Nombre:</text>
+      <path d="M250,706 h180" class="th"/>
+
+      <!-- gatito y pajarito -->
+      <g>
+        <path d="M110,800 v-52 q0,-30 30,-30 q30,0 30,30 v52 z" class="ln"/>
+        <path d="M118,724 l7,-17 l10,12" class="ln"/>
+        <path d="M162,724 l-7,-17 l-10,12" class="ln"/>
+        <circle cx="130" cy="742" r="9" class="th"/><circle cx="150" cy="742" r="9" class="th"/>
+        <path d="M139,742 h2" class="th"/>
+      </g>
+      <g>
+        <path d="M540,754 l16,5 l-15,7 z" class="ln"/>
+        <ellipse cx="490" cy="766" rx="36" ry="19" class="ln"/>
+        <circle cx="527" cy="756" r="15" class="ln"/>
+        <circle cx="532" cy="753" r="2.5" class="dot"/>
+        <path d="M484,756 C478,730 500,722 513,728 C514,738 506,752 487,758 Z" class="ln"/>
+        <path d="M456,760 l-18,-8 M455,767 l-19,0 M456,774 l-18,8" class="th"/>
+      </g>
+      <circle cx="230" cy="790" r="5" class="th"/>
+      <circle cx="390" cy="800" r="5" class="th"/>
+      <circle cx="330" cy="780" r="4" class="th"/>
+    </svg>
+    </div>
+    <div class="meta">
+      <p>Un diploma con medalla de estrella y espacio para su nombre — el premio se siente logro y lo pueden presumir en el refri.</p>
+      <button class="dl" data-svg="d3" data-name="diploma-explorador-mondomio">⬇️ Descargar PNG</button>
+    </div>
+  </div>
+
+  <!-- DISEÑO 4: EL ARCOÍRIS -->
+  <div class="card">
+    <div class="tag" style="background:var(--yellow);color:var(--navy)">Diseño 4 · El arcoíris de Mondomío</div>
+    <div class="sheet">
+    <svg id="d4" viewBox="0 0 620 877" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="620" height="877" fill="#fff"/>
+      <rect x="20" y="20" width="580" height="837" rx="26" class="dash"/>
+
+      <!-- sol esquina -->
+      <path d="M600,20 a95,95 0 0 1 -95,95" fill="none" stroke="#322B7A" stroke-width="5" stroke-linecap="round"/>
+      <path d="M488,42 l-20,-8 M498,72 l-18,12 M520,98 l-12,18 M552,116 l-4,21" class="th"/>
+
+      <!-- arcoíris -->
+      <path d="M85,560 A225,225 0 0 1 535,560" class="th" stroke-width="5"/>
+      <path d="M115,560 A195,195 0 0 1 505,560" class="th"/>
+      <path d="M145,560 A165,165 0 0 1 475,560" class="th"/>
+      <path d="M175,560 A135,135 0 0 1 445,560" class="th"/>
+      <path d="M205,560 A105,105 0 0 1 415,560" class="th"/>
+
+      <!-- nubes felices -->
+      <g>
+        <path d="M50,560 q0,-26 26,-26 q8,-18 30,-18 q24,0 31,18 q27,2 27,26 q0,22 -26,22 h-62 q-26,0 -26,-22 z" class="ln"/>
+        <path d="M92,548 q5,5 10,0 M114,548 q5,5 10,0" class="th"/>
+        <path d="M96,562 q12,8 24,0" class="th"/>
+      </g>
+      <g>
+        <path d="M456,560 q0,-26 26,-26 q8,-18 30,-18 q24,0 31,18 q27,2 27,26 q0,22 -26,22 h-62 q-26,0 -26,-22 z" class="ln"/>
+        <path d="M498,548 q5,5 10,0 M520,548 q5,5 10,0" class="th"/>
+        <path d="M502,562 q12,8 24,0" class="th"/>
+      </g>
+
+      <!-- pajaritos -->
+      <g>
+        <path d="M236,262 l13,4 l-12,6 z" class="ln"/>
+        <ellipse cx="196" cy="272" rx="29" ry="15" class="ln"/>
+        <circle cx="226" cy="264" r="12" class="ln"/>
+        <circle cx="230" cy="261" r="2" class="dot"/>
+        <path d="M192,264 C187,243 205,236 215,241 C216,249 209,260 194,265 Z" class="ln"/>
+        <path d="M168,267 l-15,-7 M167,273 l-16,0 M168,279 l-15,7" class="th"/>
+      </g>
+      <g transform="translate(150,-58) scale(-1,1) translate(-560,0)">
+        <path d="M236,262 l13,4 l-12,6 z" class="ln"/>
+        <ellipse cx="196" cy="272" rx="29" ry="15" class="ln"/>
+        <circle cx="226" cy="264" r="12" class="ln"/>
+        <circle cx="230" cy="261" r="2" class="dot"/>
+        <path d="M192,264 C187,243 205,236 215,241 C216,249 209,260 194,265 Z" class="ln"/>
+        <path d="M168,267 l-15,-7 M167,273 l-16,0 M168,279 l-15,7" class="th"/>
+      </g>
+
+      <!-- corazón y nombre -->
+      <path d="M310,442 c-11,-17 -37,-3 -26,14 c8,11 26,20 26,20 c0,0 18,-9 26,-20 c11,-17 -15,-31 -26,-14 z" class="ln"/>
+      <text x="310" y="640" class="tt" font-size="34" letter-spacing="6">Mondomío</text>
+      <text x="310" y="676" class="tm" font-size="15" letter-spacing="3">DISCOVERING &amp; LEARNING</text>
+
+      <!-- pasto y florecitas -->
+      <path d="M40,780 q40,-14 80,0 t80,0 t80,0 t80,0 t80,0 t80,0 t80,0" class="th"/>
+      <g>
+        <path d="M140,778 v-40" class="th"/>
+        <circle cx="140" cy="726" r="7" class="ln"/>
+        <g class="th"><circle cx="140" cy="712" r="7"/><circle cx="153" cy="720" r="7"/><circle cx="153" cy="734" r="7"/><circle cx="140" cy="740" r="7"/><circle cx="127" cy="734" r="7"/><circle cx="127" cy="720" r="7"/></g>
+      </g>
+      <g>
+        <path d="M480,778 v-40" class="th"/>
+        <circle cx="480" cy="726" r="7" class="ln"/>
+        <g class="th"><circle cx="480" cy="712" r="7"/><circle cx="493" cy="720" r="7"/><circle cx="493" cy="734" r="7"/><circle cx="480" cy="740" r="7"/><circle cx="467" cy="734" r="7"/><circle cx="467" cy="720" r="7"/></g>
+      </g>
+      <text x="310" y="830" class="tm" font-size="15" letter-spacing="3">COLOREA TU ARCOÍRIS ✏️</text>
+    </svg>
+    </div>
+    <div class="meta">
+      <p>El arcoíris del hero del sitio con nubes sonrientes, pajaritos y el nombre de Mondomío grandote para colorear.</p>
+      <button class="dl" data-svg="d4" data-name="arcoiris-de-mondomio">⬇️ Descargar PNG</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="foot">Dime qué diseño te late (<b>1</b>, <b>2</b>, <b>3</b> o <b>4</b>) para conectarlo al final del juego 🖍️</div>
+
+<script>
+document.querySelectorAll('.dl').forEach(function(b){
+  b.addEventListener('click',function(){
+    var svg=document.getElementById(b.dataset.svg);
+    var clone=svg.cloneNode(true);
+    var style=document.createElementNS('http://www.w3.org/2000/svg','style');
+    style.textContent=".ln{fill:#fff;stroke:#322B7A;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}"+
+      ".th{fill:none;stroke:#322B7A;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}"+
+      ".dot{fill:#322B7A;stroke:none}"+
+      ".tt{font-family:sans-serif;font-weight:900;fill:#322B7A;text-anchor:middle;text-transform:uppercase}"+
+      ".tm{font-family:sans-serif;fill:#322B7A;text-anchor:middle}"+
+      ".dash{fill:none;stroke:#322B7A;stroke-width:3;stroke-dasharray:10 12;stroke-linecap:round}";
+    clone.insertBefore(style,clone.firstChild);
+    var xml=new XMLSerializer().serializeToString(clone);
+    var img=new Image();
+    img.onload=function(){
+      var c=document.createElement('canvas');c.width=1240;c.height=1754;
+      var ctx=c.getContext('2d');
+      ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);
+      ctx.drawImage(img,0,0,c.width,c.height);
+      var a=document.createElement('a');
+      a.download=b.dataset.name+'.png';
+      a.href=c.toDataURL('image/png');
+      a.click();
+    };
+    img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(xml);
+  });
+});
+</script>
+</body>
+</html>

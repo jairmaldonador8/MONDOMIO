@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iconos con animalitos — opciones</title>
+<style>
+@font-face{font-family:'UniformBlack';src:url(../inicio/assets/fonts/uniform-black.woff2) format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'UniformMed';src:url(../inicio/assets/fonts/uniform-medium.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'UniformLight';src:url(../inicio/assets/fonts/uniform-light.woff2) format('woff2');font-weight:300;font-display:swap}
+:root{
+  --sky:#6CC9EC;--sky-deep:#46B2DD;--lime:#8CC63E;--lime-d:#79B62F;
+  --pink:#C0539F;--pink-d:#A6408A;--yellow:#FAC81C;--yellow-d:#EBB200;
+  --navy:#322B7A;--navy-d:#231E5C;--paper:#FFF9EC;--cloud2:#E9E7FA;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);font-family:'UniformMed',system-ui,sans-serif;color:var(--navy);padding-bottom:90px}
+.head{background:var(--navy);color:#fff;text-align:center;padding:34px 20px}
+.head h1{font-family:'UniformBlack';text-transform:uppercase;font-size:clamp(22px,4vw,34px)}
+.head p{color:var(--cloud2);margin-top:10px;font-size:15px;max-width:60ch;margin-left:auto;margin-right:auto;line-height:1.5}
+.head .tip{display:inline-block;margin-top:14px;background:var(--yellow);color:var(--navy);font-family:'UniformBlack';text-transform:uppercase;font-size:12.5px;letter-spacing:.04em;padding:9px 18px;border-radius:999px}
+.zoo{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;padding:18px 16px;background:var(--navy-d)}
+.zoo figure{text-align:center;width:76px}
+.zoo img{width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 3px 0 rgba(0,0,0,.18))}
+.zoo figcaption{color:var(--cloud2);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;margin-top:4px;font-family:'UniformBlack'}
+.opt{max-width:1060px;margin:46px auto 0;padding:0 20px}
+.opt-tag{display:inline-block;background:var(--pink);color:#fff;font-family:'UniformBlack';text-transform:uppercase;
+  font-size:14px;letter-spacing:.08em;padding:9px 20px;border-radius:999px;transform:rotate(-2deg)}
+.opt h2{font-family:'UniformBlack';text-transform:uppercase;font-size:clamp(20px,3vw,28px);margin:14px 0 4px}
+.opt .sub{font-size:14.5px;color:#5a54a0;max-width:70ch;line-height:1.5}
+.panel{background:#fff;border:2.5px solid var(--navy);border-radius:26px;padding:28px;margin-top:20px;box-shadow:0 8px 0 rgba(50,43,122,.12)}
+.lbl{font-family:'UniformBlack';text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;color:var(--pink);margin:6px 0 14px}
+.lbl.two{margin-top:34px}
+
+/* rompecabezas */
+.pz{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.piece{position:relative;border-radius:22px;aspect-ratio:1.15;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;text-align:center;padding:18px;color:#fff;overflow:visible}
+.piece h3{font-family:'UniformBlack';font-size:14.5px;line-height:1.2;text-transform:none}
+.piece.c1{background:var(--pink)} .piece.c2{background:var(--sky-deep)}
+.piece.c3{background:var(--lime)} .piece.c4{background:var(--yellow)} .piece.c4 h3{color:var(--navy)}
+
+/* horario */
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.stop{background:var(--paper);border:2px solid rgba(50,43,122,.18);border-radius:18px;padding:16px 14px;text-align:center;position:relative;overflow:visible}
+.stop .time{font-family:'UniformBlack';font-size:12px;color:var(--pink-d);letter-spacing:.04em}
+.stop .act{font-size:13px;margin-top:6px;line-height:1.35}
+
+/* —— tratamientos de icono —— */
+.spot{cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform .18s}
+.spot:hover{transform:scale(1.1) rotate(-4deg)}
+.spot img{display:block;object-fit:contain;pointer-events:none}
+/* A: tal cual */
+.vA .spot img{width:64px;height:64px;filter:drop-shadow(0 3px 0 rgba(0,0,0,.16))}
+.vA .stop .spot img{width:56px;height:56px;margin:0 auto 4px}
+/* B: sticker circulito */
+.vB .spot{width:74px;height:74px;background:#fff;border-radius:50%;display:grid;place-items:center;
+  box-shadow:0 4px 0 rgba(0,0,0,.14);border:3px solid rgba(50,43,122,.14)}
+.vB .spot img{width:52px;height:52px}
+.vB .stop .spot{width:64px;height:64px;margin:0 auto 6px;border-color:var(--yellow)}
+.vB .stop .spot img{width:44px;height:44px}
+/* C: asomándose */
+.vC .piece,.vC .stop{overflow:visible}
+.vC .spot{position:absolute;top:-34px;right:-10px;transform:rotate(8deg)}
+.vC .spot:hover{transform:rotate(-4deg) scale(1.1)}
+.vC .spot img{width:78px;height:78px;filter:drop-shadow(0 4px 0 rgba(0,0,0,.2))}
+.vC .piece{margin-top:26px}
+.vC .stop{margin-top:30px;padding-top:26px}
+.vC .stop .spot{top:-30px;left:50%;right:auto;margin-left:-34px}
+.duo{position:relative;width:64px;height:56px;display:block}
+.duo img{position:absolute;width:44px;height:44px}
+.duo img:first-child{left:0;top:12px}
+.duo img:last-child{right:0;top:0;transform:scaleX(-1)}
+.vB .duo{width:52px;height:48px}.vB .duo img{width:36px;height:36px}
+.vC .spot .duo{width:78px;height:70px}.vC .spot .duo img{width:54px;height:54px}
+.vC .piece .spot[data-k="duo"],.vC .piece .spot:has(.duo){right:4px}
+.foot{position:fixed;left:0;right:0;bottom:0;background:var(--navy);color:#fff;text-align:center;padding:14px;font-size:14px;z-index:9}
+.foot b{color:var(--yellow);font-family:'UniformBlack'}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <h1>Animalitos en vez de emojis</h1>
+  <p>Tres formas de poner los dibujitos del sitio en el rompecabezas de «Por qué Mondomío» y en las tarjetas del horario.</p>
+  <span class="tip">👆 Haz clic en cualquier animalito para cambiarlo por otro</span>
+</div>
+
+<div class="zoo">
+  <figure><img src="../inicio/assets/img/RANA.png" alt=""><figcaption>Rana</figcaption></figure>
+  <figure><img src="../inicio/assets/img/CARACOL.png" alt=""><figcaption>Caracol</figcaption></figure>
+  <figure><img src="../inicio/assets/img/CATARINA.png" alt=""><figcaption>Catarina</figcaption></figure>
+  <figure><img src="../inicio/assets/img/GATO.png" alt=""><figcaption>Gato</figcaption></figure>
+  <figure><img src="../inicio/assets/img/PAJARITO.png" alt=""><figcaption>Pajarito</figcaption></figure>
+  <figure><img src="../inicio/assets/img/PAJARITO2.png" alt=""><figcaption>Pajarito 2</figcaption></figure>
+  <figure><img src="../inicio/assets/img/ABEJITA2.png" alt=""><figcaption>Abejita</figcaption></figure>
+</div>
+
+<!-- OPCIÓN A -->
+<section class="opt vA">
+  <span class="opt-tag">Opción A</span>
+  <h2>Tal cual, flotando</h2>
+  <p class="sub">El animalito reemplaza al emoji directamente, con la misma sombrita que hoy tienen los emojis. Es el cambio más limpio y ligero.</p>
+  <div class="panel">
+    <div class="lbl">Rompecabezas · Por qué Mondomío</div>
+    <div class="pz">
+      <div class="piece c1"><span class="spot" data-k="caracol"></span><h3>Modelo Constructivista</h3></div>
+      <div class="piece c2"><span class="spot" data-k="catarina"></span><h3>8 Áreas de Rotación</h3></div>
+      <div class="piece c3"><span class="spot" data-k="gato"></span><h3>Maestras Especializadas</h3></div>
+      <div class="piece c4"><span class="spot" data-k="duo"></span><h3>Trabajo en Familia</h3></div>
+    </div>
+    <div class="lbl two">Horario · Una mañana en Mondomío</div>
+    <div class="tl">
+      <div class="stop"><span class="spot" data-k="pajarito2"></span><div class="time">9:00 – 9:30</div><div class="act">Recepción &amp; Juego Libre</div></div>
+      <div class="stop"><span class="spot" data-k="rana"></span><div class="time">9:30 – 10:10</div><div class="act">Rotación 1</div></div>
+      <div class="stop"><span class="spot" data-k="abejita"></span><div class="time">10:10 – 10:30</div><div class="act">Snack &amp; Descanso</div></div>
+      <div class="stop"><span class="spot" data-k="catarina"></span><div class="time">10:30 – 11:10</div><div class="act">Rotación 2</div></div>
+      <div class="stop"><span class="spot" data-k="caracol"></span><div class="time">11:10 – 11:45</div><div class="act">Yoga / Huerto / Música</div></div>
+      <div class="stop"><span class="spot" data-k="pajarito"></span><div class="time">11:45 – 12:20</div><div class="act">Cierre &amp; Juego</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OPCIÓN B -->
+<section class="opt vB">
+  <span class="opt-tag" style="background:var(--sky-deep)">Opción B</span>
+  <h2>Sticker en circulito</h2>
+  <p class="sub">Cada animalito va dentro de una moneda blanca tipo sticker. Resalta muy bien sobre las piezas de colores y se ve ordenadito.</p>
+  <div class="panel">
+    <div class="lbl">Rompecabezas · Por qué Mondomío</div>
+    <div class="pz">
+      <div class="piece c1"><span class="spot" data-k="caracol"></span><h3>Modelo Constructivista</h3></div>
+      <div class="piece c2"><span class="spot" data-k="catarina"></span><h3>8 Áreas de Rotación</h3></div>
+      <div class="piece c3"><span class="spot" data-k="gato"></span><h3>Maestras Especializadas</h3></div>
+      <div class="piece c4"><span class="spot" data-k="duo"></span><h3>Trabajo en Familia</h3></div>
+    </div>
+    <div class="lbl two">Horario · Una mañana en Mondomío</div>
+    <div class="tl">
+      <div class="stop"><span class="spot" data-k="pajarito2"></span><div class="time">9:00 – 9:30</div><div class="act">Recepción &amp; Juego Libre</div></div>
+      <div class="stop"><span class="spot" data-k="rana"></span><div class="time">9:30 – 10:10</div><div class="act">Rotación 1</div></div>
+      <div class="stop"><span class="spot" data-k="abejita"></span><div class="time">10:10 – 10:30</div><div class="act">Snack &amp; Descanso</div></div>
+      <div class="stop"><span class="spot" data-k="catarina"></span><div class="time">10:30 – 11:10</div><div class="act">Rotación 2</div></div>
+      <div class="stop"><span class="spot" data-k="caracol"></span><div class="time">11:10 – 11:45</div><div class="act">Yoga / Huerto / Música</div></div>
+      <div class="stop"><span class="spot" data-k="pajarito"></span><div class="time">11:45 – 12:20</div><div class="act">Cierre &amp; Juego</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OPCIÓN C -->
+<section class="opt vC">
+  <span class="opt-tag" style="background:var(--lime-d)">Opción C</span>
+  <h2>Asomándose por la orilla</h2>
+  <p class="sub">El animalito se asoma por encima de la pieza o la tarjeta, como si estuviera espiando. Es la más juguetona y conecta con el juego de encontrarlos.</p>
+  <div class="panel">
+    <div class="lbl">Rompecabezas · Por qué Mondomío</div>
+    <div class="pz">
+      <div class="piece c1"><span class="spot" data-k="caracol"></span><h3>Modelo Constructivista</h3></div>
+      <div class="piece c2"><span class="spot" data-k="catarina"></span><h3>8 Áreas de Rotación</h3></div>
+      <div class="piece c3"><span class="spot" data-k="gato"></span><h3>Maestras Especializadas</h3></div>
+      <div class="piece c4"><span class="spot" data-k="duo"></span><h3>Trabajo en Familia</h3></div>
+    </div>
+    <div class="lbl two">Horario · Una mañana en Mondomío</div>
+    <div class="tl">
+      <div class="stop"><span class="spot" data-k="pajarito2"></span><div class="time">9:00 – 9:30</div><div class="act">Recepción &amp; Juego Libre</div></div>
+      <div class="stop"><span class="spot" data-k="rana"></span><div class="time">9:30 – 10:10</div><div class="act">Rotación 1</div></div>
+      <div class="stop"><span class="spot" data-k="abejita"></span><div class="time">10:10 – 10:30</div><div class="act">Snack &amp; Descanso</div></div>
+      <div class="stop"><span class="spot" data-k="catarina"></span><div class="time">10:30 – 11:10</div><div class="act">Rotación 2</div></div>
+      <div class="stop"><span class="spot" data-k="caracol"></span><div class="time">11:10 – 11:45</div><div class="act">Yoga / Huerto / Música</div></div>
+      <div class="stop"><span class="spot" data-k="pajarito"></span><div class="time">11:45 – 12:20</div><div class="act">Cierre &amp; Juego</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="foot">Dime cuál opción te gusta (<b>A</b>, <b>B</b> o <b>C</b>) y si cambiaste algún animalito de lugar, dime cuál 🐸</div>
+
+<script>
+var IMGS={
+  rana:'../inicio/assets/img/RANA.png',
+  caracol:'../inicio/assets/img/CARACOL.png',
+  catarina:'../inicio/assets/img/CATARINA.png',
+  gato:'../inicio/assets/img/GATO.png',
+  pajarito:'../inicio/assets/img/PAJARITO.png',
+  pajarito2:'../inicio/assets/img/PAJARITO2.png',
+  abejita:'../inicio/assets/img/ABEJITA2.png'
+};
+var ORDER=['rana','caracol','catarina','gato','pajarito','pajarito2','abejita','duo'];
+function render(el){
+  var k=el.dataset.k;
+  if(k==='duo'){
+    el.innerHTML='<span class="duo"><img src="'+IMGS.pajarito+'" alt=""><img src="'+IMGS.pajarito2+'" alt=""></span>';
+  }else{
+    el.innerHTML='<img src="'+IMGS[k]+'" alt="">';
+  }
+  el.title='Clic para cambiar ('+k+')';
+}
+document.querySelectorAll('.spot').forEach(function(el){
+  render(el);
+  el.addEventListener('click',function(){
+    var i=ORDER.indexOf(el.dataset.k);
+    el.dataset.k=ORDER[(i+1)%ORDER.length];
+    render(el);
+  });
+});
+</script>
+</body>
+</html>
