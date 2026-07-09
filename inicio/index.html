@@ -206,7 +206,7 @@ section{position:relative}
 @media(max-width:820px){.puzzle-stage{grid-template-columns:1fr;justify-items:center}}
 .puzzle{display:grid;grid-template-columns:repeat(2,minmax(150px,190px));position:relative}
 .piece{position:relative;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;
-  padding:20px;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1),filter .3s;z-index:1}
+  padding:20px;cursor:pointer;transition:transform .3s cubic-bezier(.34,1.56,.64,1),filter .3s}
 .piece .pic{font-size:42px;line-height:1;filter:drop-shadow(0 3px 0 rgba(0,0,0,.14))}
 .piece .pic img{width:54px;height:54px;object-fit:contain;display:block}
 .piece .pic.pduo{position:relative;width:66px;height:56px}
@@ -219,10 +219,11 @@ section{position:relative}
 .piece.p3{background:var(--lime);border-radius:0 0 0 26px}
 .piece.p4{background:var(--yellow);border-radius:0 0 26px 0}
 .piece.p4 h3{color:var(--navy)}
-.piece .knob{position:absolute;width:36px;height:36px;border-radius:50%;background:inherit;z-index:2}
+.piece .knob{position:absolute;width:36px;height:36px;border-radius:50%;background:inherit;z-index:7}
 .piece.p1 .knob{right:-17px;top:50%;transform:translateY(-50%)}
 .piece.p2 .knob{bottom:-17px;left:50%;transform:translateX(-50%)}
-.piece.p3 .knob,.piece.p4 .knob{display:none}
+.piece.p3 .knob{top:-17px;left:50%;transform:translateX(-50%)}
+.piece.p4 .knob{left:-17px;top:50%;transform:translateY(-50%)}
 .piece:hover,.piece.sel,html.js .piece.reveal.in:hover,html.js .piece.reveal.in.sel{transform:scale(1.06);z-index:6;filter:drop-shadow(0 14px 18px rgba(50,43,122,.3))}
 html.js .piece.p1.reveal{transform:translate(-130px,-130px) rotate(-24deg)}
 html.js .piece.p2.reveal{transform:translate(130px,-130px) rotate(20deg)}
